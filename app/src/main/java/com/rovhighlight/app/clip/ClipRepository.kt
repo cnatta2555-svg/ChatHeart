@@ -43,6 +43,11 @@ class ClipRepository(context: Context) {
             ?.sortedBy { it.name }
             .orEmpty()
 
+    fun clips(sessionDir: File): List<Clip> = clipFiles(sessionDir).map(::readClip)
+
+    /** A clip counts as a kill shot when any event inside it was a kill banner. */
+    fun isKill(clip: Clip): Boolean = clip.type.isKill || clip.types.any { it.isKill }
+
     fun saveMeta(clip: File, types: Collection<HighlightType>, durationMs: Long) {
         val sorted = types.sortedByDescending { it.priority }
         val json = JSONObject()
@@ -62,7 +67,7 @@ class ClipRepository(context: Context) {
             .orEmpty()
             .map { dir ->
                 val merged = File(dir, MERGED_FILE).takeIf { it.exists() }?.readText()?.let(Uri::parse)
-                Session(dir, dir.lastModified(), clipFiles(dir).map(::readClip), merged)
+                Session(dir, dir.lastModified(), clips(dir), merged)
             }
             .filter { it.clips.isNotEmpty() }
             .sortedByDescending { it.dir.name }

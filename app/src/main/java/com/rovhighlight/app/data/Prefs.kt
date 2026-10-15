@@ -33,6 +33,11 @@ class Prefs(context: Context) {
         get() = bool("autoMerge", true)
         set(v) = setBool("autoMerge", v)
 
+    /** Gallery video contains only kill shots (fights / manual saves stay in the app). */
+    var mergeKillsOnly: Boolean
+        get() = bool("killsOnly", true)
+        set(v) = setBool("killsOnly", v)
+
     var highQuality: Boolean
         get() = bool("hq", false)
         set(v) = setBool("hq", v)

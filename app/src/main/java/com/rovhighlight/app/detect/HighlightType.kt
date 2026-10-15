@@ -10,6 +10,9 @@ enum class HighlightType(val priority: Int, val title: String) {
     MANUAL(50, "เซฟเอง"),
     BIG_FIGHT(40, "ไฟต์ใหญ่");
 
+    /** A kill banner (Double … Penta, Solo), as opposed to a fight or a manual save. */
+    val isKill: Boolean get() = priority >= SOLO_KILL.priority
+
     companion object {
         fun fromName(name: String?): HighlightType = entries.firstOrNull { it.name == name } ?: MANUAL
 

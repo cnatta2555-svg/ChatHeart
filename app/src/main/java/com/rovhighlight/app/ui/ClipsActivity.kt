@@ -113,13 +113,31 @@ class ClipsActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun merge(session: ClipRepository.Session) {
-        Toast.makeText(this, "กำลังรวม ${session.clips.size} คลิป…", Toast.LENGTH_SHORT).show()
+    private fun chooseMerge(session: ClipRepository.Session) {
+        val kills = session.clips.filter(repo::isKill)
+        MaterialAlertDialogBuilder(this)
+            .setTitle("รวมคลิปเป็นวิดีโอเดียว")
+            .setItems(
+                arrayOf("เฉพาะช็อตฆ่า (${kills.size} คลิป)", "ทุกคลิป (${session.clips.size} คลิป)"),
+            ) { _, which ->
+                val clips = if (which == 0) kills else session.clips
+                if (clips.isEmpty()) {
+                    Toast.makeText(this, "รอบนี้ไม่มีช็อตฆ่า", Toast.LENGTH_SHORT).show()
+                } else {
+                    merge(session, clips)
+                }
+            }
+            .setNegativeButton("ยกเลิก", null)
+            .show()
+    }
+
+    private fun merge(session: ClipRepository.Session, clips: List<ClipRepository.Clip>) {
+        Toast.makeText(this, "กำลังรวม ${clips.size} คลิป…", Toast.LENGTH_SHORT).show()
         lifecycleScope.launch {
             val uri: Uri? = withContext(Dispatchers.IO) {
                 val tmp = File(cacheDir, "merge_${session.dir.name}.mp4")
                 try {
-                    if (VideoMerger.merge(session.clips.map { it.file }, tmp)) {
+                    if (VideoMerger.merge(clips.map { it.file }, tmp)) {
                         GallerySaver.saveVideo(
                             this@ClipsActivity, tmp, "ROV_Highlight_${session.dir.name}_${System.currentTimeMillis() / 1000}.mp4",
                         )?.also { repo.markMerged(session.dir, it) }
@@ -203,14 +221,16 @@ class ClipsActivity : AppCompatActivity() {
                     h.b.title.text = sessionTitle(s.dir)
                     val totalSec = s.clips.sumOf { it.durationMs } / 1000
                     val merged = if (s.galleryUri != null) " • อยู่ในแกลเลอรีแล้ว" else ""
-                    h.b.subtitle.text = "${s.clips.size} คลิป • ${totalSec / 60}:${"%02d".format(totalSec % 60)} นาที$merged"
+                    val kills = s.clips.count(repo::isKill)
+                    h.b.subtitle.text =
+                        "${s.clips.size} คลิป (ช็อตฆ่า $kills) • ${totalSec / 60}:${"%02d".format(totalSec % 60)} นาที$merged"
                     h.b.btnMerge.text = if (s.galleryUri != null) "ดูวิดีโอรวม" else "รวม & เซฟลงแกลเลอรี"
                     h.b.btnMerge.setOnClickListener {
                         val uri = s.galleryUri
-                        if (uri != null) openInGallery(uri) else merge(s)
+                        if (uri != null) openInGallery(uri) else chooseMerge(s)
                     }
                     h.b.btnMerge.setOnLongClickListener {
-                        merge(s)
+                        chooseMerge(s)
                         true
                     }
                 }

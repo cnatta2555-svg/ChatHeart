@@ -154,6 +154,12 @@
                 android:text="หยุดแล้วรวมคลิปเป็นวิดีโอเดียว ลงแกลเลอรี" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swKillsOnly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="วิดีโอรวมเอาเฉพาะช็อตฆ่า (Double / Triple / Quadra / Penta / Solo)" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/swHq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:lineSpacingExtra="4dp"
-            android:text="วิธีใช้\n1. กด “เริ่มจับไฮไลท์” → เลือกแชร์ “ทั้งหน้าจอ”\n2. แอปจะเปิด ROV ให้ → เข้าไปดู replay ตามปกติ\n3. แอปจำภาพย้อนหลังไว้ในแรม เก็บเฉพาะช่วง 12 วิ ก่อน + 5 วิ หลังช็อตเด็ด\n4. อยากเก็บเองแตะปุ่มลอย ★\n5. ดูจบ กดค้างปุ่มลอย หรือกด “หยุด &amp; รวมคลิป” ในแจ้งเตือน\n→ วิดีโอรวมอยู่ในแกลเลอรี อัลบั้ม “ROV Highlight”"
+            android:text="วิธีใช้\n1. กด “เริ่มจับไฮไลท์” → เลือกแชร์ “ทั้งหน้าจอ”\n2. แอปจะเปิด ROV ให้ → เข้าไปดู replay ตามปกติ\n3. แอปจำภาพย้อนหลังไว้ในแรม ตัดเฉพาะช่วง 12 วิ ก่อน + 5 วิ หลังช็อตเด็ดให้เอง\n4. อยากเก็บเองแตะปุ่มลอย ★\n5. ดูจบ กดค้างปุ่มลอย หรือกด “หยุด &amp; รวมคลิป” ในแจ้งเตือน\n→ วิดีโอรวมอยู่ในแกลเลอรี อัลบั้ม “ROV Highlight”"
             android:textColor="@color/text_dim" />
     </LinearLayout>
 </ScrollView>

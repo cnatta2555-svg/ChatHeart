@@ -355,6 +355,7 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
         notifyRecording(msg, actions = false)
 
         val autoMerge = prefs.autoMerge
+        val killsOnly = prefs.mergeKillsOnly
         writer.execute {
             releaseCapture() // drains the encoders so the last seconds are in the buffer
             for (w in windows) {
@@ -363,16 +364,17 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
             ring.clear()
             val count = clipCount.get()
             val dir = sessionDir
-            val uri = if (autoMerge && dir != null && count > 0) mergeToGallery(dir) else null
+            val clips = dir?.let { repo.clips(it) }.orEmpty()
+            val toMerge = if (killsOnly) clips.filter(repo::isKill) else clips
+            val uri = if (autoMerge && dir != null && toMerge.isNotEmpty()) mergeToGallery(dir, toMerge) else null
             dir?.let { repo.deleteIfEmpty(it) }
-            mainHandler.post { finish(count, uri, autoMerge) }
+            mainHandler.post { finish(count, toMerge.size, killsOnly, uri, autoMerge) }
         }
     }
 
-    /** Joins every clip of the session and stores it in the gallery. Runs on the writer thread. */
-    private fun mergeToGallery(dir: File): Uri? {
-        val files = repo.clipFiles(dir)
-        if (files.isEmpty()) return null
+    /** Joins the given clips of the session and stores them in the gallery. Runs on the writer thread. */
+    private fun mergeToGallery(dir: File, clips: List<ClipRepository.Clip>): Uri? {
+        val files = clips.map { it.file }
         val tmp = File(cacheDir, "merge_${dir.name}.mp4")
         return try {
             if (!VideoMerger.merge(files, tmp)) return null
@@ -398,10 +400,12 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
         projection = null
     }
 
-    private fun finish(count: Int, uri: Uri?, autoMerge: Boolean) {
+    private fun finish(count: Int, merged: Int, killsOnly: Boolean, uri: Uri?, autoMerge: Boolean) {
+        val what = if (killsOnly) "ช็อตฆ่า" else "ไฮไลท์"
         val text = when {
             count == 0 -> "รอบนี้ไม่พบช็อตไฮไลท์"
-            uri != null -> "เซฟไฮไลท์ $count คลิป รวมเป็นวิดีโอเดียวในอัลบั้ม \"${GallerySaver.ALBUM}\" แล้ว"
+            autoMerge && killsOnly && merged == 0 -> "รอบนี้ไม่พบช็อตฆ่า (ได้ $count คลิปอื่น ดูในหน้าคลิปของฉัน)"
+            uri != null -> "รวม$what $merged คลิปเป็นวิดีโอเดียวในอัลบั้ม \"${GallerySaver.ALBUM}\" แล้ว"
             autoMerge -> "ได้ $count คลิป แต่รวมวิดีโอไม่สำเร็จ — ลองกดรวมใหม่ในหน้าคลิป"
             else -> "ได้ $count คลิป — ดูได้ในหน้าคลิปของฉัน"
         }
