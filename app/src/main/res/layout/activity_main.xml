@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROV Highlight"
+            android:textColor="@color/gold"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="อัดหน้าจอตอนดู replay แล้วเก็บเฉพาะช็อตเด็ดให้อัตโนมัติ"
+            android:textColor="@color/text_dim" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/statusTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="พร้อมใช้งาน"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="กดเริ่ม แล้วเลือก “ทั้งหน้าจอ” เมื่อระบบถาม"
+                android:textColor="@color/text_dim" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginTop="12dp"
+                android:text="▶  เริ่มจับไฮไลท์"
+                android:textSize="18sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="★  เซฟช็อตนี้"
+                android:visibility="gone" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStop"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="■  หยุด &amp; รวมคลิป"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClips"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="🎬  คลิปของฉัน" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="ตั้งค่า (มีผลรอบถัดไป)"
+            android:textColor="@color/gold"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swOcr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="อ่านป้าย Kill บนจอ (Double / Triple / Quadra / Penta / Solo)" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swFight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="จับไฟต์ใหญ่ / จังหวะสวย (เสียงดัง + ภาพเคลื่อนไหวเยอะ)" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swAudio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="อัดเสียงเกม (ใช้วัดความดังด้วย)" />
+
+            <TextView
+                android:id="@+id/sensitivityLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="ความไวในการจับไฟต์" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderSensitivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stepSize="1"
+                android:valueFrom="1"
+                android:valueTo="5"
+                app:labelBehavior="gone" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swFloating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ปุ่มลอยกดเซฟเอง (แตะ = เซฟ, กดค้าง = หยุด)" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swMerge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="หยุดแล้วรวมคลิปเป็นวิดีโอเดียว ลงแกลเลอรี" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swHq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ความละเอียดสูง 1080p (ใช้แรมมากขึ้น)" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="4dp"
+            android:text="วิธีใช้\n1. กด “เริ่มจับไฮไลท์” → เลือกแชร์ “ทั้งหน้าจอ”\n2. แอปจะเปิด ROV ให้ → เข้าไปดู replay ตามปกติ\n3. แอปจำภาพย้อนหลังไว้ในแรม เก็บเฉพาะช่วง 12 วิ ก่อน + 5 วิ หลังช็อตเด็ด\n4. อยากเก็บเองแตะปุ่มลอย ★\n5. ดูจบ กดค้างปุ่มลอย หรือกด “หยุด &amp; รวมคลิป” ในแจ้งเตือน\n→ วิดีโอรวมอยู่ในแกลเลอรี อัลบั้ม “ROV Highlight”"
+            android:textColor="@color/text_dim" />
+    </LinearLayout>
+</ScrollView>

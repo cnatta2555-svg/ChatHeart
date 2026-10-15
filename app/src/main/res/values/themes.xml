@@ -1,0 +1,14 @@
+<resources>
+    <style name="Theme.ROVHighlight" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/gold</item>
+        <item name="colorOnPrimary">#000000</item>
+        <item name="colorSecondary">@color/gold</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+    </style>
+
+    <style name="Theme.ROVHighlight.Fullscreen" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
+</resources>
