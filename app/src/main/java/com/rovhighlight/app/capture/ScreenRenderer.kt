@@ -18,7 +18,6 @@ import android.util.Log
 import android.view.Surface
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.FloatBuffer
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
@@ -52,6 +51,9 @@ class ScreenRenderer(
     private var aTexCoord = 0
     private var uTexMatrix = 0
     private var uFlipY = 0
+    private var uTexMatrixF = 0
+    private var uMask = 0
+    private var uFrameSize = 0
     private var oesTex = 0
     private var fbo = 0
     private var fboTex = 0
@@ -62,11 +64,16 @@ class ScreenRenderer(
     private var virtualDisplay: VirtualDisplay? = null
     private var readBuffer: ByteBuffer? = null
 
+    // Circle (frame pixels, origin bottom-left) painted over with its surroundings: hides our floating button.
+    @Volatile private var maskX = 0f
+    @Volatile private var maskY = 0f
+    @Volatile private var maskR = 0f
+
     private var lastEncodedNs = 0L
     private var lastAnalysisNs = 0L
 
-    private val vertices = floatBuffer(-1f, -1f, 1f, -1f, -1f, 1f, 1f, 1f)
-    private val texCoords = floatBuffer(0f, 0f, 1f, 0f, 0f, 1f, 1f, 1f)
+    private val vertices = GlUtil.floatBuffer(-1f, -1f, 1f, -1f, -1f, 1f, 1f, 1f)
+    private val texCoords = GlUtil.floatBuffer(0f, 0f, 1f, 0f, 0f, 1f, 1f, 1f)
 
     /** Sets everything up on the render thread; throws if that fails. */
     fun start() {
@@ -94,7 +101,7 @@ class ScreenRenderer(
             EGL14.EGL_BLUE_SIZE, 8,
             EGL14.EGL_ALPHA_SIZE, 8,
             EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
-            EGL_RECORDABLE_ANDROID, 1,
+            GlUtil.EGL_RECORDABLE_ANDROID, 1,
             EGL14.EGL_NONE,
         )
         val configs = arrayOfNulls<EGLConfig>(1)
@@ -110,21 +117,24 @@ class ScreenRenderer(
         check(eglSurface != EGL14.EGL_NO_SURFACE) { "eglCreateWindowSurface failed" }
         check(EGL14.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)) { "eglMakeCurrent failed" }
 
-        program = createProgram(VERTEX_SHADER, FRAGMENT_SHADER)
+        program = GlUtil.createProgram(VERTEX_SHADER, FRAGMENT_SHADER)
         aPosition = GLES20.glGetAttribLocation(program, "aPosition")
         aTexCoord = GLES20.glGetAttribLocation(program, "aTexCoord")
         uTexMatrix = GLES20.glGetUniformLocation(program, "uTexMatrix")
         uFlipY = GLES20.glGetUniformLocation(program, "uFlipY")
+        uTexMatrixF = GLES20.glGetUniformLocation(program, "uTexMatrixF")
+        uMask = GLES20.glGetUniformLocation(program, "uMask")
+        uFrameSize = GLES20.glGetUniformLocation(program, "uFrameSize")
 
         val tex = IntArray(2)
         GLES20.glGenTextures(2, tex, 0)
         oesTex = tex[0]
         fboTex = tex[1]
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, oesTex)
-        setTexParams(GLES11Ext.GL_TEXTURE_EXTERNAL_OES)
+        GlUtil.setTexParams(GLES11Ext.GL_TEXTURE_EXTERNAL_OES)
 
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, fboTex)
-        setTexParams(GLES20.GL_TEXTURE_2D)
+        GlUtil.setTexParams(GLES20.GL_TEXTURE_2D)
         GLES20.glTexImage2D(
             GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, analysisWidth, analysisHeight, 0,
             GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null,
@@ -195,6 +205,9 @@ class ScreenRenderer(
         GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, oesTex)
         GLES20.glUniformMatrix4fv(uTexMatrix, 1, false, texMatrix, 0)
         GLES20.glUniform1f(uFlipY, flipY)
+        GLES20.glUniformMatrix4fv(uTexMatrixF, 1, false, texMatrix, 0)
+        GLES20.glUniform3f(uMask, maskX, maskY, maskR)
+        GLES20.glUniform2f(uFrameSize, width.toFloat(), height.toFloat())
         GLES20.glEnableVertexAttribArray(aPosition)
         GLES20.glVertexAttribPointer(aPosition, 2, GLES20.GL_FLOAT, false, 8, vertices)
         GLES20.glEnableVertexAttribArray(aTexCoord)
@@ -202,6 +215,17 @@ class ScreenRenderer(
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4)
         GLES20.glDisableVertexAttribArray(aPosition)
         GLES20.glDisableVertexAttribArray(aTexCoord)
+    }
+
+    /**
+     * Paints over a circle of the mirrored screen (frame pixels, origin top-left) with the
+     * colours around it, so an overlay such as the floating button doesn't show in clips.
+     * A radius <= 0 turns the mask off.
+     */
+    fun setMask(centerX: Float, centerY: Float, radius: Float) {
+        maskX = centerX
+        maskY = height - centerY
+        maskR = radius
     }
 
     /** Stops mirroring and frees GL resources. Blocks until done. */
@@ -238,41 +262,8 @@ class ScreenRenderer(
         thread.quitSafely()
     }
 
-    private fun setTexParams(target: Int) {
-        GLES20.glTexParameteri(target, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(target, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR)
-        GLES20.glTexParameteri(target, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE)
-        GLES20.glTexParameteri(target, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE)
-    }
-
-    private fun createProgram(vs: String, fs: String): Int {
-        val v = compileShader(GLES20.GL_VERTEX_SHADER, vs)
-        val f = compileShader(GLES20.GL_FRAGMENT_SHADER, fs)
-        val p = GLES20.glCreateProgram()
-        GLES20.glAttachShader(p, v)
-        GLES20.glAttachShader(p, f)
-        GLES20.glLinkProgram(p)
-        val status = IntArray(1)
-        GLES20.glGetProgramiv(p, GLES20.GL_LINK_STATUS, status, 0)
-        check(status[0] == GLES20.GL_TRUE) { "link failed: " + GLES20.glGetProgramInfoLog(p) }
-        GLES20.glDeleteShader(v)
-        GLES20.glDeleteShader(f)
-        return p
-    }
-
-    private fun compileShader(type: Int, src: String): Int {
-        val s = GLES20.glCreateShader(type)
-        GLES20.glShaderSource(s, src)
-        GLES20.glCompileShader(s)
-        val status = IntArray(1)
-        GLES20.glGetShaderiv(s, GLES20.GL_COMPILE_STATUS, status, 0)
-        check(status[0] == GLES20.GL_TRUE) { "shader compile failed: " + GLES20.glGetShaderInfoLog(s) }
-        return s
-    }
-
     companion object {
         private const val TAG = "ScreenRenderer"
-        private const val EGL_RECORDABLE_ANDROID = 0x3142
         private const val MIN_FRAME_INTERVAL_NS = 30_000_000L
 
         private val VERTEX_SHADER = """
@@ -281,26 +272,50 @@ class ScreenRenderer(
             attribute vec4 aPosition;
             attribute vec4 aTexCoord;
             varying vec2 vTexCoord;
+            varying vec2 vPos;
             void main() {
                 gl_Position = vec4(aPosition.x, aPosition.y * uFlipY, 0.0, 1.0);
                 vTexCoord = (uTexMatrix * aTexCoord).xy;
+                vPos = aTexCoord.xy;
             }
         """.trimIndent()
 
+        // Inside the mask circle the pixel is rebuilt from samples just outside it,
+        // which reads as a soft blur of the scenery instead of the button.
         private val FRAGMENT_SHADER = """
             #extension GL_OES_EGL_image_external : require
+            #ifdef GL_FRAGMENT_PRECISION_HIGH
+            precision highp float;
+            #else
             precision mediump float;
+            #endif
             varying vec2 vTexCoord;
+            varying vec2 vPos;
             uniform samplerExternalOES sTexture;
+            uniform mat4 uTexMatrixF;
+            uniform vec3 uMask;
+            uniform vec2 uFrameSize;
+            vec4 sampleAt(vec2 px) {
+                return texture2D(sTexture, (uTexMatrixF * vec4(px / uFrameSize, 0.0, 1.0)).xy);
+            }
             void main() {
-                gl_FragColor = texture2D(sTexture, vTexCoord);
+                vec2 d = vPos * uFrameSize - uMask.xy;
+                float dist = length(d);
+                if (uMask.z > 0.0 && dist < uMask.z) {
+                    float ring = uMask.z * 1.1;
+                    vec4 acc = vec4(0.0);
+                    for (int i = 0; i < 12; i++) {
+                        float a = float(i) * 0.5235988;
+                        acc += sampleAt(uMask.xy + vec2(cos(a), sin(a)) * ring);
+                    }
+                    acc /= 12.0;
+                    vec2 dir = dist > 0.001 ? d / dist : vec2(1.0, 0.0);
+                    vec4 edge = sampleAt(uMask.xy + dir * ring);
+                    gl_FragColor = mix(acc, edge, dist / uMask.z);
+                } else {
+                    gl_FragColor = texture2D(sTexture, vTexCoord);
+                }
             }
         """.trimIndent()
-
-        private fun floatBuffer(vararg values: Float): FloatBuffer =
-            ByteBuffer.allocateDirect(values.size * 4).order(ByteOrder.nativeOrder()).asFloatBuffer().apply {
-                put(values)
-                position(0)
-            }
     }
 }

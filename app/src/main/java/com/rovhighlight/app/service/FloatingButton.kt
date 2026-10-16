@@ -121,6 +121,16 @@ class FloatingButton(
         }
     }
 
+    /** Centre and radius of the button on screen (px), padded for the border and tap animation. */
+    fun screenCircle(): FloatArray? {
+        val v = view ?: return null
+        if (!v.isAttachedToWindow || v.width == 0) return null
+        val loc = IntArray(2)
+        v.getLocationOnScreen(loc)
+        val r = v.width / 2f
+        return floatArrayOf(loc[0] + r, loc[1] + v.height / 2f, r * 1.45f)
+    }
+
     fun setCount(n: Int) {
         count = n
         render()

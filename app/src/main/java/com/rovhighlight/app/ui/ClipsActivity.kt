@@ -20,7 +20,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rovhighlight.app.clip.ClipRepository
 import com.rovhighlight.app.clip.GallerySaver
-import com.rovhighlight.app.clip.VideoMerger
+import com.rovhighlight.app.clip.HighlightExport
+import com.rovhighlight.app.data.Prefs
 import com.rovhighlight.app.databinding.ActivityClipsBinding
 import com.rovhighlight.app.databinding.ItemClipBinding
 import com.rovhighlight.app.databinding.ItemSessionBinding
@@ -132,12 +133,12 @@ class ClipsActivity : AppCompatActivity() {
     }
 
     private fun merge(session: ClipRepository.Session, clips: List<ClipRepository.Clip>) {
-        Toast.makeText(this, "กำลังรวม ${clips.size} คลิป…", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "กำลังตัดต่อ ${clips.size} คลิป… (อาจใช้เวลาสักครู่)", Toast.LENGTH_LONG).show()
         lifecycleScope.launch {
             val uri: Uri? = withContext(Dispatchers.IO) {
                 val tmp = File(cacheDir, "merge_${session.dir.name}.mp4")
                 try {
-                    if (VideoMerger.merge(clips.map { it.file }, tmp)) {
+                    if (HighlightExport.build(clips.map { it.file }, tmp, Prefs(this@ClipsActivity).verticalStyle)) {
                         GallerySaver.saveVideo(
                             this@ClipsActivity, tmp, "ROV_Highlight_${session.dir.name}_${System.currentTimeMillis() / 1000}.mp4",
                         )?.also { repo.markMerged(session.dir, it) }

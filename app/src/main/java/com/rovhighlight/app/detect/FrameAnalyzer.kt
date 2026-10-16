@@ -90,12 +90,15 @@ class FrameAnalyzer(ocrEnabled: Boolean, private val listener: Listener) {
             listener.onMotion(ptsUs, sum.toDouble() / luma.size)
         }
 
-        // OCR on the upper-middle area where "DOUBLE KILL" etc. appear.
+        // OCR on the upper-middle area: replays show "Double Kill" in a small bar at the top
+        // centre, live games show a big banner a little lower. Upscaled because the bar text is small.
         val rec = recognizer ?: return
         if (closed || !ocrBusy.compareAndSet(false, true)) return
-        val crop = Bitmap.createBitmap(
-            bmp, (w * 0.15).toInt(), (h * 0.05).toInt(), (w * 0.70).toInt(), (h * 0.60).toInt(),
-        )
+        val cw = (w * 0.60).toInt()
+        val ch = (h * 0.42).toInt()
+        val raw = Bitmap.createBitmap(bmp, (w * 0.20).toInt(), (h * 0.04).toInt(), cw, ch)
+        val crop = Bitmap.createScaledBitmap(raw, cw * 2, ch * 2, true)
+        if (crop !== raw) raw.recycle()
         rec.process(InputImage.fromBitmap(crop, 0))
             .addOnSuccessListener(callbackExecutor) { result ->
                 val text = result.text

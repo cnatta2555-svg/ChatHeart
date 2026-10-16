@@ -145,7 +145,7 @@
                 android:id="@+id/swFloating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ปุ่มลอยกดเซฟเอง (แตะ = เซฟ, กดค้าง = หยุด)" />
+                android:text="ปุ่มลอยกดเซฟเอง (แตะ = เซฟ, กดค้าง = หยุด) — ไม่ติดในคลิป" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/swMerge"
@@ -158,6 +158,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="วิดีโอรวมเอาเฉพาะช็อตฆ่า (Double / Triple / Quadra / Penta / Solo)" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/swVertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ตัดต่อแนวตั้งแบบ TikTok (พื้นหลังเบลอ + เฟดระหว่างช็อต)" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/swHq"

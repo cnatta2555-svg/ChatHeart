@@ -38,6 +38,11 @@ class Prefs(context: Context) {
         get() = bool("killsOnly", true)
         set(v) = setBool("killsOnly", v)
 
+    /** Gallery video in vertical 9:16 with a blurred background and fades (TikTok style). */
+    var verticalStyle: Boolean
+        get() = bool("vertical", true)
+        set(v) = setBool("vertical", v)
+
     var highQuality: Boolean
         get() = bool("hq", false)
         set(v) = setBool("hq", v)

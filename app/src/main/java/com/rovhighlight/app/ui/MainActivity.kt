@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         b.swFloating.isChecked = prefs.floatingButton
         b.swMerge.isChecked = prefs.autoMerge
         b.swKillsOnly.isChecked = prefs.mergeKillsOnly
+        b.swVertical.isChecked = prefs.verticalStyle
         b.swHq.isChecked = prefs.highQuality
         b.sliderSensitivity.value = prefs.sensitivity.toFloat()
         updateSensitivityLabel(prefs.sensitivity)
@@ -93,6 +94,7 @@ class MainActivity : AppCompatActivity() {
         b.swFloating.setOnCheckedChangeListener { _, v -> prefs.floatingButton = v }
         b.swMerge.setOnCheckedChangeListener { _, v -> prefs.autoMerge = v }
         b.swKillsOnly.setOnCheckedChangeListener { _, v -> prefs.mergeKillsOnly = v }
+        b.swVertical.setOnCheckedChangeListener { _, v -> prefs.verticalStyle = v }
         b.swHq.setOnCheckedChangeListener { _, v -> prefs.highQuality = v }
         b.sliderSensitivity.addOnChangeListener { _, value, _ ->
             prefs.sensitivity = value.toInt()

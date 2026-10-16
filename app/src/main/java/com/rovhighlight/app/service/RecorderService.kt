@@ -34,7 +34,7 @@ import com.rovhighlight.app.clip.ClipRepository
 import com.rovhighlight.app.clip.ClipScheduler
 import com.rovhighlight.app.clip.ClipWriter
 import com.rovhighlight.app.clip.GallerySaver
-import com.rovhighlight.app.clip.VideoMerger
+import com.rovhighlight.app.clip.HighlightExport
 import com.rovhighlight.app.data.Prefs
 import com.rovhighlight.app.detect.FightDetector
 import com.rovhighlight.app.detect.FrameAnalyzer
@@ -270,8 +270,7 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
     private fun saveManual() {
         if (!running) return
         addEvent(nowUs(), HighlightType.MANUAL, cooldown = false)
-        floating?.flash()
-        Toast.makeText(this, "เซฟช็อตนี้แล้ว ✓", Toast.LENGTH_SHORT).show()
+        floating?.flash() // no toast: it would show up in the clip
     }
 
     override fun onMotion(ptsUs: Long, motion: Double) {
@@ -293,8 +292,28 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
 
     // ---- clip writing ---------------------------------------------------------------------
 
+    /** Keeps the floating button blurred out of the video, following drags and rotation. */
+    private fun updateButtonMask() {
+        val r = renderer ?: return
+        val enc = videoEncoder ?: return
+        val circle = floating?.screenCircle()
+        if (circle == null) {
+            r.setMask(0f, 0f, 0f)
+            return
+        }
+        // The mirrored screen is scaled to fit the (landscape) frame, centred.
+        val dm = DisplayMetrics()
+        @Suppress("DEPRECATION")
+        getSystemService(DisplayManager::class.java).getDisplay(Display.DEFAULT_DISPLAY).getRealMetrics(dm)
+        val scale = minOf(enc.width.toFloat() / dm.widthPixels, enc.height.toFloat() / dm.heightPixels)
+        val offX = (enc.width - dm.widthPixels * scale) / 2
+        val offY = (enc.height - dm.heightPixels * scale) / 2
+        r.setMask(offX + circle[0] * scale, offY + circle[1] * scale, circle[2] * scale)
+    }
+
     private fun onTick() {
         if (!running) return
+        updateButtonMask()
         val now = nowUs()
         scheduler.poll(now)?.let { readyWindows += it }
 
@@ -350,12 +369,13 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
         val windows = readyWindows.toList()
         readyWindows.clear()
 
-        val msg = "กำลังบันทึกและรวมคลิป…"
+        val msg = "กำลังตัดต่อวิดีโอไฮไลท์…"
         _state.value = _state.value.copy(running = false, busy = true, message = msg)
         notifyRecording(msg, actions = false)
 
         val autoMerge = prefs.autoMerge
         val killsOnly = prefs.mergeKillsOnly
+        val vertical = prefs.verticalStyle
         writer.execute {
             releaseCapture() // drains the encoders so the last seconds are in the buffer
             for (w in windows) {
@@ -366,18 +386,18 @@ class RecorderService : Service(), FrameAnalyzer.Listener {
             val dir = sessionDir
             val clips = dir?.let { repo.clips(it) }.orEmpty()
             val toMerge = if (killsOnly) clips.filter(repo::isKill) else clips
-            val uri = if (autoMerge && dir != null && toMerge.isNotEmpty()) mergeToGallery(dir, toMerge) else null
+            val uri = if (autoMerge && dir != null && toMerge.isNotEmpty()) mergeToGallery(dir, toMerge, vertical) else null
             dir?.let { repo.deleteIfEmpty(it) }
             mainHandler.post { finish(count, toMerge.size, killsOnly, uri, autoMerge) }
         }
     }
 
     /** Joins the given clips of the session and stores them in the gallery. Runs on the writer thread. */
-    private fun mergeToGallery(dir: File, clips: List<ClipRepository.Clip>): Uri? {
+    private fun mergeToGallery(dir: File, clips: List<ClipRepository.Clip>, vertical: Boolean): Uri? {
         val files = clips.map { it.file }
         val tmp = File(cacheDir, "merge_${dir.name}.mp4")
         return try {
-            if (!VideoMerger.merge(files, tmp)) return null
+            if (!HighlightExport.build(files, tmp, vertical)) return null
             GallerySaver.saveVideo(this, tmp, "ROV_Highlight_${dir.name}.mp4")?.also { repo.markMerged(dir, it) }
         } finally {
             tmp.delete()
