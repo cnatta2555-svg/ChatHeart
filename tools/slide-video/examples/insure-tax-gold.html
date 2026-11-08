@@ -66,6 +66,7 @@ tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
   - data-pop="1" เด้งเข้า / data-x="1" เลื่อนจากซ้าย / (ไม่ใส่) เลื่อนขึ้น
   - data-count="20450"  ตัวเลขนับขึ้น (data-ccue="คำ" ให้เริ่มนับตอนพูดคำนี้, data-from ค่าเริ่ม)
   - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน, data-wl = วินาทีที่ใช้ยืด)
+  - data-bob="1" ลอยขึ้นลงเบาๆ (ใส่ที่รูป/ไอคอนข้างใน ไม่ใช่ตัว .r)
   - data-spin="40" หมุนตลอด (องศา/วินาที)   |  data-cue + data-d = โผล่หลังคำนั้น d วินาที
   - <section data-zoom="1.08"> ซูมเข้าช้าๆ ทั้งหน้า (ค่าเริ่ม 1.012)
   ใช้ข้อความ cue เป็น "คำ" ไม่ใช่ตัวเลข เพราะ Whisper เขียนตัวเลขไทยเพี้ยนบ่อย
@@ -218,6 +219,7 @@ function drawBg(t) {
 }
 function render(t) {
   drawBg(t);
+  document.querySelectorAll('[data-bob]').forEach((e, k) => e.style.transform = `translateY(${Math.sin(t * 2.2 + k * 1.7) * 12}px) rotate(${Math.sin(t * 1.6 + k) * 5}deg)`);
   document.querySelectorAll('[data-spin]').forEach(e => e.style.transform = `rotate(${t * +e.dataset.spin}deg)`);
   const sh = ((t * 35) % 160) - 30;
   document.querySelectorAll('.gold').forEach(e => e.style.setProperty('--sh', sh + '%'));
