@@ -65,7 +65,9 @@ tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
   - class="r" data-d="0.3"     = ไม่มีคำพูดตรงๆ ให้โผล่หลังเริ่มหน้า 0.3 วินาที
   - data-pop="1" เด้งเข้า / data-x="1" เลื่อนจากซ้าย / (ไม่ใส่) เลื่อนขึ้น
   - data-count="20450"  ตัวเลขนับขึ้น (data-ccue="คำ" ให้เริ่มนับตอนพูดคำนี้, data-from ค่าเริ่ม)
-  - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน)
+  - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน, data-wl = วินาทีที่ใช้ยืด)
+  - data-spin="40" หมุนตลอด (องศา/วินาที)   |  data-cue + data-d = โผล่หลังคำนั้น d วินาที
+  - <section data-zoom="1.08"> ซูมเข้าช้าๆ ทั้งหน้า (ค่าเริ่ม 1.012)
   ใช้ข้อความ cue เป็น "คำ" ไม่ใช่ตัวเลข เพราะ Whisper เขียนตัวเลขไทยเพี้ยนบ่อย
 -->
 <canvas id="bg" width="1080" height="1920"></canvas>
@@ -182,7 +184,7 @@ window.setup = (m, dur) => {
   for (let i = 1; i < STARTS.length; i++) if (STARTS[i] == null) STARTS[i] = STARTS[i - 1] + 5;
   slides.forEach((s, i) => {
     s.querySelectorAll('.r').forEach(e => {
-      if (e.dataset.cue && e.dataset.cue in m) e._t = m[e.dataset.cue] - LEAD;
+      if (e.dataset.cue && e.dataset.cue in m) e._t = m[e.dataset.cue] - LEAD + (+e.dataset.d || 0);
       else if (e.dataset.after && e.dataset.after in m) e._t = m[e.dataset.after] + (+e.dataset.d || 0);
       else e._t = STARTS[i] + (+e.dataset.d || 0);
     });
@@ -216,6 +218,7 @@ function drawBg(t) {
 }
 function render(t) {
   drawBg(t);
+  document.querySelectorAll('[data-spin]').forEach(e => e.style.transform = `rotate(${t * +e.dataset.spin}deg)`);
   const sh = ((t * 35) % 160) - 30;
   document.querySelectorAll('.gold').forEach(e => e.style.setProperty('--sh', sh + '%'));
   slides.forEach((s, i) => {
@@ -228,7 +231,7 @@ function render(t) {
     s.style.opacity = op; s.style.display = op > 0 ? 'block' : 'none';
     if (op <= 0) return;
     const lt = t - a;
-    s.style.transform = `translateY(${dy}px) scale(${1 + 0.012 * cl(lt / (b - a))})`;
+    s.style.transform = `translateY(${dy}px) scale(${1 + (+(s.dataset.zoom || 1.012) - 1) * cl(lt / (b - a))})`;
     s.querySelectorAll('.prog b').forEach((e, k) => { e.style.width = (k < i ? 100 : k > i ? 0 : cl(lt / (b - a)) * 100) + '%'; });
     s.querySelectorAll('.r').forEach(e => {
       const x = cl((t - e._t) / .6);
@@ -241,7 +244,7 @@ function render(t) {
       const x = cl((t - e._t) / L); e.textContent = x >= 1 ? e.dataset.fmt : fmt(from + (to - from) * eo(x));
     });
     s.querySelectorAll('[data-w]').forEach(e => {
-      const x = eo(cl((t - e._t) / 1.2)), f = +(e.dataset.from || 0);
+      const x = eo(cl((t - e._t) / (+e.dataset.wl || 1.2))), f = +(e.dataset.from || 0);
       e.style.width = (f + (+e.dataset.w - f) * x) + '%';
     });
     const cta = s.querySelector('#cta');

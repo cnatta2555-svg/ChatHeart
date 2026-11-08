@@ -1,0 +1,162 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.body>.qn{align-self:flex-start}
+.phone{width:440px;height:760px;border-radius:64px;background:#120b06;border:10px solid #3a2a1c;box-shadow:0 30px 80px #000a, inset 0 0 0 3px #E2B65A55;margin:10px auto 50px;padding:60px 34px;position:relative}
+.phone .bar{height:22px;border-radius:11px;background:#ffffff22;margin-bottom:22px}
+.phone .ttl{font-size:38px;font-weight:700;color:var(--gold2);margin-bottom:30px}
+.phone .price{margin-top:40px;background:linear-gradient(135deg,var(--gold2),var(--goldd));color:var(--bg);border-radius:24px;padding:24px;font-size:34px;font-weight:700;text-align:center}
+.flag{font-size:120px;line-height:1}
+.hook{font-size:80px;font-weight:800;line-height:1.25;text-align:center}
+.vs{display:flex;flex-direction:column;align-items:center;gap:10px}
+.vs .card{width:100%;text-align:center;padding:50px 30px}
+.vs .card .k{font-size:58px;font-weight:800}
+.neq{font-size:150px;font-weight:800;line-height:1;color:var(--copper)}
+.five{font-size:420px;font-weight:800;line-height:1;text-align:center}
+.dots{display:flex;justify-content:center;gap:26px;margin-top:20px}
+.dots div{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--goldd))}
+.qn{width:170px;height:170px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:110px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--goldd));box-shadow:0 0 60px #E2B65A55;margin-bottom:40px}
+.qt{font-size:84px;font-weight:800;line-height:1.25;margin-bottom:50px}
+.icon{display:flex;justify-content:center;margin:20px 0 50px}
+.icon svg{width:400px;height:400px}
+.chips{justify-content:center}
+.years{display:flex;justify-content:space-between;font-size:34px;color:var(--muted);margin-top:16px}
+.track.tall{height:80px;border-radius:40px}
+.quote{font-size:96px;font-weight:800;line-height:1.25;text-align:center;margin:40px 0}
+.photo{width:560px;height:560px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(from var(--a,0deg),var(--goldd),#FFF3C8,var(--gold),var(--goldd),var(--gold2),var(--goldd))}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 35%,#6B4626,#2A1B10)}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+.savebtn{display:inline-flex;align-items:center;gap:20px;font-size:52px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--gold));border-radius:60px;padding:24px 56px}
+.center{text-align:center}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:900px;height:900px;right:-380px;top:-260px"></div>
+<div class="ring" id="ring2" style="width:620px;height:620px;left:-300px;bottom:-120px;border-style:dashed"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="phone r" data-d="0" data-pop="1">
+    <div class="ttl">ใบเสนอราคา</div>
+    <div class="bar" style="width:90%"></div><div class="bar" style="width:70%"></div><div class="bar" style="width:80%"></div><div class="bar" style="width:55%"></div>
+    <div class="price r" data-cue="แล้วได้ใบเสนอราคา" data-pop="1">อายุ 35 · เบี้ย ฿xx,xxx/ปี</div>
+  </div>
+  <div class="hook r" data-cue="แล้วได้ใบเสนอราคา">ได้ใบเสนอราคา<br>ใน <span class="gold">5 นาที</span> = <span class="r flag" data-cue="ระวัง" data-pop="1" style="display:inline-block">🚩</span>?</div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-cue="เพราะเขายังไม่รู้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <h2 class="r" data-d=".2">เขายัง<span class="cp">ไม่รู้อะไร</span><br>เกี่ยวกับเงินของคุณเลย</h2>
+  <div class="vs">
+    <div class="card r" data-cue="แผนที่เขาอยากขาย" data-x="1" style="border-color:var(--copper)"><div class="k cp">แผนที่เขาอยากขาย</div></div>
+    <div class="neq r" data-cue="ไม่ใช่แผนที่คุณต้องใช้" data-pop="1">≠</div>
+    <div class="card r" data-cue="ไม่ใช่แผนที่คุณต้องใช้" data-x="1"><div class="k gold">แผนที่คุณต้องใช้</div></div>
+  </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-cue="ก่อนเสนออะไร">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="five gold r" data-cue="ควรถามคุณ" data-pop="1">5</div>
+  <h2 class="r center" data-cue="ควรถามคุณ">คำถามที่ต้อง<span class="gold">โดนถามก่อน</span></h2>
+  <div class="dots"><div class="r" data-cue="ข้อนี้" data-pop="1">1</div><div class="r" data-cue="ข้อนี้" data-d=".15" data-pop="1">2</div><div class="r" data-cue="ข้อนี้" data-d=".3" data-pop="1">3</div><div class="r" data-cue="ข้อนี้" data-d=".45" data-pop="1">4</div><div class="r" data-cue="ข้อนี้" data-d=".6" data-pop="1">5</div></div>
+  </div>
+</section>
+
+<!-- Q1 -->
+<section class="slide" data-cue="1ตอนนี้มี">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คำถามที่ 1 / 5</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="qn r" data-d=".1" data-pop="1">1</div>
+  <div class="qt r" data-d=".3">มี<span class="gold">อะไรอยู่แล้ว</span>บ้าง?</div>
+  <div class="icon r" data-d=".5" data-pop="1"><svg viewBox="0 0 200 200" fill="none" stroke="#E2B65A" stroke-width="7" stroke-linejoin="round"><path d="M20 55h55l12 15h93v95a10 10 0 0 1-10 10H30a10 10 0 0 1-10-10z" fill="#E2B65A22"/><path d="M45 70V40h80l20 20v10" /><path d="M65 55h45M65 100h70M65 125h70M65 150h45" stroke-linecap="round"/></svg></div>
+  <div class="chips"><div class="chip r" data-cue="ประกันกลุ่ม" data-pop="1">ประกันกลุ่ม</div><div class="chip r" data-cue="ประกันสังคม" data-pop="1">ประกันสังคม</div><div class="chip r" data-cue="หรือกรมธรรม์เดิม" data-pop="1">กรมธรรม์เดิม</div></div>
+  </div>
+</section>
+
+<!-- Q2 -->
+<section class="slide" data-cue="2รายได้กับ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คำถามที่ 2 / 5</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="qn r" data-d=".1" data-pop="1">2</div>
+  <div class="qt r" data-d=".3">จ่ายไหว<span class="gold">ทั้งสัญญา</span>ไหม?</div>
+  <div class="card r" data-cue="รายได้กับรายจ่าย" style="margin-bottom:60px"><div class="row"><div class="k">รายได้ − รายจ่าย / เดือน</div><div class="v">?</div></div></div>
+  <div class="bar r" data-cue="จะได้เลือกเบี้ย"><div class="lab"><span>จ่ายเบี้ย</span><b>ปีที่ <span data-count="10" data-ccue="จ่ายไหวทั้งสัญญา" data-cl="3">10</span></b></div>
+    <div class="track tall"><div class="fill" data-w="100" data-wl="3.2" data-ccue="จ่ายไหวทั้งสัญญา" style="background:linear-gradient(90deg,var(--goldd),var(--gold2))"></div></div>
+    <div class="years"><span>ปีที่ 1</span><span>ปีที่ 5</span><span>ปีที่ 10</span></div></div>
+  <p class="lead r center" data-cue="ไม่ใช่ไหวแค่ปีแรก" style="margin-top:40px">ไม่ใช่ไหว<span class="cp">แค่ปีแรก</span></p>
+  </div>
+</section>
+
+<!-- Q3 -->
+<section class="slide" data-cue="3มีใครพึ่งพา">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คำถามที่ 3 / 5</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="qn r" data-d=".1" data-pop="1">3</div>
+  <div class="qt r" data-d=".3">ใคร<span class="gold">พึ่งรายได้</span>คุณ?</div>
+  <div class="icon r" data-d=".5" data-pop="1"><svg viewBox="0 0 200 200" fill="none" stroke="#E2B65A" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"><path d="M20 95L100 30l80 65" /><path d="M40 80v95h120V80" fill="#E2B65A22"/><circle cx="78" cy="112" r="13"/><path d="M58 165c0-18 9-28 20-28s20 10 20 28"/><circle cx="125" cy="120" r="10"/><path d="M110 165c0-14 7-22 15-22s15 8 15 22"/></svg></div>
+  <div class="chips"><div class="chip r" data-cue="พ่อแม่" data-pop="1">พ่อแม่</div><div class="chip r" data-cue="พ่อแม่" data-d=".5" data-pop="1">ลูก</div><div class="chip r" data-cue="หรือหนี้บ้าน" data-pop="1">หนี้บ้าน</div></div>
+  </div>
+</section>
+
+<!-- Q4 -->
+<section class="slide" data-cue="4เป้าหมายการเงิน">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คำถามที่ 4 / 5</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="qn r" data-d=".1" data-pop="1">4</div>
+  <div class="qt r" data-d=".3">เป้าหมายการเงิน<br>ของคุณคืออะไร?</div>
+  <div class="icon r" data-cue="ช่วยปกป้องเป้าหมาย" data-pop="1"><svg viewBox="0 0 200 200" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"><path d="M100 15l70 25v50c0 45-30 75-70 95-40-20-70-50-70-95V40z" stroke="#E2B65A" fill="#E2B65A22"/><path d="M60 130l25-25 20 15 35-40" stroke="#F6D88A"/><path d="M125 80h15v15" stroke="#F6D88A"/></svg></div>
+  <div class="card r center" data-cue="ช่วยปกป้องเป้าหมาย"><div class="k">ประกันควร<span class="gold">ปกป้องเป้าหมาย</span></div></div>
+  <div class="card r center" data-cue="ไม่ใช่มาแย่งเงิน" style="border-color:var(--copper)"><div class="k">ไม่ใช่<span class="cp">มาแย่งเงิน</span>จากมัน</div></div>
+  </div>
+</section>
+
+<!-- Q5 -->
+<section class="slide" data-cue="5ประวัติสุขภาพ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คำถามที่ 5 / 5</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <div class="qn r" data-d=".1" data-pop="1">5</div>
+  <div class="qt r" data-d=".3">ประวัติสุขภาพ<br><span class="gold">บอกข้อยกเว้นตรงๆ</span></div>
+  <div class="icon r" data-d=".6" data-pop="1"><svg viewBox="0 0 200 200" fill="none" stroke="#E2B65A" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"><path d="M40 20h80l30 30v130H40z" fill="#E2B65A22"/><path d="M120 20v30h30M60 70h60M60 95h70M60 120h40"/><circle cx="130" cy="140" r="26" stroke="#F6D88A" fill="#1A110A"/><path d="M149 159l25 25" stroke="#F6D88A" stroke-width="10"/></svg></div>
+  <div class="chips"><div class="chip r" data-cue="แบบไหนรับประกันได้" data-pop="1">✓ รับประกันได้แบบไหน</div><div class="chip r" data-cue="และอาจมีข้อยกเว้น" data-pop="1" style="border-color:var(--copper);color:var(--copper)">! ข้อยกเว้นอะไร</div></div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-cue="และคำตอบที่ดีที่สุด" data-zoom="1.07">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+  <p class="lead r center" data-d=".2" >บางครั้งคำตอบที่ดีที่สุดคือ</p>
+  <div class="quote r" data-cue="ตอนนี้ยังไม่ต้องซื้อ" data-pop="1">“<span class="gold">ยังไม่ต้องซื้อ</span>”</div>
+  <div class="card r center" data-cue="ถ้ามีใครกล้าบอก"><div class="k">ใครกล้าบอกคุณแบบนี้<div class="r" data-cue="คนนั้นวางแผนให้คุณจริง" style="margin-top:14px">คนนั้น<span class="gold">วางแผนให้คุณจริง</span></div></div></div>
+  </div>
+</section>
+
+<!-- 10 save + face -->
+<section class="slide" data-cue="บันทึกไว้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog" style="margin-bottom:50px"></div>
+  <div class="body">
+  <div class="photo r" data-d=".1" data-pop="1" id="ph"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+  <h2 class="r center" data-d=".4" style="margin-bottom:34px">📌 <span class="gold">บันทึกไว้</span>ใช้เช็ก</h2>
+  <p class="lead r center" data-cue="เปิดเช็กครั้งหน้า">ครั้งหน้าที่คุยกับตัวแทน<br><span class="gold">ไม่ว่าจะคนไหนก็ตาม</span></p>
+  <div class="center" style="margin-top:44px"><div class="savebtn r" data-cue="ไม่ว่าจะคนไหน" data-pop="1" id="cta"><svg width="44" height="54" viewBox="0 0 44 54"><path d="M4 4h36v46L22 38 4 50z" fill="#1A110A"/></svg>บันทึก</div></div>
+  </div>
+</section>
