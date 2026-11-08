@@ -1,0 +1,65 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.hook{font-size:86px;font-weight:800;line-height:1.25;text-align:center}
+.stamp{margin:60px auto 0;width:520px;padding:30px 0;border:12px solid var(--copper);border-radius:40px;color:var(--copper);font-size:150px;font-weight:800;text-align:center;line-height:1}
+.emo{display:flex;justify-content:center;gap:40px;margin:30px 0 50px}
+.emo div{width:250px;height:250px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:120px;background:linear-gradient(135deg,#5a3d2688,#3a271888);border:3px solid #E2B65A55}
+.emo div span{font-size:40px;font-weight:700;color:var(--cream);margin-top:6px}
+.tag{display:inline-block;font-size:44px;font-weight:700;padding:12px 34px;border-radius:40px;margin-bottom:30px}
+.tag.g{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--bg)}
+.tag.c{background:linear-gradient(135deg,#F2A66A,#B9612A);color:var(--bg)}
+.arrow{font-size:110px;line-height:1;text-align:center;color:var(--gold2)}
+.answer{background:linear-gradient(135deg,var(--gold2),var(--goldd));color:var(--bg);border-radius:40px;padding:40px;text-align:center;font-size:72px;font-weight:800;box-shadow:0 20px 60px #E2B65A33}
+.photo{width:500px;height:500px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(var(--goldd),#FFF3C8,var(--gold),var(--goldd),var(--gold2),var(--goldd))}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 35%,#6B4626,#2A1B10)}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:900px;height:900px;right:-380px;top:-260px"></div>
+<div class="ring" id="ring2" style="width:620px;height:620px;left:-300px;bottom:-120px;border-style:dashed"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="hook r" data-d="0">ประกัน<span class="gold">อุบัติเหตุ</span></div>
+    <div class="hook r" data-cue="คุ้มครองตอนป่วย">คุ้มครองตอน<span class="cp">ป่วย</span>ด้วย</div>
+    <div class="hook r" data-cue="จริงไหม" data-pop="1"><span class="gold">จริงไหม?</span></div>
+    <div class="stamp r" data-cue="ไม่ค่ะ" data-pop="1">✗ ไม่</div>
+  </div>
+</section>
+
+<section class="slide" data-cue="ประกันอุบัติเหตุคุ้มครองเฉพาะ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="center"><div class="tag g r" data-d=".1" data-pop="1">ประกันอุบัติเหตุ</div></div>
+    <h2 class="r center" data-cue="คุ้มครองเฉพาะเหตุ">คุ้มครอง<span class="gold">เฉพาะ</span><br>เหตุที่เกิดจากอุบัติเหตุ</h2>
+    <div class="emo"><div class="r" data-cue="หกล้ม" data-pop="1">🤕<span>หกล้ม</span></div><div class="r" data-cue="หกล้ม" data-d=".7" data-pop="1">🚗<span>รถชน</span></div></div>
+  </div>
+</section>
+
+<section class="slide" data-cue="ส่วนการเจ็บป่วย">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="center"><div class="tag c r" data-d=".1" data-pop="1">การเจ็บป่วย</div></div>
+    <div class="emo"><div class="r" data-cue="ไส้ติ่งอักเสบ" data-pop="1">🤒<span>ไส้ติ่งอักเสบ</span></div><div class="r" data-cue="หรือโรคทั่วไป" data-pop="1">🦠<span>โรคทั่วไป</span></div></div>
+    <div class="arrow r" data-cue="ต้องใช้ประกันสุขภาพ">↓</div>
+    <div class="answer r" data-cue="ต้องใช้ประกันสุขภาพ" data-d=".2" data-pop="1">ต้องใช้ประกันสุขภาพ</div>
+  </div>
+</section>
+
+<section class="slide" data-cue="บางแผนอาจมี">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <p class="lead r center" data-d=".2">บางแผนอาจมี<span class="gold">ความคุ้มครองเสริม</span></p>
+    <h2 class="r center" data-cue="เช็กหน้ากรมธรรม์" style="margin-top:30px">📄 เช็กหน้า<span class="gold">กรมธรรม์</span><br>ของตัวเองดูนะ</h2>
+  </div>
+</section>
