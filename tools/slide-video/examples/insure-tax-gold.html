@@ -199,19 +199,27 @@ window.setup = (m, dur) => {
 let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 const P = [...Array(70)].map(() => ({ x: rnd() * 1080, y: rnd() * 1920, r: 2 + rnd() * 7, s: 12 + rnd() * 40, w: rnd() * 6.28, a: .15 + rnd() * .5 }));
 const bg = document.getElementById('bg').getContext('2d'), fx = document.getElementById('fx').getContext('2d');
+const CV = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let TH = null;
+function theme() {
+  if (TH) return TH;
+  TH = { a: CV('--bgA') || '#4A3018', b: CV('--bgB') || '#24170D', c: CV('--bgC') || '#140D07', glow: CV('--glow') || '#7A4E2240', dust: CV('--dust') || '246,216,138' };
+  return TH;
+}
 function drawBg(t) {
+  const T = theme();
   const cx = 540 + Math.sin(t * .15) * 260, cy = 500 + Math.cos(t * .11) * 220;
   const g = bg.createRadialGradient(cx, cy, 50, cx, cy, 1300);
-  g.addColorStop(0, '#4A3018'); g.addColorStop(.45, '#24170D'); g.addColorStop(1, '#140D07');
+  g.addColorStop(0, T.a); g.addColorStop(.45, T.b); g.addColorStop(1, T.c);
   bg.fillStyle = g; bg.fillRect(0, 0, 1080, 1920);
   const g2 = bg.createRadialGradient(1000 - Math.sin(t * .09) * 200, 1700, 10, 1000, 1700, 800);
-  g2.addColorStop(0, '#7A4E2240'); g2.addColorStop(1, '#0000'); bg.fillStyle = g2; bg.fillRect(0, 0, 1080, 1920);
+  g2.addColorStop(0, T.glow); g2.addColorStop(1, '#0000'); bg.fillStyle = g2; bg.fillRect(0, 0, 1080, 1920);
   fx.clearRect(0, 0, 1080, 1920);
   for (const p of P) {
     const y = ((p.y - t * p.s) % 2000 + 2000) % 2000 - 40, x = p.x + Math.sin(t * .6 + p.w) * 30;
     const tw = .6 + .4 * Math.sin(t * 2 + p.w * 3);
     const gr = fx.createRadialGradient(x, y, 0, x, y, p.r * 3);
-    gr.addColorStop(0, `rgba(246,216,138,${p.a * tw})`); gr.addColorStop(1, 'rgba(246,216,138,0)');
+    gr.addColorStop(0, `rgba(${T.dust},${p.a * tw})`); gr.addColorStop(1, `rgba(${T.dust},0)`);
     fx.fillStyle = gr; fx.beginPath(); fx.arc(x, y, p.r * 3, 0, 6.3); fx.fill();
   }
   document.getElementById('ring1').style.transform = `rotate(${t * 6}deg) scale(${1 + .03 * Math.sin(t * .5)})`;
