@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<link href="../fonts/prompt.css" rel="stylesheet">
+<style>
+:root{--bg:#1A110A;--bg2:#2A1B10;--brown:#4A3220;--gold:#E2B65A;--gold2:#F6D88A;--goldd:#A9772E;--cream:#F7EBD3;--muted:#BFA88A;--copper:#E08A4A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+body{font-family:"Prompt",sans-serif;color:var(--cream);font-variant-numeric:tabular-nums}
+#bg{position:absolute;inset:0}
+#fx{position:absolute;inset:0}
+.ring{position:absolute;border-radius:50%;border:3px solid #E2B65A22}
+.slide{position:absolute;inset:0;padding:150px 96px 0;opacity:0}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:56px}
+.brand{font-weight:800;letter-spacing:4px;font-size:34px}
+.pg{font-size:30px;color:var(--muted);font-weight:500}
+.prog{display:flex;gap:12px;margin-bottom:70px}
+.prog i{flex:1;height:12px;border-radius:6px;background:#ffffff1a;overflow:hidden;position:relative}
+.prog i b{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--goldd),var(--gold2));border-radius:6px}
+.gold{background:linear-gradient(100deg,var(--goldd) 0%,var(--gold) 30%,#FFF3C8 var(--sh,50%),var(--gold) 70%,var(--goldd) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.label{display:inline-block;font-size:36px;font-weight:600;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--gold));padding:10px 30px;border-radius:40px;margin-bottom:40px}
+h1{font-size:92px;line-height:1.2;font-weight:800}
+h2{font-size:74px;line-height:1.25;font-weight:800;margin-bottom:44px}
+.cp{color:var(--copper)}
+p.lead{font-size:46px;line-height:1.5;color:#EADBC0;font-weight:500}
+.card{background:linear-gradient(135deg,#5a3d2655,#3a271855);border:2px solid #E2B65A40;border-radius:36px;padding:36px 40px;margin-bottom:26px}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.k{font-size:42px;font-weight:600}
+.v{font-size:52px;font-weight:800;color:var(--gold2);white-space:nowrap}
+.note{font-size:32px;color:var(--muted);margin-top:8px;line-height:1.4}
+.note b{color:var(--copper);font-weight:600}
+.item{display:flex;gap:30px;align-items:flex-start;margin-bottom:34px}
+.num{flex:none;width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--goldd))}
+.warn .num{background:linear-gradient(135deg,#F2A66A,#B9612A)}
+.item .t{font-size:48px;line-height:1.4;font-weight:600;padding-top:6px}
+.foot{position:absolute;left:96px;right:96px;bottom:330px;font-size:28px;color:#9C8669;line-height:1.45}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:44px}
+td{padding:22px 0;border-bottom:2px solid #E2B65A26}
+td.ra{text-align:right;font-weight:700;white-space:nowrap}
+td.m{color:#E7C07A}
+tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
+.big{background:linear-gradient(135deg,var(--gold2),var(--goldd));color:var(--bg);border-radius:40px;padding:40px 44px;margin-top:34px;box-shadow:0 20px 60px #E2B65A33}
+.big .v{color:var(--bg);font-size:96px}
+.bar{margin-bottom:34px}
+.bar .lab{display:flex;justify-content:space-between;font-size:40px;font-weight:600;margin-bottom:14px}
+.bar .track{height:56px;border-radius:28px;background:#ffffff12;overflow:hidden}
+.bar .fill{height:100%;border-radius:28px;width:0}
+.save{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--bg);border-radius:40px;padding:34px 44px;margin:30px 0}
+.save .v{color:var(--bg);font-size:84px}
+.cal{width:380px;border-radius:40px;overflow:hidden;background:var(--cream);color:var(--bg);text-align:center;margin:10px 0 50px;box-shadow:0 24px 60px #0008}
+.cal .m{background:linear-gradient(135deg,var(--goldd),#7A4E22);font-size:44px;font-weight:700;padding:18px 0;color:#fff}
+.cal .d{font-size:200px;font-weight:800;line-height:1.1}
+.cal .y{font-size:40px;font-weight:600;padding-bottom:24px}
+.cta{background:linear-gradient(135deg,#6B4626,#3E2715);border:3px solid var(--gold);border-radius:44px;padding:44px;text-align:center;margin:40px 0}
+.cta .s{font-size:44px;font-weight:500}
+.cta .b{font-size:84px;font-weight:800;letter-spacing:3px}
+.chips{display:flex;gap:20px;flex-wrap:wrap}
+.chip{font-size:40px;font-weight:600;border:3px solid var(--gold);color:var(--gold2);border-radius:50px;padding:14px 34px}
+.r{will-change:transform,opacity}
+</style></head><body>
+</head><body>
+<!--
+  วิธีตั้งเวลา (ไม่ต้องใส่วินาทีเอง):
+  - <section class="slide" data-cue="คำแรกที่พูดในหน้านี้">  = หน้าเริ่มตอนเสียงพูดคำนี้
+  - class="r" data-cue="..."   = ข้อความโผล่ตอนเสียงพูดคำนี้
+  - class="r" data-d="0.3"     = ไม่มีคำพูดตรงๆ ให้โผล่หลังเริ่มหน้า 0.3 วินาที
+  - data-pop="1" เด้งเข้า / data-x="1" เลื่อนจากซ้าย / (ไม่ใส่) เลื่อนขึ้น
+  - data-count="20450"  ตัวเลขนับขึ้น (data-ccue="คำ" ให้เริ่มนับตอนพูดคำนี้, data-from ค่าเริ่ม)
+  - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน)
+  ใช้ข้อความ cue เป็น "คำ" ไม่ใช่ตัวเลข เพราะ Whisper เขียนตัวเลขไทยเพี้ยนบ่อย
+-->
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:900px;height:900px;right:-380px;top:-260px"></div>
+<div class="ring" id="ring2" style="width:620px;height:620px;left:-300px;bottom:-120px;border-style:dashed"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เช็กสิทธิ์ก่อนจ่ายเพิ่ม</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">ลดหย่อนภาษีปี 2569</div>
+  <h1 class="r" data-d=".2">เงินเดือน<br><span class="gold" style="font-size:150px" data-count="50000" data-cl="1.3">50,000</span></h1>
+  <h1 class="r" data-cue="ถ้าใช้ประกันลดหย่อนภาษี" style="margin-top:30px">ใช้ประกันลดหย่อน<br>ประหยัดได้<span class="gold">จริง</span><br>เท่าไหร่?</h1>
+  <p class="lead r" data-cue="วันนี้คำนวณให้ดู">คำนวณให้ดูทีละขั้น →</p>
+</section>
+
+<section class="slide" data-cue="ก่อนอื่นต้องรู้ไว้ว่า">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">2 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">ทำไมต้องตอนนี้</div>
+  <h2 class="r" data-cue="เบี้ยประกันที่จะใช้ลดหย่อน">เบี้ยต้องจ่าย<span class="gold">ภายใน</span></h2>
+  <div class="cal r" data-cue="ต้องจ่ายภายใน" data-pop="1"><div class="m">ธันวาคม</div><div class="d">31</div><div class="y">2569</div></div>
+  <div class="card r" data-cue="ถ้าจะทำกรมธรรม์ใหม่"><div class="k">ทำกรมธรรม์ใหม่ บริษัทต้องใช้เวลา<br><span class="gold">พิจารณา</span>ด้วย</div></div>
+  <div class="card r" data-cue="อย่ารอจนสัปดาห์สุดท้าย" data-pop="1" style="border-color:var(--copper)"><div class="k cp">อย่ารอจนสัปดาห์สุดท้าย</div></div>
+</section>
+
+<section class="slide" data-cue="ประกันที่ลดหย่อนได้มี">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">3 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">สิทธิ 4 แบบ</div>
+  <h2 class="r" data-d=".3">ประกันที่ลดหย่อนได้</h2>
+  <div class="card r" data-cue="ประกันออมทรัพย์ทั่วไป" data-x="1"><div class="row"><div class="k">ประกันออมทรัพย์ทั่วไป</div><div class="v" data-count="100000">100,000</div></div></div>
+  <div class="card r" data-cue="ประกันสุขภาพตัวเอง" data-x="1"><div class="row"><div class="k">ประกันสุขภาพตัวเอง</div><div class="v" data-count="25000">25,000</div></div></div>
+  <div class="card r" data-cue="ประกันสุขภาพพ่อแม่" data-x="1"><div class="row"><div class="k">ประกันสุขภาพพ่อแม่</div><div class="v" data-count="15000">15,000</div></div></div>
+  <div class="card r" data-cue="ประกันบำนาญได้สูงสุด" data-x="1"><div class="row"><div class="k">ประกันบำนาญ</div><div class="v" data-count="200000">200,000</div></div><div class="note r" data-cue="แต่ไม่เกิน">แต่<b>ไม่เกิน 15%</b> ของรายได้</div></div>
+</section>
+
+<section class="slide" data-cue="จุดที่คนพลาดบ่อย">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">4 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">จุดที่มักพลาด</div>
+  <h2 class="r" data-d=".2">จุดที่คน<br><span class="cp">พลาดบ่อย</span></h2>
+  <div class="warn">
+    <div class="item r" data-cue="กรมธรรม์ต้องคุ้มครอง" data-x="1"><div class="num">!</div><div class="t">กรมธรรม์ต้องคุ้มครอง <span class="gold">10 ปีขึ้นไป</span></div></div>
+    <div class="item r" data-cue="ต้องแจ้งบริษัทประกัน" data-x="1"><div class="num">!</div><div class="t">ต้อง<span class="gold">แจ้งบริษัทประกัน</span>ให้ส่งข้อมูลถึงสรรพากร</div></div>
+    <div class="item r" data-cue="บำนาญไม่ได้ลดได้เต็ม" data-x="1"><div class="num">!</div><div class="t">บำนาญ<span class="gold">ไม่ได้ลดได้เต็ม</span> <span style="white-space:nowrap">200,000 ทุกคน</span></div></div>
+  </div>
+</section>
+
+<section class="slide" data-cue="มาดูตัวอย่างกัน">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">5 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">ก่อนใช้ประกัน</div>
+  <h2 class="r" data-cue="เงินเดือน">เงินเดือน <span class="gold">50,000</span></h2>
+  <table>
+    <tr class="r" data-cue="รายได้ทั้งปี" data-x="1"><td>รายได้ทั้งปี</td><td class="ra" data-count="600000">600,000</td></tr>
+    <tr class="r" data-cue="หักค่าใช้จ่าย" data-x="1"><td>หักค่าใช้จ่าย</td><td class="ra m">−100,000</td></tr>
+    <tr class="r" data-cue="ลดหย่อนส่วนตัว" data-x="1"><td>ลดหย่อนส่วนตัว</td><td class="ra m">−60,000</td></tr>
+    <tr class="r" data-cue="ประกันสังคมอีก" data-x="1"><td>ประกันสังคม</td><td class="ra m">−10,500</td></tr>
+    <tr class="sum r" data-cue="เหลือเงินได้สุทธิ" data-x="1"><td>เงินได้สุทธิ</td><td class="ra gold" data-count="429500" data-cd=".6">429,500</td></tr>
+  </table>
+  <div class="big r" data-cue="ภาษีที่ต้องจ่ายคือ" data-pop="1"><div class="row"><div class="k">ภาษีที่ต้องจ่าย</div><div class="v" data-count="20450" data-cd=".6" data-cl="1.4">20,450</div></div></div>
+  <div class="foot r" data-d="2" data-after="ภาษีที่ต้องจ่ายคือ">ตัวอย่างคำนวณตามอัตราภาษีเงินได้บุคคลธรรมดาแบบขั้นบันได ใช้เฉพาะรายการที่ระบุ</div>
+</section>
+
+<section class="slide" data-cue="ถ้าเพิ่มประกันชีวิต">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">6 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">หลังใช้ประกัน</div>
+  <h2 class="r" data-d=".2">ภาษีลดลงเท่าไหร่?</h2>
+  <div class="bar r" data-d=".3"><div class="lab"><span>ก่อนใช้ประกัน</span><b>20,450</b></div><div class="track"><div class="fill" data-w="100" style="background:linear-gradient(90deg,#B9612A,var(--copper))"></div></div></div>
+  <div class="bar r" data-d=".6"><div class="lab"><span>+ ประกันชีวิต 100,000</span><b data-count="10450" data-from="20450" data-ccue="ภาษีจะเหลือ">10,450</b></div><div class="track"><div class="fill" data-w="51.1" data-from="100" data-ccue="ภาษีจะเหลือ" style="background:linear-gradient(90deg,#8A5A2B,#C9934A)"></div></div></div>
+  <div class="bar r" data-cue="ถ้าเพิ่มประกันบำนาญอีก"><div class="lab"><span>+ บำนาญอีก 90,000</span><b data-count="4475" data-from="10450" data-ccue="ภาษีเหลือแค่">4,475</b></div><div class="track"><div class="fill" data-w="21.9" data-from="51.1" data-ccue="ภาษีเหลือแค่" style="background:linear-gradient(90deg,var(--goldd),var(--gold2))"></div></div></div>
+  <div class="save r" data-cue="รวมแล้วประหยัดได้" data-pop="1"><div class="row"><div class="k">รวมประหยัดได้</div><div class="v" data-count="15975" data-cd=".5" data-cl="1.5">15,975</div></div></div>
+  <div class="card r" data-cue="แต่ต้องย้ำว่า"><div class="k" style="font-size:38px;line-height:1.45">เบี้ยที่จ่าย = เงินซื้อ<span class="gold">ความคุ้มครอง</span>และ<span class="gold">เงินออม</span><div class="r" data-cue="ภาษีที่ลดได้เป็นแค่">ภาษีที่ลดได้เป็นแค่<span class="cp">ผลพลอยได้</span></div></div></div>
+</section>
+
+<section class="slide" data-cue="ก่อนซื้อลองถามตัวเอง">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">7 / 8</div></div>
+  <div class="prog"></div>
+  <div class="label r" data-d=".1">ถามตัวเองก่อน</div>
+  <h2 class="r" data-d=".2">ก่อนซื้อ<br>ถามตัวเอง <span class="gold">3 ข้อ</span></h2>
+  <div class="item r" data-cue="เราต้องการความคุ้มครอง" data-x="1"><div class="num">1</div><div class="t">เราต้องการความคุ้มครองนี้<span class="gold">จริงไหม</span></div></div>
+  <div class="item r" data-cue="จ่ายเบี้ยไหวทุกปี" data-x="1"><div class="num">2</div><div class="t">จ่ายเบี้ยไหว<span class="gold">ทุกปีจนครบสัญญา</span>ไหม</div></div>
+  <div class="item r" data-cue="ขั้นภาษีเราอยู่ที่" data-x="1"><div class="num">3</div><div class="t">ขั้นภาษีเราอยู่ที่เท่าไหร่<br><span class="note r" data-cue="ถ้าอยู่ขั้น" style="font-size:38px;display:inline-block">ถ้าอยู่<b>ขั้น 5%</b> จะประหยัดได้น้อย</span></div></div>
+</section>
+
+<section class="slide" data-cue="อยากรู้ว่าตัวเองประหยัด">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">8 / 8</div></div>
+  <div class="prog"></div>
+  <h2 class="r" data-d=".1">อยากรู้ว่า<br><span class="gold">ตัวเอง</span>ประหยัดได้<br>เท่าไหร่?</h2>
+  <div class="cta r" data-d="2.2" data-pop="1" id="cta"><div class="s">ทักแชท</div><div class="b gold">INSUREINGAME</div></div>
+  <div class="chips"><div class="chip r" data-cue="บอกรายได้" data-pop="1">บอกรายได้</div><div class="chip r" data-cue="กับประกันที่มีอยู่" data-pop="1">ประกันที่มีอยู่</div></div>
+  <p class="lead r" data-cue="เราคำนวณให้ฟรี">เราคำนวณให้<span class="gold">ฟรี</span> · ไม่ตื๊อขาย</p>
+  <div class="foot r" data-d="1.5" data-after="เราคำนวณให้ฟรี">ข้อมูลทั่วไปเพื่อความเข้าใจเบื้องต้น เงื่อนไขการลดหย่อนให้ยึดตามประกาศกรมสรรพากรและกรมธรรม์ของบริษัทที่เกี่ยวข้อง</div>
+</section>
+
+<script>
+// ---------- engine (ไม่ต้องแก้) ----------
+const LEAD = 0.12, TR = 0.5;
+let END = 60, STARTS = [];
+const slides = [...document.querySelectorAll('.slide')];
+slides.forEach(s => { const p = s.querySelector('.prog'); if (p) for (let i = 0; i < slides.length; i++) { const e = document.createElement('i'); e.appendChild(document.createElement('b')); p.appendChild(e); } });
+document.querySelectorAll('[data-count]').forEach(e => e.dataset.fmt = e.textContent);
+const cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const eo = x => 1 - Math.pow(1 - x, 3);
+const eb = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const fmt = n => Math.round(n).toLocaleString('en-US');
+
+// เรียกจาก make_video.js: m = {cue: วินาที}
+window.setup = (m, dur) => {
+  END = dur;
+  STARTS = slides.map((s, i) => i === 0 ? 0 : (s.dataset.cue in m ? m[s.dataset.cue] - 0.25 : null));
+  for (let i = 1; i < STARTS.length; i++) if (STARTS[i] == null) STARTS[i] = STARTS[i - 1] + 5;
+  slides.forEach((s, i) => {
+    s.querySelectorAll('.r').forEach(e => {
+      if (e.dataset.cue && e.dataset.cue in m) e._t = m[e.dataset.cue] - LEAD;
+      else if (e.dataset.after && e.dataset.after in m) e._t = m[e.dataset.after] + (+e.dataset.d || 0);
+      else e._t = STARTS[i] + (+e.dataset.d || 0);
+    });
+    s.querySelectorAll('[data-count],[data-w]').forEach(e => {
+      const host = e.closest('.r');
+      e._t = e.dataset.ccue && e.dataset.ccue in m ? m[e.dataset.ccue] : (host ? host._t : STARTS[i]) + (+e.dataset.cd || 0.2);
+    });
+  });
+};
+
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const P = [...Array(70)].map(() => ({ x: rnd() * 1080, y: rnd() * 1920, r: 2 + rnd() * 7, s: 12 + rnd() * 40, w: rnd() * 6.28, a: .15 + rnd() * .5 }));
+const bg = document.getElementById('bg').getContext('2d'), fx = document.getElementById('fx').getContext('2d');
+function drawBg(t) {
+  const cx = 540 + Math.sin(t * .15) * 260, cy = 500 + Math.cos(t * .11) * 220;
+  const g = bg.createRadialGradient(cx, cy, 50, cx, cy, 1300);
+  g.addColorStop(0, '#4A3018'); g.addColorStop(.45, '#24170D'); g.addColorStop(1, '#140D07');
+  bg.fillStyle = g; bg.fillRect(0, 0, 1080, 1920);
+  const g2 = bg.createRadialGradient(1000 - Math.sin(t * .09) * 200, 1700, 10, 1000, 1700, 800);
+  g2.addColorStop(0, '#7A4E2240'); g2.addColorStop(1, '#0000'); bg.fillStyle = g2; bg.fillRect(0, 0, 1080, 1920);
+  fx.clearRect(0, 0, 1080, 1920);
+  for (const p of P) {
+    const y = ((p.y - t * p.s) % 2000 + 2000) % 2000 - 40, x = p.x + Math.sin(t * .6 + p.w) * 30;
+    const tw = .6 + .4 * Math.sin(t * 2 + p.w * 3);
+    const gr = fx.createRadialGradient(x, y, 0, x, y, p.r * 3);
+    gr.addColorStop(0, `rgba(246,216,138,${p.a * tw})`); gr.addColorStop(1, 'rgba(246,216,138,0)');
+    fx.fillStyle = gr; fx.beginPath(); fx.arc(x, y, p.r * 3, 0, 6.3); fx.fill();
+  }
+  document.getElementById('ring1').style.transform = `rotate(${t * 6}deg) scale(${1 + .03 * Math.sin(t * .5)})`;
+  document.getElementById('ring2').style.transform = `rotate(${-t * 9}deg)`;
+}
+function render(t) {
+  drawBg(t);
+  const sh = ((t * 35) % 160) - 30;
+  document.querySelectorAll('.gold').forEach(e => e.style.setProperty('--sh', sh + '%'));
+  slides.forEach((s, i) => {
+    const a = STARTS[i], b = i < slides.length - 1 ? STARTS[i + 1] : END + 1, last = i === slides.length - 1;
+    let op = 0, dy = 0;
+    if (t >= a - TR / 2 && t < b + TR / 2) {
+      const fin = i == 0 ? 1 : eo(cl((t - (a - TR / 2)) / TR)), fout = last ? 1 : 1 - cl((t - (b - TR / 2)) / TR);
+      op = Math.min(fin, fout); dy = (1 - fin) * 60 - (1 - fout) * 60;
+    }
+    s.style.opacity = op; s.style.display = op > 0 ? 'block' : 'none';
+    if (op <= 0) return;
+    const lt = t - a;
+    s.style.transform = `translateY(${dy}px) scale(${1 + 0.012 * cl(lt / (b - a))})`;
+    s.querySelectorAll('.prog b').forEach((e, k) => { e.style.width = (k < i ? 100 : k > i ? 0 : cl(lt / (b - a)) * 100) + '%'; });
+    s.querySelectorAll('.r').forEach(e => {
+      const x = cl((t - e._t) / .6);
+      if (e.dataset.pop) { const k = x <= 0 ? 0 : eb(x); e.style.opacity = cl(x * 2); e.style.transform = `scale(${.7 + .3 * k})`; }
+      else if (e.dataset.x) { const k = eo(x); e.style.opacity = k; e.style.transform = `translateX(${(1 - k) * -80}px)`; }
+      else { const k = eo(x); e.style.opacity = k; e.style.transform = `translateY(${(1 - k) * 50}px)`; }
+    });
+    s.querySelectorAll('[data-count]').forEach(e => {
+      const L = +(e.dataset.cl || 1), to = +e.dataset.count, from = +(e.dataset.from || 0);
+      const x = cl((t - e._t) / L); e.textContent = x >= 1 ? e.dataset.fmt : fmt(from + (to - from) * eo(x));
+    });
+    s.querySelectorAll('[data-w]').forEach(e => {
+      const x = eo(cl((t - e._t) / 1.2)), f = +(e.dataset.from || 0);
+      e.style.width = (f + (+e.dataset.w - f) * x) + '%';
+    });
+    const cta = s.querySelector('#cta');
+    if (cta && t > cta._t + .6) { const g = .5 + .5 * Math.sin((t - cta._t) * 3); cta.style.boxShadow = `0 0 ${30 + 50 * g}px rgba(226,182,90,${.25 + .35 * g})`; cta.style.transform = `scale(${1 + .02 * g})`; }
+  });
+}
+window.render = render;
+</script>
+</body></html>
