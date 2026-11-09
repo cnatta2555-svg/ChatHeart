@@ -65,6 +65,7 @@ tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
   - class="r" data-d="0.3"     = ไม่มีคำพูดตรงๆ ให้โผล่หลังเริ่มหน้า 0.3 วินาที
   - data-pop="1" เด้งเข้า / data-x="1" เลื่อนจากซ้าย / (ไม่ใส่) เลื่อนขึ้น
   - data-count="20450"  ตัวเลขนับขึ้น (data-ccue="คำ" ให้เริ่มนับตอนพูดคำนี้, data-from ค่าเริ่ม)
+  - data-h="60" ความสูงกราฟแท่งแนวตั้ง % (ใช้ data-ccue / data-cd / data-from / data-wl ได้)
   - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน, data-wl = วินาทีที่ใช้ยืด)
   - data-bob="1" ลอยขึ้นลงเบาๆ (ใส่ที่รูป/ไอคอนข้างใน ไม่ใช่ตัว .r)
   - data-spin="40" หมุนตลอด (องศา/วินาที)   |  data-cue + data-d = โผล่หลังคำนั้น d วินาที
@@ -189,7 +190,7 @@ window.setup = (m, dur) => {
       else if (e.dataset.after && e.dataset.after in m) e._t = m[e.dataset.after] + (+e.dataset.d || 0);
       else e._t = STARTS[i] + (+e.dataset.d || 0);
     });
-    s.querySelectorAll('[data-count],[data-w]').forEach(e => {
+    s.querySelectorAll('[data-count],[data-w],[data-h]').forEach(e => {
       const host = e.closest('.r');
       e._t = e.dataset.ccue && e.dataset.ccue in m ? m[e.dataset.ccue] : (host ? host._t : STARTS[i]) + (+e.dataset.cd || 0.2);
     });
@@ -252,6 +253,10 @@ function render(t) {
     s.querySelectorAll('[data-count]').forEach(e => {
       const L = +(e.dataset.cl || 1), to = +e.dataset.count, from = +(e.dataset.from || 0);
       const x = cl((t - e._t) / L); e.textContent = x >= 1 ? e.dataset.fmt : fmt(from + (to - from) * eo(x));
+    });
+    s.querySelectorAll('[data-h]').forEach(e => {
+      const x = eo(cl((t - e._t) / (+e.dataset.wl || 1.2))), f = +(e.dataset.from || 0);
+      e.style.height = (f + (+e.dataset.h - f) * x) + '%';
     });
     s.querySelectorAll('[data-w]').forEach(e => {
       const x = eo(cl((t - e._t) / (+e.dataset.wl || 1.2))), f = +(e.dataset.from || 0);
