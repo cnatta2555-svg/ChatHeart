@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FFF7E6"/><stop offset="1" stop-color="#F3DDB0"/></radialGradient>
+ <linearGradient id="c" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE38A"/><stop offset="1" stop-color="#E0A92E"/></linearGradient>
+ <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AD1B8"/><stop offset="1" stop-color="#2FA58E"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<ellipse cx="100" cy="186" rx="70" ry="6" fill="#C9A060" opacity=".4"/>
+<!-- parent -->
+<path d="M30 186v-44q0-26 26-26t26 26v44z" fill="#F27E63"/>
+<circle cx="56" cy="92" r="18" fill="#F2C29B"/><path d="M38 90c-1-15 9-23 19-22 11 0 18 9 16 21-6-8-15-11-25-9-5 1-8 5-10 10z" fill="#3A2A1C"/>
+<path d="M50 92q2-2 4 0M60 92q2-2 4 0" fill="none" stroke="#3A2A1C" stroke-width="2.2" stroke-linecap="round"/><path d="M52 100q5 4 10 0" fill="none" stroke="#3A2A1C" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M78 138q14-4 22-16" fill="none" stroke="#F27E63" stroke-width="12" stroke-linecap="round"/>
+<!-- coins flowing -->
+<g><circle cx="108" cy="112" r="11" fill="url(#c)" stroke="#C98A1E" stroke-width="2"/><circle cx="124" cy="98" r="9" fill="url(#c)" stroke="#C98A1E" stroke-width="2"/><circle cx="138" cy="86" r="7" fill="url(#c)" stroke="#C98A1E" stroke-width="2"/></g>
+<!-- child inside shield -->
+<path d="M150 46l34 12v28c0 26-16 40-34 48-18-8-34-22-34-48V58z" fill="url(#sh)" stroke="#fff" stroke-width="4"/>
+<circle cx="150" cy="84" r="12" fill="#F2C29B"/><path d="M138 82c0-10 6-14 12-14 7 0 12 6 11 13-4-5-10-6-16-5-3 1-5 3-7 6z" fill="#3A2A1C"/>
+<path d="M136 120v-10q0-10 14-10t14 10v10z" fill="#FFD36B"/>
+<path d="M146 86q4 3 8 0" fill="none" stroke="#3A2A1C" stroke-width="2" stroke-linecap="round"/>
+</svg>

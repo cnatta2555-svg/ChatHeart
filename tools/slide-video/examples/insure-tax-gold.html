@@ -68,6 +68,7 @@ tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
   - data-h="60" ความสูงกราฟแท่งแนวตั้ง % (ใช้ data-ccue / data-cd / data-from / data-wl ได้)
   - data-w="51" ความยาวกราฟแท่ง % (data-ccue / data-from แบบเดียวกัน, data-wl = วินาทีที่ใช้ยืด)
   - data-bob="1" ลอยขึ้นลงเบาๆ (ใส่ที่รูป/ไอคอนข้างใน ไม่ใช่ตัว .r)
+  - <img data-seq="dir/f_%04d.jpg" data-n="361" data-speed="0.5"> วิดีโอพื้นหลัง (แตกเป็นภาพด้วย ffmpeg -vf fps=30 dir/f_%04d.jpg) เล่นวนไปกลับ
   - data-spin="40" หมุนตลอด (องศา/วินาที)   |  data-cue + data-d = โผล่หลังคำนั้น d วินาที
   - <section data-zoom="1.08"> ซูมเข้าช้าๆ ทั้งหน้า (ค่าเริ่ม 1.012)
   ใช้ข้อความ cue เป็น "คำ" ไม่ใช่ตัวเลข เพราะ Whisper เขียนตัวเลขไทยเพี้ยนบ่อย
@@ -266,6 +267,18 @@ function render(t) {
     if (cta && t > cta._t + .6) { const g = .5 + .5 * Math.sin((t - cta._t) * 3); cta.style.boxShadow = `0 0 ${30 + 50 * g}px rgba(226,182,90,${.25 + .35 * g})`; cta.style.transform = `scale(${1 + .02 * g})`; }
   });
 }
-window.render = render;
+// วิดีโอพื้นหลังแบบลำดับภาพ: <img data-seq="dir/f_%04d.jpg" data-n="361" data-speed="0.5">
+const SEQ = [...document.querySelectorAll('[data-seq]')];
+function seqTick(t) {
+  SEQ.forEach(e => {
+    const n = +e.dataset.n, k = Math.floor(t * 30 * (+e.dataset.speed || 1)), m = 2 * (n - 1);
+    let i = k % m; if (i >= n) i = m - i;
+    const src = e.dataset.seq.replace('%04d', String(i + 1).padStart(4, '0'));
+    if (e._src !== src) { e._src = src; e.src = src; }
+  });
+}
+window.afterRender = () => Promise.all(SEQ.map(e => e.decode().catch(() => {})));
+const _render = render;
+window.render = t => { seqTick(t); _render(t); };
 </script>
 </body></html>

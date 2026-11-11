@@ -50,7 +50,7 @@ const duration = +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'form
   // 3a) พรีวิวเป็นภาพ
   if (preview) {
     for (const t of preview.split(',')) {
-      await pg.evaluate(t => render(t), +t);
+      await pg.evaluate(async t => { render(t); if (window.afterRender) await window.afterRender(); }, +t);
       await pg.screenshot({ path: path.join(work, `preview_${t}.png`) });
     }
     console.log('preview ->', work); await b.close(); return;
@@ -62,7 +62,7 @@ const duration = +execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'form
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out], { stdio: ['pipe', 'inherit', 'inherit'] });
   const t0 = Date.now();
   for (let f = 0; f < N; f++) {
-    await pg.evaluate(t => render(t), f / FPS);
+    await pg.evaluate(async t => { render(t); if (window.afterRender) await window.afterRender(); }, f / FPS);
     const buf = await pg.screenshot({ type: 'jpeg', quality: 92 });
     if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r));
     if (f % 600 === 0) console.log(`frame ${f}/${N}  ${((Date.now() - t0) / 1000).toFixed(0)}s`);

@@ -31,5 +31,7 @@ for c in cues:
     if blk: bi += blk.b
     t = times[min(bi, len(times) - 1)] if times else 0
     out.append({'cue': c, 't': round(t, 2), 'score': round(best, 2), 'heard': text[bi:bi + L]})
-    pos = bi + 1
+    # ถ้าจับคู่ไม่มั่นใจ ไม่เลื่อนตำแหน่งค้นหา กันไม่ให้ cue ถัดไปหลุดตามกันทั้งหมด
+    if best >= 0.55:
+        pos = bi + 1
 json.dump(out, open(sys.argv[3], 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
