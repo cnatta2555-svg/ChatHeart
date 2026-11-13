@@ -80,3 +80,17 @@ node make_video.js examples/insure-tax-gold.html voice.mp3 out/clip.mp4
 ## ภาพประกอบ
 
 ภาพอยู่ที่ `icons/illust/*.svg` เป็นภาพเวกเตอร์ที่วาดเอง ห้ามใช้อีโมจิ ถ้าภาพที่มีไม่ตรงกับเนื้อหา ให้วาดเพิ่มในสไตล์เดียวกัน (การ์ตูนแบน กรอบมน พื้นหลังสีอ่อน)
+
+## พรีเซนเตอร์มุมจอ (ปากขยับตามเสียง)
+
+```bash
+pip install librosa opencv-python-headless onnxruntime
+mkdir -p models && curl -L -o models/wav2lip_gan.onnx https://huggingface.co/bluefoxcreation/Wav2lip-Onnx/resolve/main/wav2lip_gan.onnx
+python3 presenter.py <รูปตัดพื้นหลัง.png> voice.mp3 <โฟลเดอร์คลิป>/assets/presenter
+```
+
+- รูปตัดพื้นหลังทำด้วย `rembg` ค่า `--crop` (ครึ่งตัว) กับ `--face` (กรอบคิ้วถึงคาง) ตั้งไว้สำหรับรูปโปรไฟล์ของเจ้าของช่อง ถ้าเปลี่ยนรูปต้องวัดใหม่
+- ทำปากบนรูปนิ่งก่อน แล้วค่อยใส่การโยกตัว/หายใจ ใช้ CPU ได้ (คลิป 36 วินาทีใช้ประมาณ 2 นาที)
+- ใส่ในสไลด์: ต่อ `presenter.css` ท้ายธีม แล้ววาง `<div class="presenter-wrap"><div class="glow"></div><img data-seq="assets/presenter/p_%04d.png" data-n="<จำนวนเฟรม>" data-speed="1" data-loop="0"><div class="tag">INSUREINGAME</div></div>` ก่อน `<script>`
+- ห้าม commit รูป/เฟรมของเจ้าของช่อง (repo เป็น public) — โฟลเดอร์ `assets/` และ `models/` อยู่ใน .gitignore
+- โพสต์ TikTok ให้เปิดป้าย "เนื้อหาที่สร้างด้วย AI"

@@ -272,7 +272,7 @@ const SEQ = [...document.querySelectorAll('[data-seq]')];
 function seqTick(t) {
   SEQ.forEach(e => {
     const n = +e.dataset.n, k = Math.floor(t * 30 * (+e.dataset.speed || 1)), m = 2 * (n - 1);
-    let i = k % m; if (i >= n) i = m - i;
+    let i = e.dataset.loop === '0' ? Math.min(k, n - 1) : k % m; if (e.dataset.loop !== '0' && i >= n) i = m - i;
     const src = e.dataset.seq.replace('%04d', String(i + 1).padStart(4, '0'));
     if (e._src !== src) { e._src = src; e.src = src; }
   });
