@@ -1,0 +1,116 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.art{display:block;margin:0 auto 40px;width:380px;height:380px}
+.art.sm{width:280px;height:280px;margin-bottom:30px}
+.word{font-size:150px;font-weight:800;line-height:1.1;text-align:center;margin:10px 0 20px}
+.dict{font-size:40px;color:var(--muted);text-align:center;font-style:italic}
+.tl{position:relative;margin:50px 0 30px;height:120px}
+.tl .base{position:absolute;left:0;right:0;top:46px;height:28px;border-radius:14px;background:#2E1D1020}
+.tl .wait{position:absolute;left:0;top:46px;height:28px;border-radius:14px;background:repeating-linear-gradient(45deg,#A8401C,#A8401C 14px,#C8603A 14px,#C8603A 28px)}
+.tl .ok{position:absolute;top:46px;height:28px;border-radius:14px;background:linear-gradient(90deg,#5DB37A,#3E9A5F)}
+.tl .pin{position:absolute;top:0;font-size:32px;font-weight:700;white-space:nowrap;transform:translateX(-50%)}
+.tl .pin.b{top:86px}
+.tl .dot{position:absolute;top:40px;width:40px;height:40px;border-radius:50%;margin-left:-20px;background:#2E1D10;border:6px solid #FFFDF7}
+.bars{display:flex;flex-direction:column;gap:22px;margin:30px 0}
+.bars .row{display:flex;align-items:center;gap:20px;font-size:40px;font-weight:700}
+.bars .row span{width:150px;flex:none}
+.bars .track{flex:1;height:44px;border-radius:22px;background:#2E1D1018;overflow:hidden}
+.bars .fill{height:100%;border-radius:22px;background:repeating-linear-gradient(45deg,#A8401C,#A8401C 12px,#C8603A 12px,#C8603A 24px);width:0}
+.ok-chip{display:inline-flex;align-items:center;gap:18px;font-size:50px;font-weight:800;background:#2F7A4A;color:#fff;padding:20px 44px;border-radius:60px;box-shadow:0 14px 30px #0003}
+.do{display:flex;flex-direction:column;gap:26px;margin-top:20px}
+.do .card{display:flex;align-items:center;gap:26px;font-size:54px;font-weight:800}
+.mk{flex:none;width:90px;height:90px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:56px;color:#fff}
+.photo{width:440px;height:440px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:900px;height:900px;right:-380px;top:-260px"></div>
+<div class="ring" id="ring2" style="width:620px;height:620px;left:-300px;bottom:-120px"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="center"><div class="label r" data-d="0" data-pop="1">ประกันคำเดียววันนี้</div></div>
+    <img class="art r" data-d=".3" data-pop="1" data-bob="1" src="ILL/hourglass.svg">
+    <div class="word gold r" data-cue="ระยะ" data-pop="1">ระยะรอคอย</div>
+    <div class="dict r" data-cue="ระยะ" data-d=".5">(Waiting Period)</div>
+  </div>
+</section>
+
+<!-- 2 definition -->
+<section class="slide" data-cue="คือช่วงเวลาหลัง">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r" data-d=".1">คือช่วงเวลา<span class="gold">หลังกรมธรรม์เริ่มมีผล</span></h2>
+    <div class="tl r" data-d=".3">
+      <div class="base"></div>
+      <div class="wait" data-w="45" data-ccue="ที่บางโรค" data-wl="1.4"></div>
+      <div class="ok r" data-cue="ยังเคลมไม่ได้" data-d=".6" style="left:45%;width:55%"></div>
+      <div class="dot" style="left:0%"></div>
+      <div class="pin" style="left:6%">เริ่มคุ้มครอง</div>
+      <div class="pin b r" data-cue="ที่บางโรค" style="left:24%;color:var(--copper)">ระยะรอคอย</div>
+      <div class="pin b r" data-cue="ยังเคลมไม่ได้" data-d=".6" style="left:72%;color:#2F7A4A">เคลมได้</div>
+    </div>
+    <div class="card r center" data-cue="ยังเคลมไม่ได้"><div class="k">ที่<span class="cp">บางโรคยังเคลมไม่ได้</span></div></div>
+  </div>
+</section>
+
+<!-- 3 example -->
+<section class="slide" data-cue="เช่นซื้อประกัน">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ตัวอย่าง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art sm r" data-d=".1" data-pop="1" data-bob="1" src="ILL/calendar-x.svg">
+    <div class="card r" data-cue="สุขภาพวันนี้" data-x="1"><div class="k"><span class="gold">วันนี้</span> ซื้อประกันสุขภาพ</div></div>
+    <div class="card r" data-cue="อีกสองสัปดาห์" data-x="1"><div class="k">อีก <span class="gold">2 สัปดาห์</span> ต้องผ่าตัด</div><div class="note r" data-cue="โรคที่อยู่ในระยะรอคอย">ด้วยโรคที่ยัง<b>อยู่ในระยะรอคอย</b></div></div>
+    <div class="card r center" data-cue="อาจเคลมไม่ได้" data-pop="1" style="background:#A8401C"><div class="k" style="color:#fff">อาจเคลมไม่ได้เลย</div></div>
+  </div>
+</section>
+
+<!-- 4 differs -->
+<section class="slide" data-cue="แต่ละโรค">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r" data-d=".1">แต่ละโรค<br>ระยะรอคอย<span class="gold">ไม่เท่ากัน</span></h2>
+    <div class="bars">
+      <div class="row r" data-d=".5" data-x="1"><span>โรค ก</span><div class="track"><div class="fill" data-w="30"></div></div></div>
+      <div class="row r" data-d=".8" data-x="1"><span>โรค ข</span><div class="track"><div class="fill" data-w="65"></div></div></div>
+      <div class="row r" data-d="1.1" data-x="1"><span>โรค ค</span><div class="track"><div class="fill" data-w="90"></div></div></div>
+    </div>
+    <div class="card r center" data-cue="ต้องดูในกรมธรรม์"><div class="k">ต้องดูใน<span class="gold">กรมธรรม์ของคุณเอง</span></div></div>
+    <div class="center" style="margin-top:30px"><div class="ok-chip r" data-cue="ส่วนอุบัติเหตุ" data-pop="1">✓ อุบัติเหตุ ส่วนใหญ่คุ้มครองทันที</div></div>
+  </div>
+</section>
+
+<!-- 5 conclusion -->
+<section class="slide" data-cue="ข้อสรุปคือ" data-zoom="1.04">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ข้อสรุป</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art sm r" data-d=".1" data-pop="1" data-bob="1" src="ILL/health-shield.svg" style="background:#FFFDF7">
+    <div class="do">
+      <div class="card r" data-cue="ซื้อตอนยังไม่ป่วย" data-x="1"><div class="mk" style="background:#2F7A4A">✓</div><span>ซื้อตอน<span class="gold">ยังไม่ป่วย</span></span></div>
+      <div class="card r" data-cue="อย่ารอให้ป่วย" data-x="1"><div class="mk" style="background:#A8401C">✗</div><span>อย่ารอให้<span class="cp">ป่วยแล้วค่อยซื้อ</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 last + face -->
+<section class="slide" data-cue="อยากให้อธิบาย">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <h2 class="r center" data-d=".2" style="margin-bottom:24px">อยากให้อธิบาย<br><span class="gold">คำไหนต่อ?</span></h2>
+    <div class="center"><div class="label r" data-cue="คอมเมนต์ไว้เลย" data-pop="1" id="cta" style="font-size:48px;padding:18px 44px">คอมเมนต์ไว้เลย</div></div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#E8F4FF"/><stop offset="1" stop-color="#BFDDF5"/></radialGradient>
+ <linearGradient id="ca" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3CC4B0"/><stop offset="1" stop-color="#1E9C8A"/></linearGradient>
+ <linearGradient id="cb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A62"/><stop offset="1" stop-color="#E9673A"/></linearGradient>
+ <linearGradient id="win" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9F7FF"/><stop offset="1" stop-color="#9FD3F2"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<rect x="0" y="138" width="200" height="62" fill="#6B7A8C"/>
+<path d="M14 170h26M62 170h26M110 170h26M158 170h26" stroke="#F4F1E8" stroke-width="5" stroke-linecap="round"/>
+<ellipse cx="50" cy="145" rx="42" ry="5" fill="#000" opacity=".2"/><ellipse cx="152" cy="145" rx="42" ry="5" fill="#000" opacity=".2"/>
+<!-- car A (left, facing right) -->
+<g transform="translate(4 102) scale(.74)">
+ <path d="M4 44q0-14 14-16l18-2 16-18q4-4 10-4h26q6 0 10 5l12 16 6 1q10 2 10 14v4q0 4-4 4H8q-4 0-4-4z" fill="url(#ca)"/>
+ <path d="M42 26l12-14q2-2 5-2h12v16z" fill="url(#win)"/><path d="M75 10h10q3 0 5 2l10 14H75z" fill="url(#win)"/>
+ <rect x="104" y="34" width="10" height="6" rx="2" fill="#FFF3B0"/>
+ <rect x="6" y="36" width="8" height="5" rx="2" fill="#F05A4A"/>
+ <circle cx="30" cy="52" r="12" fill="#2B2F38"/><circle cx="30" cy="52" r="5" fill="#C7CED8"/>
+ <circle cx="92" cy="52" r="12" fill="#2B2F38"/><circle cx="92" cy="52" r="5" fill="#C7CED8"/>
+</g>
+<!-- car B (right, facing left, tilted) -->
+<g transform="translate(196 106) scale(-.74 .74) rotate(-6)">
+ <path d="M4 44q0-14 14-16l18-2 16-18q4-4 10-4h26q6 0 10 5l12 16 6 1q10 2 10 14v4q0 4-4 4H8q-4 0-4-4z" fill="url(#cb)"/>
+ <path d="M42 26l12-14q2-2 5-2h12v16z" fill="url(#win)"/><path d="M75 10h10q3 0 5 2l10 14H75z" fill="url(#win)"/>
+ <rect x="104" y="34" width="10" height="6" rx="2" fill="#FFF3B0"/>
+ <circle cx="30" cy="52" r="12" fill="#2B2F38"/><circle cx="30" cy="52" r="5" fill="#C7CED8"/>
+ <circle cx="92" cy="52" r="12" fill="#2B2F38"/><circle cx="92" cy="52" r="5" fill="#C7CED8"/>
+</g>
+<!-- impact burst -->
+<g transform="translate(100 104) scale(.8)">
+ <path d="M0-30l7 16 17-8-8 17 18 5-18 6 8 16-17-7-7 17-6-17-17 7 8-16-18-6 18-5-8-17 17 8z" fill="#FFD54A" stroke="#F5A623" stroke-width="2.5" stroke-linejoin="round"/>
+ <path d="M0-14l3 8 9-4-4 9 9 3-9 3 4 8-9-4-3 9-3-9-9 4 4-8-9-3 9-3-4-9 9 4z" fill="#FFF6C9"/>
+</g>
+<g fill="#FFFFFF" opacity=".85"><circle cx="112" cy="60" r="7"/><circle cx="122" cy="52" r="9"/><circle cx="134" cy="58" r="6"/></g>
+</svg>

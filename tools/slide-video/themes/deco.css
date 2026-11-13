@@ -1,0 +1,17 @@
+/* ธีม "อาร์ตเดโค": พื้นดำอมน้ำตาล กรอบเส้นทองคู่ ลายพัด แสงทองเฉียง (คลิปเหมาจ่าย) */
+:root{--bg:#120C08;--cream:#F4E6CC;--muted:#B9A07A;--gold:#D4AF37;--gold2:#F1D27A;--goldd:#8C6A1C;--copper:#E39A5C;
+ --bgA:#2A1C10;--bgB:#160E08;--bgC:#0A0604;--glow:#D4AF3722;--dust:241,210,122}
+html,body{background:#0A0604}
+.ring{border:2px solid #D4AF3733;border-radius:0;transform-origin:center}
+.prog{gap:6px}
+.prog i{height:6px;border-radius:0;background:#D4AF3722}
+.prog i b{border-radius:0}
+.card{background:linear-gradient(180deg,#1E140C,#140D08);border:2px solid #D4AF37;border-radius:0;outline:1px solid #D4AF3755;outline-offset:6px}
+.label{border-radius:0;letter-spacing:2px;background:linear-gradient(90deg,#8C6A1C,#F1D27A,#8C6A1C);color:#120C08}
+p.lead{color:#E8D6B4}
+.art{border-radius:0 !important;outline:2px solid #D4AF37;outline-offset:10px}
+.photo .ringg{background:conic-gradient(#8C6A1C,#F1D27A,#D4AF37,#8C6A1C,#F1D27A,#8C6A1C)}
+.brand{letter-spacing:8px}
+.deco-frame{position:absolute;inset:44px;border:2px solid #D4AF3799;pointer-events:none}
+.deco-frame::after{content:"";position:absolute;inset:10px;border:1px solid #D4AF3755}
+.deco-fan{position:absolute;width:150px;height:150px;pointer-events:none;opacity:.8}
