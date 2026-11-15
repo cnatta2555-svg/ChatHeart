@@ -2,6 +2,7 @@
 
 - `day1.mp4` — Day 1 (44.5s, 1080×1920), voiced
 - `day1_voice.wav` — voice-over (Google AI Studio); `voice_env.js` = its loudness per frame for lip-sync
+- `day2.mp4` — Day 2 (30.5s), voiced; sources `day2.html`, `audio_d2.py`, `voice_env_d2.js`, `day2_voice.wav` (render: `PAGE=day2.html OUT=video_d2.mp4 node render.js`)
 - `index.html` — animation (SVG, `renderAt(t)`); Kanit font from `npm i @fontsource/kanit@5.1.0`
 - `audio.py` — music + SFX → `audio.wav`
 - `render.js` — renders frames via Playwright → `video.mp4`
