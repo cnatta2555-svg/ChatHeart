@@ -11,12 +11,14 @@ html,body{margin:0;background:#000}
 svg{display:block;width:540px;height:960px;font-family:K,'Noto Color Emoji',sans-serif}
 </style></head>
 <body><svg id="v" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="voice_env.js"></script>
 <script>
 const OL='#2b2140', SKIN='#f6c9a4', HAIR='#3a2a3f', HOOD='#ff8fa3', HOOD2='#e86a84';
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
 const ease=t=>1-Math.pow(1-clamp(t),3);
 const back=t=>{t=clamp(t);const c=2.2;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2);};
 const P=(t,a,d)=>clamp((t-a)/d);
+const speaking=t=>{const v=(window.VENV||[])[Math.floor(t*30)];return v!==undefined&&v>-28;};
 
 /* ---------------- character ---------------- */
 function eyes(expr,t){
@@ -37,7 +39,7 @@ function eyes(expr,t){
   }
 }
 function mouth(expr,t,talk){
-  const open = talk && Math.sin(t*26)>-0.2;
+  const open = talk && speaking(t);
   const dark=`fill="#5a1f33" stroke="${OL}" stroke-width="7"`;
   switch(expr){
     case 'sad': return open?`<ellipse cx="0" cy="-240" rx="22" ry="16" ${dark}/>`:`<path d="M-30,-232 Q0,-258 30,-232" stroke="${OL}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
@@ -168,61 +170,61 @@ function sub(text,lt){
 
 /* ---------------- timeline ---------------- */
 const SUBS=[
- [0.2,2.3,'เลิกกับแฟนมา 3 เดือน'],[2.3,4.5,'แต่ใจยังอยู่ที่เดิม...'],
- [4.5,6.8,'ส่องไอจีเขาวันละ'],[6.8,9,'47 ครั้ง 💀'],
- [9,11,'พอแล้ว!!'],[11,13.5,'ฉันจะลืมเขาให้ได้!'],
- [13.5,15.5,'กฎข้อแรก'],[15.5,18,'ห้ามส่องเขาเด็ดขาด'],
- [18,20.5,'ผ่านไป... 3 นาที'],[20.5,23.5,'ดูนิดเดียว\nคงไม่เป็นไรมั้ง'],
- [23.5,25.5,'เขาลงรูปกับคนใหม่...'],[25.6,29,'ใจพังไม่เหลือชิ้นดี'],
- [29,31.5,'ตีสอง กินมาม่า'],[31.5,34,'ร้องไห้ไป ซดน้ำไป'],
- [34,36.4,'ระหว่างไถดูรูปเขา...'],[36.4,37.6,'นิ้วก็ลั่น...'],[37.6,39.5,'กดไลก์ไปแล้ว!!!'],
- [39.5,41,'จบวันแรก'],[41,42.5,'มูฟออนติดลบ 20%'],
+ [0.15,2.1,'เลิกกับแฟนมา 3 เดือน'],[2.1,3.8,'แต่ใจยังอยู่ที่เดิม...'],
+ [3.9,5.6,'ส่องไอจีเขาวันละ'],[5.6,7.8,'47 ครั้ง 💀'],
+ [8.0,8.9,'พอแล้ว!!'],[8.9,10.4,'ฉันจะลืมเขาให้ได้!'],
+ [10.5,11.5,'กฎข้อแรก'],[11.5,13.4,'ห้ามส่องเขาเด็ดขาด'],
+ [13.6,14.9,'ผ่านไป...'],[14.9,16.4,'3 นาที'],[16.5,18.4,'ดูนิดเดียว\\nคงไม่เป็นไรมั้ง'],
+ [18.6,20.3,'เขาลงรูปกับคนใหม่...'],[20.4,23.3,'ใจพังไม่เหลือชิ้นดี'],
+ [23.4,26.0,'ตีสอง กินมาม่า'],[26.0,28.5,'ร้องไห้ไป ซดน้ำไป'],
+ [28.7,30.4,'ระหว่างไถดูรูปเขา...'],[30.4,31.7,'นิ้วก็ลั่น...'],[31.7,34.1,'กดไลก์ไปแล้ว!!!'],
+ [34.2,35.3,'จบวันแรก'],[35.3,37.2,'มูฟออนติดลบ 20%'],
 ];
-const END=47;
-function moveonAt(t){return t<26?0:t<37.8?-10:-20;}
-function bumpAt(t){for(const a of [26,37.8]){if(t>=a&&t<a+.4)return Math.sin((t-a)/.4*Math.PI);}return 0;}
+const END=44.5;
+function moveonAt(t){return t<20.5?0:t<31.8?-10:-20;}
+function bumpAt(t){for(const a of [20.5,31.8]){if(t>=a&&t<a+.4)return Math.sin((t-a)/.4*Math.PI);}return 0;}
 const punch=lt=>1+0.06*(1-ease(P(lt,0,.35)));
 
 function scene(t){
   let s='';
   const W=(lt,inner)=>`<g transform="translate(540,960) scale(${punch(lt)}) translate(-540,-960)">${inner}</g>`;
-  if(t<4.5){ s=W(t,bedroom(t)+girl({t,expr:'sad',pose:'phone',glow:true,y:1150})); }
-  else if(t<9){ const lt=t-4.5, n=Math.min(47,1+Math.floor(ease(P(lt,0.3,2.6))*46));
+  if(t<3.8){ s=W(t,bedroom(t)+girl({t,expr:'sad',pose:'phone',glow:true,y:1150,talk:true})); }
+  else if(t<7.8){ const lt=t-3.8, n=Math.min(47,1+Math.floor(ease(P(t,4.0,2.2))*46));
     s=W(lt,phone(t,profileUI(t))+`<g transform="translate(540,1580) rotate(-4)"><rect x="-330" y="-70" width="660" height="140" rx="24" fill="#ff3b5c" stroke="${OL}" stroke-width="8"/><text y="22" text-anchor="middle" font-size="58" font-weight="800" fill="#fff">เข้าดูวันนี้: ${n} ครั้ง</text></g>`); }
-  else if(t<13.5){ const lt=t-9;
+  else if(t<10.4){ const lt=t-7.8;
     const rays=Array.from({length:14}).map((_,i)=>`<path d="M540,1000 L${540+1600*Math.cos(i/14*Math.PI*2+lt*.3)},${1000+1600*Math.sin(i/14*Math.PI*2+lt*.3)} L${540+1600*Math.cos((i+.5)/14*Math.PI*2+lt*.3)},${1000+1600*Math.sin((i+.5)/14*Math.PI*2+lt*.3)}Z" fill="#ffb3c1" opacity=".55"/>`).join('');
     s=W(lt,`<rect width="1080" height="1920" fill="#ff8fa3"/>${rays}`+girl({t,expr:'determined',pose:'fist',y:1300,s:.9,shake:lt<2?3:0})
       +`<g transform="translate(540,470) rotate(-4) scale(${back(P(lt,.15,.4))})"><rect x="-430" y="-130" width="860" height="260" rx="30" fill="#2e7d5b" stroke="#fff" stroke-width="12"/><text y="-12" text-anchor="middle" font-size="80" font-weight="800" fill="#fff">ภารกิจมูฟออน</text><text y="82" text-anchor="middle" font-size="64" font-weight="800" fill="#ffe08a">30 วัน เริ่ม!</text></g>`); }
-  else if(t<18){ const lt=t-13.5;
+  else if(t<13.4){ const lt=t-10.4;
     s=W(lt,bedroom(t,.25)+girl({t,expr:'determined',pose:'down',y:1250,x:540,s:.85,talk:true})
       +`<g transform="translate(540,470) rotate(${3-2*ease(P(lt,0,.4))}) scale(${back(P(lt,0,.35))})"><rect x="-360" y="-200" width="720" height="400" fill="#fff59d" stroke="${OL}" stroke-width="8"/><rect x="-70" y="-225" width="140" height="50" fill="#ffffffaa"/><text y="-90" text-anchor="middle" font-size="56" font-weight="800" fill="${OL}">กฎข้อ 1</text>
         <g transform="translate(-170,40)"><rect x="-55" y="-90" width="110" height="180" rx="18" fill="#1b1830"/><rect x="-44" y="-78" width="88" height="150" rx="10" fill="#9fd8ff"/></g>
-        <path d="M-245,-30 L-95,110 M-95,-30 L-245,110" stroke="#ff3b5c" stroke-width="22" stroke-linecap="round" opacity="${P(lt,.6,.2)}"/>
+        <path d="M-245,-30 L-95,110 M-95,-30 L-245,110" stroke="#ff3b5c" stroke-width="22" stroke-linecap="round" opacity="${P(t,11.6,.2)}"/>
         <text x="80" y="20" text-anchor="middle" font-size="54" font-weight="800" fill="${OL}">ห้ามส่อง</text><text x="80" y="95" text-anchor="middle" font-size="54" font-weight="800" fill="#ff3b5c">เขาเด็ดขาด</text></g>`); }
-  else if(t<23.5){ const lt=t-18;
+  else if(t<18.4){ const lt=t-13.4;
     const clock=`<g transform="translate(540,450) scale(${back(P(lt,0,.3))})"><circle r="150" fill="#fff" stroke="${OL}" stroke-width="12"/><path d="M0,0 V-110" stroke="${OL}" stroke-width="12" stroke-linecap="round"/><path d="M0,0 L${80*Math.sin(lt*4)},${-80*Math.cos(lt*4)}" stroke="#ff3b5c" stroke-width="10" stroke-linecap="round"/><circle r="14" fill="${OL}"/></g>`;
-    s=W(lt,bedroom(t)+clock+girl({t,expr:lt<2.5?'sweat':'neutral',pose:'phone',glow:true,sweatDrop:true,y:1200,shake:lt<2.5?2:0})); }
-  else if(t<25.6){ const lt=t-23.5; s=W(lt,phone(t,couplePost(t))); }
-  else if(t<29){ const lt=t-25.6;
-    s=W(lt,bedroom(t,.35)+girl({t,expr:'shock',pose:'down',y:1250,shake:lt<.5?10:0})+brokenHeart(t,540,430,P(lt,0,2.6))); }
-  else if(t<34){ const lt=t-29; s=W(lt,kitchen(t)+girl({t,expr:'cry',pose:'bowl',tears:true,y:1210,x:600,talk:false})); }
-  else if(t<37.6){ const lt=t-34; const tap=36.2;
-    const ty=t<35.2?1950-ease(P(t,34.3,.9))*450:(t<tap?1500-ease(P(t,35.2,1))*330:1170+ease(P(t,tap,.15))*10-ease(P(t,tap+.2,.5))*40);
-    s=W(lt,phone(t,couplePost(t,t>=tap?P(t,tap,1):0,[290+ (t<35.2?100:0)*(1-ease(P(t,34.3,.9))),ty])));
+    s=W(lt,bedroom(t)+clock+girl({t,expr:t<16.4?'sweat':'neutral',pose:'phone',glow:true,sweatDrop:true,y:1200,shake:t<16.4?2:0,talk:true})); }
+  else if(t<20.3){ const lt=t-18.4; s=W(lt,phone(t,couplePost(t))); }
+  else if(t<23.3){ const lt=t-20.3;
+    s=W(lt,bedroom(t,.35)+girl({t,expr:'shock',pose:'down',y:1250,shake:lt<.5?10:0})+brokenHeart(t,540,430,P(t,20.4,2.6))); }
+  else if(t<28.5){ const lt=t-23.3; s=W(lt,kitchen(t)+girl({t,expr:'cry',pose:'bowl',tears:true,y:1210,x:600,talk:false})); }
+  else if(t<31.7){ const lt=t-28.5; const tap=30.8;
+    const ty=t<29.6?1950-ease(P(t,28.7,.9))*450:(t<tap?1500-ease(P(t,29.6,1.1))*330:1170+ease(P(t,tap,.15))*10-ease(P(t,tap+.2,.5))*40);
+    s=W(lt,phone(t,couplePost(t,t>=tap?P(t,tap,1):0,[290+ (t<29.6?100:0)*(1-ease(P(t,28.7,.9))),ty])));
     if(t>=tap) s+=`<g transform="translate(540,1520) scale(${back(P(t,tap,.3))})"><rect x="-300" y="-55" width="600" height="110" rx="55" fill="#222" opacity=".85"/><text y="18" text-anchor="middle" font-size="44" font-weight="700" fill="#fff">❤️ คุณถูกใจรูปนี้</text></g>`; }
-  else if(t<39.5){ const lt=t-37.6; s=W(lt,bedroom(t)+girl({t,expr:'scream',pose:'face',y:1200,shake:8,s:1.05})); }
-  else if(t<42.5){ const lt=t-39.5;
+  else if(t<34.1){ const lt=t-31.7; s=W(lt,bedroom(t)+girl({t,expr:'scream',pose:'face',y:1200,shake:8,s:1.05})); }
+  else if(t<37.3){ const lt=t-34.1;
     s=W(lt,bedroom(t,.2)+`<g transform="translate(540,1480)"><path d="M-420,0 Q-430,-300 -200,-330 Q0,-380 200,-330 Q430,-300 420,0Z" fill="#7d8ad6" stroke="${OL}" stroke-width="10"/></g>`
       +`<g transform="translate(540,${1200+Math.sin(t*2)*6})"><ellipse cx="0" cy="-60" rx="170" ry="130" fill="${SKIN}" stroke="${OL}" stroke-width="8"/><path d="M-172,-60 Q-175,-215 0,-210 Q175,-215 172,-60 Q120,-140 0,-130 Q-120,-140 -172,-60Z" fill="${HAIR}" stroke="${OL}" stroke-width="8"/><path d="M-90,-40 Q-62,-25 -34,-40 M34,-40 Q62,-25 90,-40" stroke="${OL}" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M-300,30 Q0,-40 300,30 L300,120 L-300,120Z" fill="#7d8ad6" stroke="${OL}" stroke-width="10"/></g>`
       +`<text x="760" y="${900-((t*40)%120)}" font-size="${60+((t*40)%120)/3}" font-weight="800" fill="#cfd6ff" opacity="${1-((t*40)%120)/120}">Z</text>`); }
-  else { const lt=t-42.5;
+  else { const lt=t-37.3;
     s=`<rect width="1080" height="1920" fill="#1b2340"/>`
      +`<g transform="translate(540,760) rotate(-3) scale(${back(P(lt,0,.4))})"><rect x="-380" y="-95" width="760" height="190" rx="18" fill="#2e7d5b" stroke="#fff" stroke-width="10"/><text y="28" text-anchor="middle" font-size="88" font-weight="800" fill="#fff">วันที่ 2 เริ่มแล้ว</text></g>`
      +`<text x="540" y="930" text-anchor="middle" font-size="46" font-weight="700" fill="#7ee0b5" opacity="${P(lt,.3,.3)}">เหลือ 29 วัน</text>`
-     +`<g opacity="${P(lt,.9,.3)}"><text x="540" y="1220" text-anchor="middle" font-size="54" font-weight="700" fill="#fff">ตอนหน้า: ลบเบอร์เขา</text><text x="540" y="1300" text-anchor="middle" font-size="54" font-weight="700" fill="#ffd166">จะทำได้ไหม...?</text></g>`
-     +`<g opacity="${P(lt,1.8,.3)}" transform="translate(540,1520) scale(${1+Math.sin(lt*6)*.04})"><rect x="-290" y="-60" width="580" height="120" rx="60" fill="#ff3b5c"/><text y="20" text-anchor="middle" font-size="50" font-weight="800" fill="#fff">กดติดตาม ไม่งั้นพลาด!</text></g>`;
+     +`<g opacity="${P(t,38.8,.3)}"><text x="540" y="1220" text-anchor="middle" font-size="54" font-weight="700" fill="#fff">ตอนหน้า: ลบเบอร์เขา</text><text x="540" y="1300" text-anchor="middle" font-size="54" font-weight="700" fill="#ffd166" opacity="${P(t,41.0,.3)}">จะทำได้ไหม...?</text></g>`
+     +`<g opacity="${P(t,42.4,.3)}" transform="translate(540,1520) scale(${1+Math.sin(lt*6)*.04})"><rect x="-290" y="-60" width="580" height="120" rx="60" fill="#ff3b5c"/><text y="20" text-anchor="middle" font-size="50" font-weight="800" fill="#fff">กดติดตาม ไม่งั้นพลาด!</text></g>`;
   }
-  if(t<42.5) s+=hud(30,moveonAt(t),bumpAt(t));
+  if(t<37.3) s+=hud(30,moveonAt(t),bumpAt(t));
   const cur=SUBS.find(([a,b])=>t>=a&&t<b); if(cur) s+=sub(cur[2],t-cur[0]);
   return s;
 }

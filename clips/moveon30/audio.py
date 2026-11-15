@@ -1,5 +1,5 @@
 import numpy as np, wave
-SR=44100; D=47; a=np.zeros(int(SR*D))
+SR=44100; D=44.5; a=np.zeros(int(SR*D))
 def add(t,s,g=1):
     i=int(t*SR); n=min(len(s),len(a)-i); a[i:i+n]+=s[:n]*g
 def tone(f,d,dec,shape='sin'):
@@ -13,19 +13,25 @@ prog=[['A3','C4','E4','A4'],['F3','A3','C4','F3'],['C4','E4','G4','C5'],['G3','B
 bpm=96; step=60/bpm/2; i=0; t=0
 while t<D-1.5:
     ch=prog[(i//8)%4]; f=notes[ch[i%4]]*2
-    vol=.05 if not (25.6<=t<34) else .03
-    if 42.5<=t: vol=.06
+    vol=.035 if not (20.3<=t<31.7) else .02
+    if 37.3<=t: vol=.05
     add(t,tone(f,1.2,4)+.3*tone(f*2,1.2,6),vol)
     if i%8==0: add(t,tone(notes[ch[0]]/2,2.4,1.2),.06)
     i+=1; t+=step
 pop=sweep(500,1100,.12,30)
-for s in [0.2,2.3,4.5,6.8,9,11,13.5,15.5,18,20.5,23.5,25.6,29,31.5,34,36.4,37.6,39.5,41,42.5]: add(s,pop,.35)
-for k in range(46): add(4.8+k*(2.6/46)**1*1,tone(1800,.04,80),.15)   # tick counter
-add(9,sweep(200,900,.4,4),.4); add(13.5,sweep(300,700,.25,8),.3)
-add(25.6,sweep(160,40,.8,3),.9); add(26.2,tone(1200,.3,15,'sq'),.2); add(26.6,tone(900,.3,15,'sq'),.2)  # crack
-add(36.2,tone(1568,.8,5)+tone(2349,.8,6),.35)  # like ding
-add(37.6,sweep(600,1400,.9,2)*np.sin(np.arange(int(SR*.9))/SR*2*np.pi*30),.25)  # scream wobble
-add(42.5,tone(784,.6,4)+tone(1047,.6,4),.3); add(42.8,tone(1319,.9,3),.3)
-a=a/max(1e-9,np.abs(a).max())*.85
+for x in [0.15,2.1,3.9,5.6,8.0,8.9,10.5,11.5,13.6,14.9,16.5,18.6,20.4,23.4,26.0,28.7,30.4,31.7,34.2,35.3]: add(x,pop,.18)
+for k in range(46): add(4.0+2.2*(1-(1-k/46)**3),tone(1800,.04,80),.1)   # counter ticks
+add(7.8,sweep(200,900,.4,4),.3); add(10.4,sweep(300,700,.25,8),.2); add(11.6,sweep(900,300,.2,10),.25)
+add(20.4,sweep(160,40,.8,3),.8); add(21.3,tone(1200,.3,15,'sq'),.15); add(21.7,tone(900,.3,15,'sq'),.15)
+add(30.8,tone(1568,.8,5)+tone(2349,.8,6),.3)
+add(31.7,sweep(600,1400,.9,2)*np.sin(np.arange(int(SR*.9))/SR*2*np.pi*30),.18)
+add(37.3,tone(784,.6,4)+tone(1047,.6,4),.25); add(37.6,tone(1319,.9,3),.25)
+a=a/max(1e-9,np.abs(a).max())*.35
+# voice
+import subprocess
+v=np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i','voice.wav','-ac','1','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,dtype=np.float32).astype(float)
+v=v/np.abs(v).max()*.9
+add(0,v,1)
+a=a/max(1.0,np.abs(a).max())*.98
 fade=np.ones_like(a); fade[-SR:]=np.linspace(1,0,SR); a*=fade
 w=wave.open('audio.wav','wb'); w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((a*32767).astype(np.int16).tobytes()); w.close()

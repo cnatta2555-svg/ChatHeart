@@ -1,6 +1,7 @@
 # มูฟออน 30 วัน — TikTok series
 
-- `day1.mp4` — Day 1 (47s, 1080×1920)
+- `day1.mp4` — Day 1 (44.5s, 1080×1920), voiced
+- `day1_voice.wav` — voice-over (Google AI Studio); `voice_env.js` = its loudness per frame for lip-sync
 - `index.html` — animation (SVG, `renderAt(t)`); Kanit font from `npm i @fontsource/kanit@5.1.0`
 - `audio.py` — music + SFX → `audio.wav`
 - `render.js` — renders frames via Playwright → `video.mp4`
