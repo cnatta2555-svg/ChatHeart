@@ -1,0 +1,6 @@
+/* โหมดพรีเซนเตอร์มุมจอ: ใส่ <style> นี้ + บล็อก .presenter-wrap ก่อน <script> */
+.body{height:1020px !important;padding-bottom:0 !important}
+.presenter-wrap{position:absolute;left:24px;bottom:150px;width:430px;height:538px;pointer-events:none}
+.presenter-wrap .glow{position:absolute;left:30px;right:30px;bottom:0;height:330px;border-radius:200px 200px 24px 24px;background:radial-gradient(ellipse at 50% 30%,var(--gold2) 0%,var(--gold) 35%,var(--goldd) 75%);opacity:.9;box-shadow:0 20px 50px #0009}
+.presenter-wrap img{position:absolute;left:0;bottom:0;width:100%;height:auto;filter:drop-shadow(0 10px 20px #0008)}
+.presenter-wrap .tag{position:absolute;left:46px;bottom:-26px;font-size:30px;font-weight:800;letter-spacing:3px;padding:8px 22px;border-radius:10px;background:#1A110A;color:var(--gold2);border:2px solid var(--gold)}

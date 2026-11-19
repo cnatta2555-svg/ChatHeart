@@ -1,0 +1,14 @@
+/* ธีม "ฟุตเทจจริงโทนอุ่น": วิดีโอ/รูปจริงเป็นพื้นหลัง เกรดสีน้ำตาลทอง การ์ดกระจกฝ้าขอบทอง (คลิป PB ผู้ชำระเบี้ย) */
+:root{--bg:#1A110A;--cream:#FFF6E6;--muted:#E6D2B0;--gold:#E8B84E;--gold2:#FFE08A;--goldd:#B07A22;--copper:#FF9A5A;
+ --bgA:#1A110A;--bgB:#1A110A;--bgC:#1A110A;--glow:#0000;--dust:255,224,138}
+#bg{display:none}
+.footage{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;filter:sepia(.45) saturate(1.1) brightness(.5) blur(var(--fb,10px));transform:scale(1.08)}
+.grade{position:absolute;inset:0;background:linear-gradient(180deg,#1A110ACC 0%,#2A1A0E55 35%,#2A1A0E66 65%,#1A110AE6 100%)}
+.ring{display:none}
+.card{background:#2A1A0E99;border:2px solid #E8B84E99;border-radius:28px;backdrop-filter:blur(6px);box-shadow:0 20px 50px #0008}
+p.lead{color:#F3E2C2;text-shadow:0 2px 12px #000c}
+h1,h2,.qt{text-shadow:0 4px 24px #000c}
+.label{background:linear-gradient(135deg,#FFE08A,#C9922E);color:#1A110A}
+.prog i{background:#ffffff30}
+.photo .in{background:radial-gradient(circle at 50% 35%,#6B4626,#1A110A)}
+.gold{background:linear-gradient(100deg,#E8B84E 0%,#FFD86A 30%,#FFE9A8 var(--sh,50%),#FFD86A 70%,#E8B84E 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 10px #000c)}

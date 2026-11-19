@@ -1,0 +1,178 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.art{display:block;margin:0 auto 46px;width:360px;height:360px}
+.art.sm{width:270px;height:270px;margin-bottom:40px}
+.hook{font-size:84px;font-weight:800;line-height:1.25;text-align:center}
+.cmp{display:flex;gap:30px;margin:30px 0}
+.cmp .col{flex:1;text-align:center}
+.cmp h3{font-size:42px;font-weight:700;margin-bottom:18px}
+.bins{display:flex;gap:12px;height:330px;align-items:flex-end;justify-content:center;border-bottom:3px solid #D4AF3788;padding-bottom:6px}
+.bin{width:62px;position:relative;border:2px solid #B9A07A;border-bottom:none;height:200px}
+.bin .lq{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(#E39A5C,#B5602A)}
+.bin .cap{position:absolute;left:-6px;right:-6px;top:0;height:4px;background:#F4E6CC}
+.bin.over .lq{background:linear-gradient(#FF6A5A,#C62E22)}
+.pool{height:330px;border:3px solid #D4AF37;position:relative;border-bottom:none;margin:0 20px;overflow:hidden}
+.pool .lq{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(#F1D27A,#8C6A1C)}
+.tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px}
+.tags span{font-size:28px;padding:6px 16px;border:1px solid #D4AF3788;color:var(--muted)}
+.num3{font-size:420px;font-weight:800;line-height:1;text-align:center}
+.qn{width:150px;height:150px;display:flex;align-items:center;justify-content:center;font-size:96px;font-weight:800;color:#120C08;margin:20px auto 50px;position:relative}
+.qn::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,#F1D27A,#8C6A1C);transform:rotate(45deg);box-shadow:0 0 40px #D4AF3755}
+.qn b{position:relative}
+.qt{font-size:76px;font-weight:800;line-height:1.25;text-align:center;margin-bottom:30px}
+.ages{display:flex;gap:30px;align-items:flex-end;justify-content:center;height:420px;margin:20px 0 10px;border-bottom:3px solid #D4AF3788}
+.ages .col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:140px}
+.ages .bar{width:110px;height:0;background:linear-gradient(#F1D27A,#8C6A1C)}
+.ages .lb{font-size:34px;font-weight:700;margin-top:12px;color:var(--muted)}
+.chips{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.chip{border-radius:0;border-color:#D4AF37}
+.say{display:inline-block;font-size:70px;font-weight:800;padding:20px 50px;border:3px solid #D4AF37;color:var(--gold2);margin:20px 0}
+.photo{width:420px;height:420px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 35%,#4A3220,#120C08)}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+.cta{border-radius:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:760px;height:760px;right:-300px;top:-200px"></div>
+<div class="ring" id="ring2" style="width:520px;height:520px;left:-240px;bottom:-60px"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+<div class="deco-frame"></div>
+<svg class="deco-fan" style="left:44px;top:44px" viewBox="0 0 100 100"><g fill="none" stroke="#D4AF37" stroke-width="1.5"><path d="M0 60A60 60 0 0 1 60 0"/><path d="M0 45A45 45 0 0 1 45 0"/><path d="M0 30A30 30 0 0 1 30 0"/><path d="M0 0L42 42M0 0L20 55M0 0L55 20"/></g></svg>
+<svg class="deco-fan" style="right:44px;bottom:44px;transform:rotate(180deg)" viewBox="0 0 100 100"><g fill="none" stroke="#D4AF37" stroke-width="1.5"><path d="M0 60A60 60 0 0 1 60 0"/><path d="M0 45A45 45 0 0 1 45 0"/><path d="M0 30A30 30 0 0 1 30 0"/><path d="M0 0L42 42M0 0L20 55M0 0L55 20"/></g></svg>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เช็กสิทธิ์ก่อนจ่ายเพิ่ม</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art r" data-d="0" data-pop="1" data-bob="1" src="ILL/health-shield.svg" style="background:#1E140C;padding:40px">
+    <p class="lead r center" data-d=".2">กำลังคิดเรื่อง</p>
+    <div class="hook r" data-cue="สุขภาพเหมาจ่าย">ประกันสุขภาพ<br><span class="gold">เหมาจ่าย</span> อยู่?</div>
+    <p class="lead r center" data-cue="ตัดสินใจได้ภายในวันนี้" style="margin-top:30px">คลิปนี้ช่วยให้<span class="gold">ตัดสินใจได้ภายในวันนี้</span></p>
+  </div>
+</section>
+
+<!-- 2 definition -->
+<section class="slide" data-cue="เหมาจ่ายคือ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เหมาจ่ายคืออะไร</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">ค่ารักษาเกือบทั้งหมด<br>อยู่ใน<span class="gold">วงเงินก้อนเดียว</span></h2>
+    <div class="cmp">
+      <div class="col r" data-cue="ไม่ต้องลุ้น" data-x="1">
+        <h3 style="color:var(--muted)">แบบแยกหมวด</h3>
+        <div class="bins">
+          <div class="bin"><div class="cap"></div><div class="lq" data-h="55" data-ccue="ไม่ต้องลุ้น"></div></div>
+          <div class="bin over"><div class="cap"></div><div class="lq" data-h="100" data-ccue="ค่าผ่าตัด"></div></div>
+          <div class="bin over"><div class="cap"></div><div class="lq" data-h="100" data-ccue="ค่าผ่าตัด"></div></div>
+          <div class="bin"><div class="cap"></div><div class="lq" data-h="40" data-ccue="ไม่ต้องลุ้น"></div></div>
+        </div>
+        <div class="tags"><span>ค่าห้อง</span><span class="cp" style="border-color:#E39A5C">ผ่าตัด ทะลุ!</span><span class="cp" style="border-color:#E39A5C">ค่ายา ทะลุ!</span></div>
+      </div>
+      <div class="col r" data-cue="เหมาจ่ายคือ" data-d=".3" data-pop="1">
+        <h3 class="gold">เหมาจ่าย</h3>
+        <div class="pool"><div class="lq" data-h="62" data-wl="1.6"></div></div>
+        <div class="tags"><span>ห้อง</span><span>ผ่าตัด</span><span>ยา</span><span>หมอ</span></div>
+      </div>
+    </div>
+    <p class="lead r center" data-cue="ทะลุเพดานหมวดไหน">ไม่ต้องลุ้นว่า<span class="cp">ทะลุเพดานหมวดไหน</span></p>
+  </div>
+</section>
+
+<!-- 3 three reasons -->
+<section class="slide" data-cue="แล้วทำไมควรตัดสินใจ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ทำไมต้องตอนนี้</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">ทำไมควร<span class="gold">ตัดสินใจตอนนี้</span>?</h2>
+    <div class="num3 gold r" data-cue="เหตุผล" data-pop="1">3</div>
+    <p class="lead r center" data-cue="เหตุผล" data-d=".3" style="font-size:60px">เหตุผล</p>
+  </div>
+</section>
+
+<!-- R1 -->
+<section class="slide" data-cue="ซื้อได้เฉพาะตอน">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เหตุผลที่ 1 / 3</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1"><b>1</b></div>
+    <div class="qt r" data-d=".2">ซื้อได้เฉพาะตอน<br><span class="gold">สุขภาพยังดี</span></div>
+    <img class="art sm r" data-d=".5" data-pop="1" data-bob="1" src="ILL/healthy.svg">
+    <div class="card r center" data-cue="ป่วยก่อนเมื่อไหร่"><div class="k">ป่วยก่อน → โรคนั้น<span class="cp">อาจถูกยกเว้น</span><div class="r" data-cue="หรือไม่รับประกัน">หรือ<span class="cp">ไม่รับประกันเลย</span></div></div></div>
+  </div>
+</section>
+
+<!-- R2 -->
+<section class="slide" data-cue="เบี้ยคิดตามอายุ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เหตุผลที่ 2 / 3</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1"><b>2</b></div>
+    <div class="qt r" data-d=".2">เบี้ย<span class="gold">คิดตามอายุ</span></div>
+    <div class="ages r" data-d=".4">
+      <div class="col"><div class="bar" data-h="35" data-ccue="ยิ่งเริ่มช้า"></div><div class="lb">อายุน้อย</div></div>
+      <div class="col"><div class="bar" data-h="60" data-ccue="ยิ่งเริ่มช้า"></div><div class="lb">กลางคน</div></div>
+      <div class="col"><div class="bar" data-h="95" data-ccue="เบี้ยปีแรกยิ่งสูง"></div><div class="lb">อายุมาก</div></div>
+    </div>
+    <p class="lead r center" data-cue="เบี้ยปีแรกยิ่งสูง">ยิ่งเริ่มช้า <span class="cp">เบี้ยปีแรกยิ่งสูง</span></p>
+  </div>
+</section>
+
+<!-- R3 -->
+<section class="slide" data-cue="ซื้อและจ่ายเบี้ย">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เหตุผลที่ 3 / 3</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1"><b>3</b></div>
+    <div class="qt r" data-d=".2">จ่ายเบี้ยภายใน<br><span class="gold">31 ธันวาคม</span></div>
+    <div class="card r center" data-cue="ใช้ลดหย่อนภาษี" data-pop="1"><p class="lead">ลดหย่อนภาษีปีนี้ได้สูงสุด</p><div class="gold" style="font-size:140px;font-weight:800;line-height:1.1"><span data-count="25000" data-ccue="สูงสุด" data-cl="1.4">25,000</span></div><p class="lead">บาท</p></div>
+  </div>
+</section>
+
+<!-- waiting -->
+<section class="slide" data-cue="และอย่าลืมว่า">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อย่าลืม</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art sm r" data-d=".1" data-pop="1" data-bob="1" src="ILL/hourglass.svg">
+    <div class="qt r" data-cue="มีระยะรอคอย">มี<span class="gold">ระยะรอคอย</span></div>
+    <div class="card r center" data-cue="ยิ่งเริ่มเร็ว"><div class="k">ยิ่งเริ่มเร็ว<br><span class="gold">ได้ความคุ้มครองเต็มเร็ว</span></div></div>
+  </div>
+</section>
+
+<!-- steps -->
+<section class="slide" data-cue="ขั้นตอนง่ายมาก">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ขั้นตอน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art sm r" data-d=".1" data-pop="1" data-bob="1" src="ILL/phone-chat.svg">
+    <p class="lead r center" data-cue="ทักข้อความมาว่า">ทักข้อความมาว่า</p>
+    <div class="center"><div class="say r" data-cue="ทักข้อความมาว่า" data-d=".6" data-pop="1">“เหมาจ่าย”</div></div>
+    <div class="chips"><div class="chip r" data-cue="บอกอายุ" data-pop="1">อายุ</div><div class="chip r" data-cue="งบต่อเดือน" data-pop="1">งบต่อเดือน</div><div class="chip r" data-cue="และสวัสดิการ" data-pop="1">สวัสดิการที่มีอยู่</div></div>
+  </div>
+</section>
+
+<!-- deliver -->
+<section class="slide" data-cue="ภายใน24ชั่วโมง">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ภายใน 24 ชม.</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="num3 gold r" data-d=".05" data-pop="1" style="font-size:240px">24<span style="font-size:80px"> ชม.</span></div>
+    <div class="card r center" data-cue="ส่งแผนที่เหมาะ"><div class="k">ส่งแผนที่เหมาะกับคุณ <span class="gold">2–3 แผน</span></div></div>
+    <div class="card r center" data-cue="พร้อมสรุปข้อยกเว้น"><div class="k">สรุป<span class="gold">ข้อยกเว้น</span> + <span class="gold">เงื่อนไขต่ออายุ</span>ให้ครบ</div></div>
+  </div>
+</section>
+
+<!-- last + face -->
+<section class="slide" data-cue="เลือกได้เลย">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เช็กสิทธิ์ก่อนจ่ายเพิ่ม</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <h2 class="r center" data-d=".2" style="margin-bottom:20px">เลือกได้เลย<br><span class="gold">ไม่ต้องนัดเจอ</span></h2>
+    <div class="cta r" data-cue="ทักมาวันนี้" data-pop="1" id="cta"><div class="s">ทักมาวันนี้</div><div class="b gold">INSUREINGAME</div></div>
+  </div>
+</section>

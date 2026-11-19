@@ -1,0 +1,17 @@
+/* ธีม "ลาเต้": พื้นครีมสว่าง ตัวหนังสือน้ำตาลเข้ม ทองเป็นตัวเน้น (ใช้ครั้งแรก: คลิปเงินเดือน 2 หมื่น) */
+:root{--bg:#2A1A0E;--cream:#3B2414;--muted:#8A6A4A;--gold:#B8862E;--gold2:#D9A84A;--goldd:#7A4E1A;--copper:#C0622A;
+ --bgA:#FFFBF2;--bgB:#F4E7CF;--bgC:#E2CBA4;--glow:#C9934A30;--dust:185,134,46}
+html,body{background:#F4E7CF}
+.gold{background:linear-gradient(100deg,#6E4412 0%,#9A6A22 30%,#C9952E var(--sh,50%),#9A6A22 70%,#6E4412 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand{letter-spacing:6px}
+.ring{border-color:#B8862E40}
+.prog i{background:#3B241418}
+.card{background:linear-gradient(135deg,#FFFFFFD9,#FFF6E6CC);border-color:#C9A06070;box-shadow:0 14px 40px #7A4E1A22}
+p.lead{color:#5A3A22}
+.foot{color:#9A7B5A}
+td{border-bottom-color:#B8862E40}
+.label{color:#FFF8EC;background:linear-gradient(135deg,#8A5A1E,#5A3A16)}
+.art{box-shadow:0 20px 50px #7A4E1A40}
+.blk.base{background:linear-gradient(135deg,#6B4626,#3E2715);color:#FFF4E0}
+.checks div{color:#8A5A1E;border-color:#B8862E}
+.photo .in{background:radial-gradient(circle at 50% 35%,#F2DDB8,#C9A06A)}

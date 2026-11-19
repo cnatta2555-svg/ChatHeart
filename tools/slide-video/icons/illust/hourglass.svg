@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FFF7E6"/><stop offset="1" stop-color="#F3DDB0"/></radialGradient>
+ <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A8743F"/><stop offset="1" stop-color="#6B4626"/></linearGradient>
+ <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset=".5" stop-color="#E9F5FF" stop-opacity=".25"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".5"/></linearGradient>
+ <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6D88A"/><stop offset="1" stop-color="#D9A84A"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<ellipse cx="100" cy="182" rx="56" ry="6" fill="#C9A060" opacity=".4"/>
+<path d="M66 36h68q0 34-26 58q-8 6 0 12 26 24 26 58H66q0-34 26-58 8-6 0-12-26-24-26-58z" fill="url(#glass)" stroke="#C9A060" stroke-width="3"/>
+<path d="M76 52h48q-4 18-20 32h-8q-16-14-20-32z" fill="url(#sand)"/>
+<path d="M98 100h4v40h-4z" fill="#D9A84A"/>
+<path d="M72 164q4-26 28-30 24 4 28 30z" fill="url(#sand)"/>
+<rect x="52" y="24" width="96" height="14" rx="6" fill="url(#wood)"/><rect x="52" y="162" width="96" height="14" rx="6" fill="url(#wood)"/>
+<rect x="58" y="36" width="7" height="128" rx="3" fill="#8A5A2B"/><rect x="135" y="36" width="7" height="128" rx="3" fill="#8A5A2B"/>
+<path d="M80 44q2 22 14 36" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+<g transform="translate(160 56)"><circle r="20" fill="#fff" stroke="#C9934A" stroke-width="3"/><path d="M0-11v11l8 6" fill="none" stroke="#6B4626" stroke-width="3.5" stroke-linecap="round"/></g>
+</svg>

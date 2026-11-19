@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FFF8EA"/><stop offset="1" stop-color="#EBD3A8"/></radialGradient>
+ <linearGradient id="roof" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9934A"/><stop offset="1" stop-color="#8A5A1E"/></linearGradient>
+ <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6D88A"/><stop offset="1" stop-color="#C9922E"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<ellipse cx="100" cy="180" rx="72" ry="7" fill="#C9A060" opacity=".4"/>
+<!-- shield behind house -->
+<path d="M100 14l66 22v42c0 46-30 74-66 92-36-18-66-46-66-92V36z" fill="url(#sh)" opacity=".9"/>
+<path d="M54 98l46-34 46 34z" fill="url(#roof)"/>
+<rect x="64" y="96" width="72" height="62" rx="4" fill="#FFF8EA" stroke="#D9BE90" stroke-width="2"/>
+<path d="M100 146s-14-8-14-17c0-5 3-8 7-8 3 0 5 2 7 4 2-2 4-4 7-4 4 0 7 3 7 8 0 9-14 17-14 17z" fill="#E06A5A"/>
+<!-- family -->
+<g><circle cx="40" cy="132" r="10" fill="#F2C29B"/><path d="M28 180v-22q0-14 12-14t12 14v22z" fill="#5F88EC"/></g>
+<g><circle cx="160" cy="130" r="10" fill="#F2C29B"/><path d="M148 180v-22q0-14 12-14t12 14v22z" fill="#F27E63"/></g>
+<g><circle cx="100" cy="170" r="0" fill="none"/></g>
+<g transform="translate(158 48)"><circle r="16" fill="#2F9A5A" stroke="#fff" stroke-width="3"/><path d="M-7 0l5 5 9-10" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+</svg>

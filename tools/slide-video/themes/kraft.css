@@ -1,0 +1,19 @@
+/* ธีม "กระดาษคราฟต์": พื้นน้ำตาลกระดาษ การ์ดขาวเหมือนกระดาษโน้ต ตัวหนังสือน้ำตาลเข้ม เน้นทองฟอยล์ (คลิประยะรอคอย) */
+:root{--bg:#2A1A0E;--cream:#2E1D10;--muted:#5E4128;--gold:#A87420;--gold2:#C99A3A;--goldd:#6E4412;--copper:#A8401C;
+ --bgA:#D9B88E;--bgB:#C49A6C;--bgC:#9C7348;--glow:#FFF3D640;--dust:255,240,200}
+html,body{background:#C49A6C}
+.gold{background:linear-gradient(100deg,#3E2406 0%,#6A400E 30%,#9A6A1A var(--sh,50%),#6A400E 70%,#3E2406 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ring{border-color:#FFF3D650;border-style:dotted}
+.prog i{background:#2E1D1020}
+.prog i b{background:linear-gradient(90deg,#5C380C,#A87420)}
+.card{background:#FFFDF7;border:none;border-radius:10px;box-shadow:0 10px 0 -4px #00000014,0 18px 40px #3B241430;position:relative}
+.card::before{content:"";position:absolute;top:-14px;left:50%;width:120px;height:30px;margin-left:-60px;background:#F3E3B8CC;transform:rotate(-2deg);box-shadow:0 2px 4px #0002}
+p.lead{color:#2E1D10}
+.card .gold,.card .cp{filter:none}
+h2 .gold,.word.gold,.qt .gold{filter:drop-shadow(0 2px 0 #FFF3D680)}
+.foot{color:#4E3420}
+.label{color:#FFF8EC;background:#2E1D10;border-radius:8px}
+.art{border-radius:16px;box-shadow:0 8px 0 -2px #00000018,0 20px 40px #3B241440;background:#fff;padding:12px}
+.photo .ringg{background:conic-gradient(#5C380C,#E9C46A,#A87420,#5C380C,#C99A3A,#5C380C)}
+.photo .in{background:radial-gradient(circle at 50% 35%,#F2DDB8,#B98A5A)}
+.brand{letter-spacing:6px}
