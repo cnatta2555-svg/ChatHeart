@@ -6,6 +6,7 @@
 - `day3.mp4` — Day 3 (29.5s), voiced; sources `day3.html`, `audio_d3.py`, `voice_env_d3.js`, `day3_voice.wav`
 - `day4.mp4` — Day 4 (25s), voiced; sources `day4.html`, `audio_d4.py`, `voice_env_d4.js`, `day4_voice.wav`
 - `day5.mp4` — Day 5 (28s), voiced; sources `day5.html`, `audio_d5.py`, `voice_env_d5.js`, `day5_voice.wav`
+- `day6.mp4` — Day 6 (28s), voiced; sources `day6.html`, `audio_d6.py`, `voice_env_d6.js`, `day6_voice.wav`
 - `index.html` — animation (SVG, `renderAt(t)`); Kanit font from `npm i @fontsource/kanit@5.1.0`
 - `audio.py` — music + SFX → `audio.wav`
 - `render.js` — renders frames via Playwright → `video.mp4`
