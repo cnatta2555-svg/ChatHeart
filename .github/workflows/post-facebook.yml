@@ -1,0 +1,69 @@
+name: Post to Facebook
+
+# กดรันเองจากแท็บ Actions → Post to Facebook → Run workflow
+on:
+  workflow_dispatch:
+    inputs:
+      content:
+        description: "ไฟล์หรือโฟลเดอร์ใน content/ เช่น content/week-01.json"
+        required: true
+        default: content/week-01.json
+      mode:
+        description: "draft = ฉบับร่าง, schedule = ตั้งเวลาตามไฟล์, now = โพสต์ทันที"
+        required: true
+        default: schedule
+        type: choice
+        options: [draft, schedule, now]
+      post:
+        description: "(ไม่บังคับ) ส่งเฉพาะ id นี้ คั่นหลายอันด้วยช่องว่าง"
+        required: false
+        default: ""
+      dry_run:
+        description: "ดูรายการอย่างเดียว ยังไม่ส่งจริง"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: post-facebook
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements-content.txt
+
+      - name: Post
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          FB_GRAPH_VERSION: ${{ vars.FB_GRAPH_VERSION || 'v23.0' }}
+          CONTENT: ${{ inputs.content }}
+          MODE: ${{ inputs.mode }}
+          POSTS: ${{ inputs.post }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          args=("$CONTENT" --mode "$MODE" --yes)
+          for p in $POSTS; do args+=(--post "$p"); done
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          python post_to_fb.py "${args[@]}"
+
+      - name: Keep post log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-log-${{ github.run_number }}
+          path: |
+            out/post_log.jsonl
+            out/*.png
+          if-no-files-found: ignore

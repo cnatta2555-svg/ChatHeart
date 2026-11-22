@@ -9,3 +9,9 @@ build/
 .cxx
 *.jks
 *.keystore
+
+# insureingame content tools
+.env
+out/
+assets/fonts/
+__pycache__/
