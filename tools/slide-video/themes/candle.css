@@ -1,0 +1,6 @@
+/* "แสงเทียน": น้ำตาลเข้มยามค่ำ แสงอำพันนุ่มๆ ขอบมน อบอุ่น */
+:root{--bg:#1A0E06;--cream:#FFEBD0;--muted:#D9B98E;--gold:#F0B35A;--gold2:#FFD79A;--goldd:#A8692A;--copper:#FF9A6A;--bgA:#6A3A16;--bgB:#2E1608;--bgC:#120804;--glow:#F0B35A33;--dust:255,200,130}
+.ring{border-color:#F0B35A1A}
+.card{background:#3A1E0CB3;border:1px solid #F0B35A55;border-radius:40px;box-shadow:0 0 60px #F0B35A22}
+.art{border-radius:50%;box-shadow:0 0 80px #F0B35A55}
+p.lead{color:#FFE0BC}

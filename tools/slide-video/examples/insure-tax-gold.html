@@ -70,6 +70,7 @@ tr.sum td{border-bottom:none;font-weight:800;padding-top:30px}
   - data-bob="1" ลอยขึ้นลงเบาๆ (ใส่ที่รูป/ไอคอนข้างใน ไม่ใช่ตัว .r)
   - <img data-seq="dir/f_%04d.jpg" data-n="361" data-speed="0.5"> วิดีโอพื้นหลัง (แตกเป็นภาพด้วย ffmpeg -vf fps=30 dir/f_%04d.jpg) เล่นวนไปกลับ
   - data-spin="40" หมุนตลอด (องศา/วินาที)   |  data-cue + data-d = โผล่หลังคำนั้น d วินาที
+  - data-at="26.2" บังคับเวลา (วินาที) ใช้เมื่อถอดเสียงไม่เจอคำนั้น ใช้ได้ทั้ง section และ .r
   - <section data-zoom="1.08"> ซูมเข้าช้าๆ ทั้งหน้า (ค่าเริ่ม 1.012)
   ใช้ข้อความ cue เป็น "คำ" ไม่ใช่ตัวเลข เพราะ Whisper เขียนตัวเลขไทยเพี้ยนบ่อย
 -->
@@ -183,11 +184,12 @@ const fmt = n => Math.round(n).toLocaleString('en-US');
 // เรียกจาก make_video.js: m = {cue: วินาที}
 window.setup = (m, dur) => {
   END = dur;
-  STARTS = slides.map((s, i) => i === 0 ? 0 : (s.dataset.cue in m ? m[s.dataset.cue] - 0.25 : null));
+  STARTS = slides.map((s, i) => i === 0 ? 0 : s.dataset.at ? +s.dataset.at : (s.dataset.cue in m ? m[s.dataset.cue] - 0.25 : null));
   for (let i = 1; i < STARTS.length; i++) if (STARTS[i] == null) STARTS[i] = STARTS[i - 1] + 5;
   slides.forEach((s, i) => {
     s.querySelectorAll('.r').forEach(e => {
-      if (e.dataset.cue && e.dataset.cue in m) e._t = m[e.dataset.cue] - LEAD + (+e.dataset.d || 0);
+      if (e.dataset.at) e._t = +e.dataset.at;
+      else if (e.dataset.cue && e.dataset.cue in m) e._t = m[e.dataset.cue] - LEAD + (+e.dataset.d || 0);
       else if (e.dataset.after && e.dataset.after in m) e._t = m[e.dataset.after] + (+e.dataset.d || 0);
       else e._t = STARTS[i] + (+e.dataset.d || 0);
     });
