@@ -1,0 +1,167 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.art{display:block;margin:0 auto 40px;width:420px;height:420px;border-radius:60px;box-shadow:0 24px 60px #0008}
+.art.sm{width:300px;height:300px;border-radius:44px;margin-bottom:30px}
+.hook{font-size:88px;font-weight:800;line-height:1.25;text-align:center}
+.yes{display:inline-block;margin:30px auto 0;padding:18px 70px;border-radius:60px;font-size:110px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--gold));box-shadow:0 0 60px #E2B65A66}
+.flow{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:20px}
+.flow .art{margin:0;width:330px;height:330px}
+.flow .arr{font-size:90px;color:var(--copper);font-weight:800}
+.x{display:inline-flex;align-items:center;justify-content:center;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#FF7A6B,#E23B2E);color:#fff;font-size:80px;font-weight:800}
+.formula{display:flex;flex-direction:column;gap:22px}
+.fr{display:flex;align-items:center;gap:24px;font-size:52px;font-weight:700}
+.op{flex:none;width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:60px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--goldd))}
+.op.c{background:linear-gradient(135deg,#F2A66A,#B9612A)}
+.qn{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:96px;font-weight:800;color:var(--bg);background:linear-gradient(135deg,var(--gold2),var(--goldd));box-shadow:0 0 60px #E2B65A55;margin:0 auto 30px}
+.qt{font-size:80px;font-weight:800;line-height:1.25;text-align:center;margin-bottom:24px}
+.stack{display:flex;flex-direction:column-reverse;align-items:center;gap:14px;margin:30px 0}
+.blk{width:720px;border-radius:30px;padding:30px;text-align:center;font-size:46px;font-weight:700}
+.blk.base{background:linear-gradient(135deg,#6B4626,#3E2715);border:3px solid #E2B65A66}
+.blk.top{background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--bg)}
+.vs{display:flex;gap:24px;justify-content:center}
+.vs .card{flex:1;text-align:center;padding:40px 20px}
+.vs .card .k{font-size:50px;font-weight:800;line-height:1.35}
+.huge{font-size:120px;font-weight:800;line-height:1}
+.checks{display:flex;justify-content:center;gap:18px;margin-top:30px}
+.checks div{width:100px;height:100px;border-radius:24px;border:4px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:52px;font-weight:800;color:var(--gold2)}
+.photo{width:440px;height:440px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(var(--goldd),#FFF3C8,var(--gold),var(--goldd),var(--gold2),var(--goldd))}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 35%,#6B4626,#2A1B10)}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="ring" id="ring1" style="width:900px;height:900px;right:-380px;top:-260px"></div>
+<div class="ring" id="ring2" style="width:620px;height:620px;left:-300px;bottom:-120px;border-style:dashed"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คุณอยู่ด่านไหน?</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art r" data-d="0" data-pop="1" src="ILL/wallet.svg">
+    <div class="hook r" data-d=".2">เงินเดือน <span class="gold" data-count="20000" data-cl="1">20,000</span></div>
+    <div class="hook r" data-cue="ทำประกันได้ไหม">ทำประกันได้ไหม?</div>
+    <div class="center"><div class="yes r" data-cue="ได้ค่ะ" data-pop="1">ได้!</div></div>
+    <p class="lead r center" data-cue="แต่ต้องเรียงลำดับ" style="margin-top:30px">แต่ต้อง<span class="gold">เรียงลำดับให้ถูก</span></p>
+  </div>
+</section>
+
+<!-- 2 problem -->
+<section class="slide" data-cue="ปัญหาส่วนใหญ่">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คุณอยู่ด่านไหน?</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">ปัญหาไม่ใช่<span class="gold">งบไม่พอ</span></h2>
+    <h2 class="r center" data-cue="แต่ใช้งบผิดที่" style="margin-top:-20px">แต่<span class="cp">ใช้งบผิดที่</span></h2>
+    <div class="flow">
+      <div class="r center" data-cue="ซื้อแบบออม" data-pop="1"><img class="art" data-bob="1" src="ILL/piggy.svg"><p class="lead">ซื้อออมทรัพย์ก่อน</p></div>
+      <div class="arr r" data-cue="หนักจริง">→</div>
+      <div class="r center" data-cue="หนักจริง" data-d=".3" data-pop="1"><img class="art" data-bob="1" src="ILL/bill.svg"><p class="lead">ป่วยหนัก <span class="cp">เคลมไม่ได้</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 budget -->
+<section class="slide" data-cue="เริ่มจากตั้งงบ">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ขั้นแรก: ตั้งงบ</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="label r" data-d=".1" style="align-self:flex-start">สูตรตั้งงบเบี้ย</div>
+    <div class="formula">
+      <div class="card r fr" data-cue="เอารายได้ทั้งปี" data-x="1"><div class="op">฿</div>รายได้ทั้งปี</div>
+      <div class="card r fr" data-cue="หักเงินที่ส่งให้พ่อแม่" data-x="1"><div class="op c">−</div>เงินที่ส่งให้พ่อแม่</div>
+      <div class="card r fr" data-cue="แล้วคูณ" data-x="1"><div class="op">×</div><span class="gold huge" style="font-size:72px">10%</span></div>
+    </div>
+    <div class="huge r center" data-cue="นั่นคืองบเบี้ย" data-pop="1" style="margin-top:36px;font-size:90px">= <span class="gold">งบเบี้ย</span></div>
+    <p class="lead r center" data-cue="ที่ควรจ่ายไหวทุกปี">ที่ต้อง<span class="gold">จ่ายไหวทุกปี</span></p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-cue="1ค่ารักษา">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ลำดับที่ 1 / 4</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1">1</div>
+    <div class="qt r" data-d=".2">ค่ารักษา<span class="gold">ก้อนใหญ่</span></div>
+    <img class="art sm r" data-cue="ป่วยหนักครั้งเดียว" data-pop="1" src="ILL/bill.svg">
+    <p class="lead r center" data-cue="ป่วยหนักครั้งเดียว">ป่วยหนักครั้งเดียว<br><span class="cp">เงินเก็บหายได้หลายปี</span></p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-cue="2รายได้หยุด">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ลำดับที่ 2 / 4</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1">2</div>
+    <div class="qt r" data-d=".2"><span class="gold">รายได้</span>หยุด</div>
+    <img class="art sm r" data-cue="ถ้าป่วยจนทำงานไม่ได้" data-pop="1" src="ILL/income-stop.svg">
+    <p class="lead r center" data-cue="ถ้าป่วยจนทำงานไม่ได้">ป่วยจนทำงานไม่ได้<br><span class="cp r" data-cue="เงินที่ส่งพ่อแม่" style="display:inline-block">เงินที่ส่งพ่อแม่ก็หยุดด้วย</span></p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-cue="3ประกันชีวิต">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ลำดับที่ 3 / 4</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1">3</div>
+    <div class="qt r" data-d=".2">ประกัน<span class="gold">ชีวิต</span></div>
+    <img class="art sm r" data-cue="ถ้ามีคนพึ่งพา" data-pop="1" src="ILL/umbrella.svg">
+    <p class="lead r center" data-cue="ถ้ามีคนพึ่งพา">ถ้ามีคน<span class="gold">พึ่งพารายได้</span>เราจริงๆ</p>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-cue="4ออมเงิน">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ลำดับที่ 4 / 4</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="qn r" data-d=".05" data-pop="1">4</div>
+    <div class="qt r" data-d=".2">ออมเงิน /<br><span class="gold">ลดหย่อนภาษี</span></div>
+    <img class="art sm r" data-d=".6" data-pop="1" src="ILL/piggy.svg">
+    <p class="lead r center" data-cue="ค่อยเพิ่มทีหลัง">ค่อย<span class="gold">เพิ่มทีหลัง</span></p>
+  </div>
+</section>
+
+<!-- 8 group insurance -->
+<section class="slide" data-cue="ถ้ามีประกันกลุ่ม">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">มีประกันกลุ่มอยู่แล้ว?</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">ใช้ประกันกลุ่ม<br><span class="gold">เป็นฐาน</span></h2>
+    <div class="stack">
+      <div class="blk base r" data-cue="ใช้เป็นฐาน" data-pop="1">ประกันกลุ่มจากที่ทำงาน</div>
+      <div class="blk top r" data-cue="เติมเฉพาะส่วนที่ขาด" data-pop="1">+ เติมเฉพาะส่วนที่ขาด</div>
+    </div>
+    <div class="card r center" data-cue="แต่จำไว้ว่า" style="border-color:var(--copper)"><div class="k">⚠ ออกจากงานเมื่อไหร่<br><span class="cp">ประกันกลุ่มก็หายไปด้วย</span></div></div>
+  </div>
+</section>
+
+<!-- 9 compare -->
+<section class="slide" data-cue="ซื้อน้อยแต่จ่ายไหว">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คุณอยู่ด่านไหน?</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="vs">
+      <div class="card r" data-d=".1" data-pop="1" style="border-color:var(--gold)"><div class="huge gold">✓</div><div class="k">ซื้อน้อย<br><span class="gold">จ่ายไหวต่อเนื่อง</span></div></div>
+      <div class="card r" data-cue="ดีกว่าซื้อเยอะ" data-pop="1" style="border-color:var(--copper);opacity:.85"><div class="huge cp">✗</div><div class="k">ซื้อเยอะ<br><span class="cp">ทิ้งกลางทาง</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 save + face -->
+<section class="slide" data-cue="บันทึกไว้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">คุณอยู่ด่านไหน?</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <h2 class="r center" data-d=".2" style="margin-bottom:10px"><span class="gold">บันทึกไว้</span>แล้วเช็กดู</h2>
+    <p class="lead r center" data-cue="ตอนนี้คุณมีครบ">ตอนนี้คุณมีครบกี่ข้อ?</p>
+    <div class="checks"><div class="r" data-cue="ตอนนี้คุณมีครบ" data-d=".2" data-pop="1">1</div><div class="r" data-cue="ตอนนี้คุณมีครบ" data-d=".35" data-pop="1">2</div><div class="r" data-cue="ตอนนี้คุณมีครบ" data-d=".5" data-pop="1">3</div><div class="r" data-cue="ตอนนี้คุณมีครบ" data-d=".65" data-pop="1">4</div></div>
+  </div>
+</section>

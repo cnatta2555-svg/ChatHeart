@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FFF7E6"/><stop offset="1" stop-color="#F3DDB0"/></radialGradient>
+ <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5AA2FF"/><stop offset="1" stop-color="#2F6BDE"/></linearGradient>
+ <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E9F7FF" stop-opacity=".95"/><stop offset="1" stop-color="#9FD3F2" stop-opacity=".55"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<ellipse cx="96" cy="180" rx="60" ry="7" fill="#C9A060" opacity=".35"/>
+<!-- back paper -->
+<rect x="60" y="30" width="96" height="128" rx="10" fill="#E9E1D2" transform="rotate(8 108 94)"/>
+<!-- doc -->
+<rect x="44" y="26" width="100" height="140" rx="12" fill="#FFFFFF" stroke="#E5D9C2" stroke-width="2"/>
+<rect x="44" y="26" width="100" height="26" rx="12" fill="#C9934A"/><rect x="44" y="40" width="100" height="12" fill="#C9934A"/>
+<rect x="56" y="34" width="44" height="7" rx="3.5" fill="#FFF3D6"/>
+<g fill="#D9CFBE"><rect x="56" y="64" width="76" height="6" rx="3"/><rect x="56" y="78" width="64" height="6" rx="3"/><rect x="56" y="92" width="72" height="6" rx="3"/><rect x="56" y="106" width="52" height="6" rx="3"/><rect x="56" y="140" width="40" height="6" rx="3"/></g>
+<path d="M104 146q8-10 14-2t14-6" fill="none" stroke="#2F6BDE" stroke-width="2.5" stroke-linecap="round"/>
+<!-- shield badge -->
+<g transform="translate(118 112)"><path d="M0-22l20 7v14c0 14-9 23-20 29-11-6-20-15-20-29v-14z" fill="url(#sh)" stroke="#fff" stroke-width="3"/><path d="M-8 2l6 6 11-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<!-- magnifier -->
+<g transform="translate(70 92)">
+ <path d="M22 22l26 26" stroke="#6B4626" stroke-width="12" stroke-linecap="round"/>
+ <path d="M22 22l26 26" stroke="#9A6A3C" stroke-width="6" stroke-linecap="round"/>
+ <circle r="28" fill="url(#lens)" stroke="#E2B65A" stroke-width="7"/>
+ <path d="M-14-12q8-10 20-8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+</g>
+<g fill="#FFD54A"><path d="M164 40l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"/><path d="M30 120l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z"/></g>
+</svg>

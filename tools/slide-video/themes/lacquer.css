@@ -1,0 +1,14 @@
+/* ธีม "ลงรักปิดทอง": พื้นน้ำตาลแดงแบบเครื่องเขิน ลายดอกทองละเอียด กรอบลายไทยทอง (คลิปเบอร์มงคล) */
+:root{--bg:#1E0A05;--cream:#FFF1D6;--muted:#E2C49A;--gold:#E0B04A;--gold2:#FFDD80;--goldd:#9A6A1C;--copper:#FF8F5A;
+ --bgA:#5A1E10;--bgB:#3A120A;--bgC:#1E0805;--glow:#E0B04A22;--dust:255,221,128}
+html,body{background:#1E0805}
+.ring{display:none}
+.lai{position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23FFD27A' stroke-width='2'%3E%3Cpath d='M60 20q10 20 0 40q-10-20 0-40zM60 100q10-20 0-40q-10 20 0 40zM20 60q20-10 40 0q-20 10-40 0zM100 60q-20-10-40 0q20 10 40 0z'/%3E%3Ccircle cx='60' cy='60' r='5'/%3E%3Cpath d='M0 0l12 12M120 0l-12 12M0 120l12-12M120 120l-12-12'/%3E%3C/g%3E%3C/svg%3E");background-size:120px 120px}
+.frame{position:absolute;inset:36px;border:3px solid #E0B04A;border-radius:28px;pointer-events:none;box-shadow:inset 0 0 0 8px #3A120A,inset 0 0 0 10px #E0B04A88}
+.card{background:linear-gradient(135deg,#4A180CEE,#2E0E07EE);border:2px solid #E0B04A;border-radius:24px;box-shadow:0 18px 40px #000a}
+.label{background:linear-gradient(135deg,#FFDD80,#C98A1E);color:#2E0E07;border-radius:40px}
+p.lead{color:#F6E1BC}
+.art{border-radius:44px;box-shadow:0 0 0 6px #E0B04A,0 24px 60px #000a}
+.photo .ringg{background:conic-gradient(#9A6A1C,#FFDD80,#E0B04A,#9A6A1C,#FFDD80,#9A6A1C)}
+.photo .in{background:radial-gradient(circle at 50% 35%,#7A2E18,#2E0E07)}
+.prog i{background:#FFDD8022}

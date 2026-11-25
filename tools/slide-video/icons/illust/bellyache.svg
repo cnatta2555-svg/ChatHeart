@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#FFF0EE"/><stop offset="1" stop-color="#F8CFC8"/></radialGradient>
+ <radialGradient id="pain" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FF3B30" stop-opacity=".95"/><stop offset=".55" stop-color="#FF6B57" stop-opacity=".5"/><stop offset="1" stop-color="#FF6B57" stop-opacity="0"/></radialGradient>
+ <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FA8FF"/><stop offset="1" stop-color="#4F7BE0"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<ellipse cx="100" cy="192" rx="56" ry="6" fill="#D99A8F" opacity=".5"/>
+<!-- legs -->
+<path d="M84 150v38M116 150v38" stroke="#3A4256" stroke-width="20" stroke-linecap="round"/>
+<!-- torso -->
+<path d="M58 92q0-22 42-22t42 22v58q0 10-10 10H68q-10 0-10-10z" fill="url(#shirt)"/>
+<path d="M88 70l12 12 12-12" fill="#F2C29B"/>
+<!-- pain glow lower-right of body (viewer's left) -->
+<circle cx="84" cy="128" r="26" fill="url(#pain)"/>
+<!-- arms hugging belly -->
+<path d="M62 96q-10 24 8 34l22 2" fill="none" stroke="#5F88EC" stroke-width="13" stroke-linecap="round"/>
+<path d="M138 96q10 26-10 34l-30 0" fill="none" stroke="#4F7BE0" stroke-width="13" stroke-linecap="round"/>
+<circle cx="92" cy="132" r="7.5" fill="#F2C29B"/><circle cx="98" cy="129" r="7.5" fill="#EDB78E"/>
+<!-- head -->
+<rect x="94" y="60" width="12" height="12" fill="#EDB78E"/>
+<circle cx="100" cy="46" r="22" fill="#F2C29B"/>
+<path d="M78 46c-2-18 12-28 24-27 14 1 22 12 20 26-8-10-20-14-32-12-6 1-10 6-12 13z" fill="#3A2A1C"/>
+<path d="M89 46l6 2M105 48l6-2" stroke="#3A2A1C" stroke-width="2.6" stroke-linecap="round"/>
+<path d="M93 58q7-5 14 0" fill="none" stroke="#3A2A1C" stroke-width="2.6" stroke-linecap="round"/>
+<circle cx="88" cy="53" r="3.5" fill="#F59C8F" opacity=".7"/><circle cx="112" cy="53" r="3.5" fill="#F59C8F" opacity=".7"/>
+<!-- sweat drop -->
+<path d="M128 30q6 9 0 13-6-4 0-13z" fill="#7CC7F2"/>
+<!-- pain zigzags -->
+<g fill="none" stroke="#FF4D3D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M44 116l-8 4 6 4-8 4"/><path d="M48 140l-10 2 6 5-9 3"/>
+</g>
+</svg>

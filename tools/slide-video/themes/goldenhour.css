@@ -1,0 +1,14 @@
+/* "แสงทองยามเย็น": ฟุตเทจวิวจริงเต็มจอ เกรดสีทองอุ่น ข้อความเรียบหรูกลางจอ เส้นทองบาง (คลิปจากวิวทะเลสาบ) */
+:root{--bg:#1A0F06;--cream:#FFF6E6;--muted:#F3DDB6;--gold:#F2C46A;--gold2:#FFE3A0;--goldd:#B8862E;--copper:#FFB07A;--bgA:#000;--bgB:#000;--bgC:#000;--glow:#0000;--dust:255,227,160}
+#bg{display:none}.ring{display:none}
+.footage{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;filter:sepia(.42) saturate(1.25) contrast(1.05) brightness(.92)}
+.grade{position:absolute;inset:0;background:linear-gradient(180deg,#2A160866 0%,#00000000 30%,#2A160833 55%,#1A0F06CC 100%),radial-gradient(ellipse at 50% 20%,#FFD27A33,transparent 60%)}
+.top{opacity:.95}
+.quote{font-size:84px;font-weight:700;line-height:1.35;text-align:center;text-shadow:0 4px 24px #000c}
+.line{width:0;height:3px;margin:34px auto;background:linear-gradient(90deg,transparent,#F2C46A,transparent)}
+.card{background:#1A0F06AA;border:1px solid #F2C46A88;border-radius:30px;backdrop-filter:blur(8px)}
+p.lead{text-shadow:0 3px 14px #000c;color:#FFF0D6}
+.body{justify-content:flex-end !important;padding-bottom:300px !important}
+.gold{background:none;-webkit-text-fill-color:#FFD27A;color:#FFD27A;filter:drop-shadow(0 3px 10px #000e) drop-shadow(0 0 2px #0008)}
+.brand.gold{-webkit-text-fill-color:#FFE3A0}
+.quote,p.lead{text-shadow:0 3px 14px #000e,0 0 3px #000a}

@@ -1,0 +1,22 @@
+/* ชิ้นส่วนที่ใช้ร่วมกันทุกคลิป (ธีมเขียนทับสีได้) */
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.art{display:block;margin:0 auto 40px;width:360px;height:360px;border-radius:44px;box-shadow:0 24px 60px #0006}
+.art.sm{width:260px;height:260px;margin-bottom:30px}
+.hook{font-size:86px;font-weight:800;line-height:1.25;text-align:center}
+.huge{font-size:130px;font-weight:800;line-height:1.1;text-align:center}
+.two{display:flex;gap:24px;margin-top:24px}
+.two .card{flex:1;text-align:center;padding:34px 20px}
+.two .k{font-size:44px;line-height:1.35}
+.t{font-size:32px;font-weight:600;opacity:.8;margin-bottom:10px}
+.chips{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.li{display:flex;align-items:center;gap:22px;text-align:left}
+.mk{flex:none;width:84px;height:84px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:800;color:#fff;background:var(--goldd)}
+.list .card{margin-bottom:22px}
+.list .k{font-size:46px}
+.photo{width:420px;height:420px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(var(--goldd),var(--gold2),var(--gold),var(--goldd),var(--gold2),var(--goldd))}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 35%,#6B4626,#2A1B10)}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+.cta2{display:inline-block;font-size:50px;font-weight:800;padding:20px 50px;border-radius:60px;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--bg)}
+.small{font-size:34px;opacity:.85}

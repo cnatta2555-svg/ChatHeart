@@ -1,0 +1,86 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.art{display:block;margin:0 auto 40px;width:360px;height:360px}
+.art.sm{width:260px;height:260px;margin-bottom:30px}
+.hook{font-size:84px;font-weight:800;line-height:1.25;text-align:center}
+.zero{font-size:280px;font-weight:800;line-height:1;text-align:center;color:#FF8F5A;text-shadow:0 0 50px #FF8F5A66}
+.two{display:flex;gap:24px;margin-top:20px}
+.two .card{flex:1;text-align:center;padding:34px 22px}
+.two .k{font-size:44px;line-height:1.35}
+.two .t{font-size:34px;color:var(--muted);margin-bottom:12px;font-weight:600}
+.pill{display:inline-block;font-size:34px;font-weight:700;padding:8px 22px;margin:6px;border-radius:40px;border:2px solid #E0B04A99}
+.eq{font-size:64px;font-weight:800;text-align:center;margin:20px 0}
+.photo{width:420px;height:420px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<div class="lai"></div>
+<div class="ring" id="ring1"></div><div class="ring" id="ring2"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+<div class="frame"></div>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เงินกับดวง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art r" data-d="0" data-pop="1" data-bob="1" src="ILL/phone-lucky.svg">
+    <div class="hook r" data-d=".2">เปลี่ยน<span class="gold">เบอร์มงคล</span></div>
+    <p class="lead r center" data-cue="หวังเสริมดวง">หวังเสริมดวงเรื่องเงิน</p>
+    <p class="lead r center" data-cue="แต่สิ้นเดือน" style="margin-top:30px">แต่สิ้นเดือน เงินเก็บ...</p>
+    <div class="zero r" data-cue="ยังเป็นศูนย์" data-pop="1">0</div>
+  </div>
+</section>
+
+<!-- 2 two views -->
+<section class="slide" data-cue="ในมุมศาสตร์">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เงินกับดวง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">ตัวเลข<span class="gold">มี 2 แบบ</span></h2>
+    <div class="two">
+      <div class="card r" data-d=".3" data-x="1"><div class="t">ศาสตร์ตัวเลข / พลังงาน</div><div class="k">ช่วยจัด<span class="gold">ทิศทาง</span><br><span class="pill r" data-cue="พลังใจ" data-pop="1">พลังใจ</span><span class="pill r" data-cue="และโอกาส" data-pop="1">โอกาส</span></div></div>
+      <div class="card r" data-cue="แต่ในโลกความเป็นจริง" data-x="1" style="border-width:4px"><div class="t">โลกความเป็นจริง</div><div class="k"><span class="gold r" data-cue="ตัวเลขในบัญชี" style="display:inline-block">ตัวเลขในบัญชี</span><br>สำคัญที่สุด</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 open vs lock -->
+<section class="slide" data-cue="มงคลช่วยดึงโอกาส">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เงินกับดวง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="card r center" data-d="0" data-x="1"><div class="k">เลขมงคล → <span class="gold">ดึงโอกาสเข้าหา</span></div></div>
+    <img class="art sm r" data-cue="แต่ตัวที่ล็อกเงิน" data-pop="1" data-bob="1" src="ILL/lock-shield.svg" style="margin-top:40px">
+    <p class="lead r center" data-cue="แต่ตัวที่ล็อกเงิน">ตัวที่<span class="gold">ล็อกเงินไม่ให้รั่วไหล</span> คือ</p>
+    <div class="eq r" data-cue="คือวินัยการเงิน" data-pop="1"><span class="gold">วินัยการเงิน</span> + <span class="gold r" data-cue="การปิดความเสี่ยง" style="display:inline-block">ปิดความเสี่ยง</span></div>
+  </div>
+</section>
+
+<!-- 4 leaky -->
+<section class="slide" data-cue="ดวงเปิด" data-zoom="1.05">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เงินกับดวง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="art r" data-d=".05" data-pop="1" data-bob="1" src="ILL/leaky.svg">
+    <div class="hook r" data-d=".2">ดวงเปิด</div>
+    <div class="hook r" data-cue="แต่ไม่กั้นรูรั่ว">แต่ไม่<span class="gold">กั้นรูรั่ว</span></div>
+    <p class="lead r center" data-cue="ยังไงก็เก็บ" style="font-size:56px;margin-top:20px">ยังไงก็<span style="color:#FF8F5A;font-weight:800">เก็บไม่อยู่</span></p>
+  </div>
+</section>
+
+<!-- 5 last + face -->
+<section class="slide" data-cue="ใครกำลังคิด">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เงินกับดวง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <p class="lead r center" data-d=".2">กำลังคิดจะ<span class="gold">เปลี่ยนเบอร์</span>?</p>
+    <p class="lead r center" data-cue="หรืออยากเริ่มจัดระเบียบ">หรืออยาก<span class="gold">จัดระเบียบเงินในกระเป๋า</span>?</p>
+    <div class="center" style="margin-top:34px"><div class="label r" data-cue="ลองคอมเมนต์" data-pop="1" id="cta" style="font-size:50px;padding:18px 48px"><img src="ILL/comment.svg" style="width:60px;height:60px;vertical-align:middle;border-radius:14px"> คอมเมนต์มาคุยกัน</div></div>
+  </div>
+</section>

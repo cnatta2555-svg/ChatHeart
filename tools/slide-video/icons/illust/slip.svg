@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="#FFF4E0"/><stop offset="1" stop-color="#F6D9A8"/></radialGradient>
+ <linearGradient id="pud" x1="0" x2="1"><stop offset="0" stop-color="#9ED8F0"/><stop offset="1" stop-color="#5DB6E0"/></linearGradient>
+ <linearGradient id="sign" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD54A"/><stop offset="1" stop-color="#F5A623"/></linearGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<rect x="0" y="150" width="200" height="50" fill="#EBC58A"/>
+<path d="M0 150h200" stroke="#D9A963" stroke-width="2"/>
+<ellipse cx="96" cy="160" rx="58" ry="10" fill="url(#pud)" opacity=".9"/>
+<ellipse cx="80" cy="158" rx="16" ry="3" fill="#fff" opacity=".7"/>
+<!-- caution sign -->
+<g transform="translate(150 96)">
+ <path d="M8 58L22 0h4l14 58z" fill="#C98512"/>
+ <path d="M4 56L20 -2h8l16 58z" fill="url(#sign)" stroke="#B9770C" stroke-width="2" stroke-linejoin="round"/>
+ <path d="M24 14v20" stroke="#3A2A1C" stroke-width="5" stroke-linecap="round"/><circle cx="24" cy="43" r="3.2" fill="#3A2A1C"/>
+</g>
+<!-- shadow -->
+<ellipse cx="95" cy="150" rx="46" ry="6" fill="#B98A4E" opacity=".35"/>
+<!-- legs (kicked up) -->
+<path d="M100 132 L128 106 L150 98" fill="none" stroke="#2E4A7A" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M96 136 L118 122 L132 132" fill="none" stroke="#3B5B92" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="156" cy="95" rx="10" ry="6" transform="rotate(-25 156 95)" fill="#FFFFFF" stroke="#C9CED8" stroke-width="2"/>
+<ellipse cx="138" cy="135" rx="10" ry="6" transform="rotate(20 138 135)" fill="#FFFFFF" stroke="#C9CED8" stroke-width="2"/>
+<!-- torso -->
+<path d="M100 134 L70 108" stroke="#F27E63" stroke-width="30" stroke-linecap="round"/>
+<!-- arms -->
+<path d="M72 106 L56 82 L50 66" fill="none" stroke="#F27E63" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M78 112 L98 94 L112 84" fill="none" stroke="#E86C52" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="49" cy="62" r="6.5" fill="#F2C29B"/><circle cx="115" cy="82" r="6.5" fill="#F2C29B"/>
+<!-- head -->
+<circle cx="56" cy="98" r="17" fill="#F2C29B"/>
+<path d="M40 96c0-14 10-22 20-21 10 1 16 8 15 16-6-5-14-6-22-3-5 2-9 5-13 8z" fill="#3A2A1C"/>
+<path d="M50 104q4 3 8 0" fill="none" stroke="#3A2A1C" stroke-width="2" stroke-linecap="round"/>
+<path d="M47 97l4 2M58 99l4-2" stroke="#3A2A1C" stroke-width="2" stroke-linecap="round"/>
+<!-- motion marks -->
+<g fill="none" stroke="#E0882E" stroke-width="3.5" stroke-linecap="round">
+ <path d="M30 70q-6 8 0 16"/><path d="M22 64q-9 14 0 28"/>
+ <path d="M160 72q8-4 14 2"/><path d="M164 62q12-6 20 4"/>
+</g>
+<g fill="#FFD54A"><path d="M36 40l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z"/><path d="M128 50l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z"/></g>
+</svg>

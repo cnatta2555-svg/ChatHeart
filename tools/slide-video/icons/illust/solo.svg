@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<defs>
+ <radialGradient id="bg" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#FFE7B8"/><stop offset=".55" stop-color="#E9B871"/><stop offset="1" stop-color="#8A5A2B"/></radialGradient>
+ <radialGradient id="lamp" cx="50%" cy="0%" r="100%"><stop offset="0" stop-color="#FFF6D6" stop-opacity=".95"/><stop offset="1" stop-color="#FFF6D6" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="200" height="200" rx="36" fill="url(#bg)"/>
+<path d="M100 34L54 170h92z" fill="url(#lamp)"/>
+<path d="M100 12v14" stroke="#4A2C10" stroke-width="3"/><path d="M84 34q16-14 32 0z" fill="#4A2C10"/><circle cx="100" cy="36" r="5" fill="#FFF6D6"/>
+<ellipse cx="100" cy="176" rx="50" ry="6" fill="#4A2C10" opacity=".35"/>
+<!-- sitting person hugging knees -->
+<path d="M78 174q0-34 22-38 22 4 22 38z" fill="#5F6F9A"/>
+<path d="M82 150q18 8 36 0" fill="none" stroke="#4A5A82" stroke-width="10" stroke-linecap="round"/>
+<circle cx="100" cy="118" r="15" fill="#F2C29B"/>
+<path d="M85 117c-1-13 7-19 15-19 9 0 16 7 14 18-5-7-12-9-20-7-4 1-7 4-9 8z" fill="#3A2A1C"/>
+<path d="M94 121q3-2 5 0M103 121q3-2 5 0" fill="none" stroke="#3A2A1C" stroke-width="2" stroke-linecap="round"/>
+<!-- small heart -->
+<path d="M150 70s-10-6-10-12c0-4 2-6 5-6 2 0 4 1 5 3 1-2 3-3 5-3 3 0 5 2 5 6 0 6-10 12-10 12z" fill="#FFF6D6" opacity=".9"/>
+</svg>

@@ -1,0 +1,10 @@
+/* "สองฝั่ง": พื้นแบ่งเฉียงคาราเมล/ช็อกโกแลต เหมาะกับเปรียบเทียบ */
+:root{--bg:#2A1608;--cream:#FFF4E2;--muted:#F0D6B0;--gold:#F2C46A;--gold2:#FFE3A0;--goldd:#B8862E;--copper:#FF9A6A;--bgA:#5A341A;--bgB:#3A200E;--bgC:#24130A;--glow:#0000;--dust:255,227,160}
+.ring{display:none}
+.diag{position:absolute;inset:0;background:linear-gradient(115deg,#C98A4A 0 46%,#4A2814 46% 100%);opacity:.9;pointer-events:none}
+.diag::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 45.6%,#F2C46A 45.6% 46.4%,transparent 46.4%)}
+.card{background:#2A1608D9;border:2px solid #F2C46A99;border-radius:30px}
+.two .card:first-child{background:#FFF4E2;color:#3A200E;border-color:#B8862E}
+.two .card:first-child .gold{background:linear-gradient(100deg,#7A4E1A,#B8862E);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1,h2,.hook{text-shadow:0 4px 18px #0008}
+h2 .gold,.hook .gold,p.lead .gold{background:none;-webkit-text-fill-color:#FFE3A0;color:#FFE3A0;filter:drop-shadow(0 3px 8px #000b)}

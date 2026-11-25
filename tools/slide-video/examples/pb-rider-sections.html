@@ -1,0 +1,126 @@
+<style>
+.body{height:1330px;display:flex;flex-direction:column;justify-content:center;padding-bottom:120px}
+.center{text-align:center}
+.doc{position:relative;width:888px;border-radius:18px;overflow:hidden;box-shadow:0 30px 80px #000c;border:3px solid #E8B84E}
+.doc img{display:block;width:100%}
+.hl{position:absolute;border:6px solid #FFC83D;border-radius:10px;box-shadow:0 0 0 4000px #0000,0 0 30px #FFC83DAA;transform-origin:left center}
+.hl.dim{box-shadow:0 0 0 4000px #00000066,0 0 30px #FFC83DAA}
+.ico{width:110px;height:110px;vertical-align:middle}
+.hook{font-size:96px;font-weight:800;line-height:1.2;text-align:center}
+.who{display:flex;justify-content:center;gap:24px;margin:30px 0}
+.who .card{flex:1;text-align:center;padding:28px}
+.who .k{font-size:44px}
+.huge{font-size:120px;font-weight:800;line-height:1.1;text-align:center}
+.trig{display:flex;gap:24px;justify-content:center;margin:26px 0}
+.trig .card{flex:1;text-align:center;font-size:52px;font-weight:800;padding:30px}
+.track{height:64px;border-radius:32px;background:#ffffff22;overflow:hidden;margin-top:16px}
+.track .fill{height:100%;border-radius:32px;background:linear-gradient(90deg,#B07A22,#FFE08A);width:0}
+.split{display:flex;height:120px;border-radius:24px;overflow:hidden;margin:30px 0 14px;border:3px solid #E8B84E}
+.split .a{background:linear-gradient(135deg,#FFE08A,#C9922E);display:flex;align-items:center;justify-content:center;color:#1A110A;font-weight:800;font-size:38px}
+.split .b{flex:1;background:#4A3220;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:44px}
+.warn{display:flex;align-items:flex-start;gap:24px}
+.warn img{width:96px;height:96px;flex:none}
+.neq{font-size:130px;font-weight:800;text-align:center;letter-spacing:4px}
+.photo{width:440px;height:440px;border-radius:50%;margin:0 auto 46px;position:relative}
+.photo .ringg{position:absolute;inset:-14px;border-radius:50%;background:conic-gradient(#B07A22,#FFE08A,#E8B84E,#B07A22,#FFE08A,#B07A22)}
+.photo .in{position:absolute;inset:0;border-radius:50%;overflow:hidden}
+.photo img{position:absolute;width:100%;bottom:0;left:0}
+</style>
+</head><body>
+<canvas id="bg" width="1080" height="1920"></canvas>
+<img class="footage" id="ft" data-seq="assets/seq/f_%04d.jpg" data-n="361" data-speed="0.45">
+<div class="grade"></div>
+<div class="ring" id="ring1"></div><div class="ring" id="ring2"></div>
+<canvas id="fx" width="1080" height="1920"></canvas>
+
+<!-- 1 hook -->
+<section class="slide">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="hook r" data-d="0">กรมธรรม์ลูก<br>มี<span class="gold">บรรทัดนี้</span>ไหม? <img class="ico r" data-cue="มีบันทัดนี้" data-pop="1" src="ILL/eye.svg"></div>
+    <div class="doc r" data-d=".3" data-pop="1" style="margin:44px auto">
+      <img src="assets/table.jpg">
+      <div class="hl r" data-cue="มีบันทัดนี้" data-x="1" style="left:5%;top:58%;width:92%;height:22%"></div>
+    </div>
+    <div class="huge r" data-cue="ปีละ" style="font-size:86px">ปีละ <span class="gold">700 กว่าบาท</span></div>
+    <p class="lead r center" data-cue="แต่ช่วยไม่ให้แผนพัง" style="font-size:52px">แต่ช่วยไม่ให้แผน<span class="gold">พังกลางทาง</span></p>
+  </div>
+</section>
+
+<!-- 2 context -->
+<section class="slide" data-cue="ถ้าเราทำประกันให้ลูก">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <img class="r" data-d=".1" data-pop="1" data-bob="1" src="ILL/family-pay.svg" style="width:360px;height:360px;margin:0 auto 30px;display:block;border-radius:44px;box-shadow:0 24px 60px #000a">
+    <p class="lead r center" data-cue="พ่อแม่เป็นคนจ่ายเบี้ย">ทำประกันให้ลูก · <span class="gold">พ่อแม่จ่ายเบี้ย</span></p>
+    <div class="who">
+      <div class="card r" data-cue="ไม่ใช่ลูก" data-x="1" style="opacity:.8"><div class="k">จุดเสี่ยง<br><s>ไม่ใช่ลูก</s></div></div>
+      <div class="card r" data-cue="แต่คือคนจ่ายเบี้ย" data-pop="1" style="border-color:#FF9A5A;background:#5A2A1499"><div class="k">แต่คือ<br><span style="color:#FF9A5A;font-weight:800">คนจ่ายเบี้ย</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 PB definition -->
+<section class="slide" data-cue="ตัวที่ช่วยตรงนี้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ประกันในภาษาคน</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="label r" data-cue="สัญญาเพิ่มเติม" data-pop="1" style="align-self:center;font-size:40px">สัญญาเพิ่มเติมผู้ชำระเบี้ย</div>
+    <div class="huge gold r" data-cue="หรือพีบี" data-pop="1" style="font-size:200px">PB</div>
+    <div class="trig"><div class="card r" data-cue="ถ้าคนจ่ายเบี้ยเสียชีวิต" data-pop="1">เสียชีวิต</div><div class="card r" data-cue="ทุพพลภาพ" data-pop="1">ทุพพลภาพ</div></div>
+    <p class="lead r center" data-cue="ตามเงื่อนไข" style="font-size:36px;opacity:.9">*ตามเงื่อนไขของสัญญา</p>
+    <div class="card r center" data-cue="บริษัทจะยกเว้น" style="margin-top:20px"><div class="k">บริษัท<span class="gold">ยกเว้นเบี้ยหลัก</span>ให้</div></div>
+    <div class="r" data-cue="แผนของลูกก็เดินต่อ" style="margin-top:20px"><p class="lead">แผนของลูก<span class="gold">เดินต่อจนครบ</span></p><div class="track"><div class="fill" data-w="100" data-wl="1.8"></div></div></div>
+  </div>
+</section>
+
+<!-- 4 numbers -->
+<section class="slide" data-cue="อย่างเคสนี้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">เคสจริง</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="doc r" data-d=".05" data-pop="1" style="margin:0 auto 40px">
+      <img src="assets/table.jpg">
+      <div class="hl dim r" data-cue="จ่ายพีบีปีละ" data-x="1" style="left:5%;top:58%;width:92%;height:22%"></div>
+      <div class="hl r" data-cue="ของเบี้ยหลัก" data-pop="1" style="left:84%;top:38%;width:11%;height:14%;border-color:#7FD3FF;box-shadow:0 0 30px #7FD3FFAA"></div>
+    </div>
+    <p class="lead r center" data-cue="จ่ายพีบีปีละ">จ่าย PB ปีละ</p>
+    <div class="huge gold r" data-cue="จ่ายพีบีปีละ"><span data-count="758" data-ccue="จ่ายพีบีปีละ" data-cl="1.2">758</span> <span style="font-size:60px">บาท</span></div>
+    <div class="split r" data-cue="ของเบี้ยหลัก"><div class="a" style="width:0%" data-w="18" data-ccue="ของเบี้ยหลัก">5%</div><div class="b r" data-cue="ไปถึงเป้าหมาย">95% ไปถึงเป้าหมาย</div></div>
+    <p class="lead r center" data-cue="ของเบี้ยหลัก" style="font-size:38px">PB 758 ÷ เบี้ยหลัก 15,290 ≈ 5%</p>
+  </div>
+</section>
+
+<!-- 5 boundary 1 -->
+<section class="slide" data-cue="แต่ต้องรู้ไว้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ต้องรู้ 2 ข้อ</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <h2 class="r center" data-d=".1">แต่ต้องรู้ไว้ <span class="gold">2 ข้อ</span></h2>
+    <div class="card r warn" data-cue="ข้อแรก" data-x="1"><img src="ILL/warn.svg"><div><div class="k" style="font-size:50px">PB ยกเว้น<span class="gold">แค่เบี้ยหลัก</span></div><p class="lead r" data-cue="ถ้ามีประกันสุขภาพแนบ" style="margin-top:10px">ประกันสุขภาพที่แนบอยู่<br><span style="color:#FF9A5A;font-weight:700" class="r" data-cue="ส่วนนั้นยังต้องจ่ายเอง">ยังต้องจ่ายเอง</span></p></div></div>
+  </div>
+</section>
+
+<!-- 6 boundary 2 -->
+<section class="slide" data-cue="ข้อ2">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">ต้องรู้ 2 ข้อ</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="card r warn" data-d=".05" data-x="1"><img src="ILL/warn.svg"><div><div class="k" style="font-size:50px">บางแบบ<span style="color:#FF9A5A">ไม่คุ้มครอง</span><br>โรคร้ายแรง</div></div></div>
+    <div class="neq r" data-cue="ต้องดูว่าเป็นพีบี" data-pop="1" style="margin-top:50px"><span class="gold">PB</span> ≠ <span class="gold">PBCI</span></div>
+    <p class="lead r center" data-cue="ต้องดูว่าเป็นพีบี" data-d=".4">ดูให้ชัดว่ากรมธรรม์ของลูกเป็นแบบไหน</p>
+  </div>
+</section>
+
+<!-- 7 last + face -->
+<section class="slide" data-cue="บันทึกคลิปนี้ไว้">
+  <div class="top"><div class="brand gold">INSUREINGAME</div><div class="pg">อ่านให้จบก่อนเซ็น</div></div>
+  <div class="prog"></div>
+  <div class="body">
+    <div class="photo r" data-d=".05" data-pop="1"><div class="ringg" data-spin="40"></div><div class="in"><img src="assets/profile_bust.png"></div></div>
+    <h2 class="r center" data-d=".2" style="margin-bottom:20px"><img src="ILL/pin.svg" style="width:80px;height:80px;vertical-align:middle"> <span class="gold">บันทึกไว้</span>เช็กกรมธรรม์</h2>
+    <p class="lead r center" data-cue="แล้วลองเปิดหน้าตาราง">เปิดหน้า<span class="gold">ตารางความคุ้มครอง</span>ของลูกดู</p>
+  </div>
+</section>

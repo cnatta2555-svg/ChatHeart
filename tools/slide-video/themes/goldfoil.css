@@ -1,0 +1,12 @@
+/* "ทองฟอยล์": พื้นทองเงา ตัวหนังสือน้ำตาลเข้ม การ์ดน้ำตาลช็อกโกแลต */
+:root{--bg:#2A1608;--cream:#2A1608;--muted:#5A3A1A;--gold:#6A3E10;--gold2:#8A5A1A;--goldd:#4A2A08;--copper:#A8301C;--bgA:#FFE9A8;--bgB:#E8C05A;--bgC:#B8862E;--glow:#FFF6D655;--dust:255,250,230}
+.ring{border-color:#FFF6D655}
+.card{background:#3A200EEE;color:#FFE9B8;border:none;border-radius:26px;box-shadow:0 18px 40px #5A3A1A55}
+.card .gold{background:linear-gradient(100deg,#F6D88A,#FFF1C2 50%,#F6D88A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gold{background:linear-gradient(100deg,#4A2A08,#7A4E14 50%,#4A2A08);-webkit-background-clip:text;background-clip:text;color:transparent}
+.label{background:#3A200E;color:#FFE9A8}
+p.lead{color:#3A200E}
+.prog i{background:#3A200E22}
+.prog i b{background:#3A200E}
+.photo .ringg{background:conic-gradient(#3A200E,#7A4E14,#3A200E)}
+.cta2{background:#3A200E;color:#FFE9A8}

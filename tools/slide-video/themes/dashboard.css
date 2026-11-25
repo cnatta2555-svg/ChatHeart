@@ -1,0 +1,8 @@
+/* "แดชบอร์ด": พื้นเอสเปรสโซ กริดบาง ตัวเลขทอง แบบหน้าจอเทรด */
+:root{--bg:#0E0905;--cream:#F4E6CC;--muted:#A8916E;--gold:#E2B65A;--gold2:#F6D88A;--goldd:#9A6A22;--copper:#FF5A4A;--bgA:#221509;--bgB:#120B06;--bgC:#070403;--glow:#E2B65A18;--dust:226,182,90}
+.ring{display:none}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#E2B65A12 1px,transparent 1px),linear-gradient(90deg,#E2B65A12 1px,transparent 1px);background-size:90px 90px;pointer-events:none}
+.card{background:#1A110AE6;border:1px solid #E2B65A55;border-radius:16px;box-shadow:inset 0 1px 0 #ffffff14,0 16px 40px #000a}
+.up{color:#4FD38A}.dn{color:#FF5A4A}
+.chart{position:relative;height:300px;margin:20px 0 30px}
+.chart svg{width:100%;height:100%}
