@@ -11,6 +11,7 @@
 - `day11.mp4`–`day14.mp4` — Days 11–14 (33–36s each), voiced; audio via `audio_d11_14.py`
 - `day15.mp4`–`day21.mp4` — Days 15–21 (29.5–34s each), voiced; audio via `audio_d15_21.py`
 - `day22.mp4`–`day25.mp4` — Days 22–25 (30.5–39.5s each), voiced; audio via `audio_d22_25.py`
+- `day26.mp4`–`day30.mp4` — Days 26–30 (31–40s), finale. Voices generated with `tts_gemini.py` (Gemini TTS, voice Leda); audio via `audio_d26_30.py`
 - `index.html` — animation (SVG, `renderAt(t)`); Kanit font from `npm i @fontsource/kanit@5.1.0`
 - `audio.py` — music + SFX → `audio.wav`
 - `render.js` — renders frames via Playwright → `video.mp4`

@@ -1,0 +1,273 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:K;font-weight:400;src:url(node_modules/@fontsource/kanit/files/kanit-thai-400-normal.woff2)}
+@font-face{font-family:K;font-weight:700;src:url(node_modules/@fontsource/kanit/files/kanit-thai-700-normal.woff2)}
+@font-face{font-family:K;font-weight:800;src:url(node_modules/@fontsource/kanit/files/kanit-thai-800-normal.woff2)}
+@font-face{font-family:K;font-weight:400;src:url(node_modules/@fontsource/kanit/files/kanit-latin-400-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:K;font-weight:700;src:url(node_modules/@fontsource/kanit/files/kanit-latin-700-normal.woff2);unicode-range:U+0000-00FF}
+@font-face{font-family:K;font-weight:800;src:url(node_modules/@fontsource/kanit/files/kanit-latin-800-normal.woff2);unicode-range:U+0000-00FF}
+html,body{margin:0;background:#000}
+svg{display:block;width:540px;height:960px;font-family:K,'Noto Color Emoji',sans-serif}
+</style></head>
+<body><svg id="v" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg"></svg>
+<script src="voice_env_d30.js"></script>
+<script>
+const OL='#2b2140'; let SKIN='#f6c9a4', HAIR='#3a2a3f', HOOD='#ff8fa3', HOOD2='#e86a84';
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const ease=t=>1-Math.pow(1-clamp(t),3);
+const back=t=>{t=clamp(t);const c=2.2;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2);};
+const P=(t,a,d)=>clamp((t-a)/d);
+const speaking=t=>{const v=(window.VENV||[])[Math.floor(t*30)];return v!==undefined&&v>-28;};
+
+/* ---------------- character ---------------- */
+function eyes(expr,t){
+  const blink=(t%3.1)<0.12;
+  const L=[], br=(a,b,c,d)=>`<path d="M${a},${b} L${c},${d}" stroke="${OL}" stroke-width="10" stroke-linecap="round"/>`;
+  const both=f=>[-1,1].map(s=>f(s)).join('');
+  const open=s=>blink?`<path d="M${s*62-24},-330 Q${s*62},-322 ${s*62+24},-330" stroke="${OL}" stroke-width="9" fill="none" stroke-linecap="round"/>`
+    :`<ellipse cx="${s*62}" cy="-330" rx="19" ry="25" fill="${OL}"/><circle cx="${s*62+6}" cy="-339" r="7" fill="#fff"/>`;
+  switch(expr){
+    case 'sad': return both(open)+both(s=>br(s*100,-378,s*32,-398))+both(s=>`<path d="M${s*62-30},-352 L${s*62+30},-352" stroke="${OL}" stroke-width="7" stroke-linecap="round" opacity=".55"/>`);
+    case 'determined': return both(open)+both(s=>br(s*102,-405,s*30,-378));
+    case 'sweat': return both(open)+both(s=>br(s*100,-385,s*32,-402));
+    case 'shock': return both(s=>`<circle cx="${s*62}" cy="-330" r="34" fill="#fff" stroke="${OL}" stroke-width="7"/><circle cx="${s*62}" cy="-330" r="8" fill="${OL}"/>`)+both(s=>br(s*100,-415,s*35,-425));
+    case 'cry': return both(s=>`<path d="M${s*62-28},-325 Q${s*62},-345 ${s*62+28},-325" stroke="${OL}" stroke-width="10" fill="none" stroke-linecap="round"/>`)+both(s=>br(s*100,-378,s*32,-400));
+    case 'scream': return both(s=>`<path d="M${s*62-s*24},-352 L${s*62+s*22},-330 L${s*62-s*24},-308" stroke="${OL}" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`);
+    case 'happy': return both(s=>`<path d="M${s*62-26},-322 Q${s*62},-352 ${s*62+26},-322" stroke="${OL}" stroke-width="10" fill="none" stroke-linecap="round"/>`);
+    default: return both(open);
+  }
+}
+function mouth(expr,t,talk){
+  const open = talk && speaking(t);
+  const dark=`fill="#5a1f33" stroke="${OL}" stroke-width="7"`;
+  switch(expr){
+    case 'sad': return open?`<ellipse cx="0" cy="-240" rx="22" ry="16" ${dark}/>`:`<path d="M-30,-232 Q0,-258 30,-232" stroke="${OL}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+    case 'determined': return `<rect x="-48" y="-262" width="96" height="40" rx="14" fill="#fff" stroke="${OL}" stroke-width="7"/><path d="M-48,-242 H48 M-16,-262 V-222 M16,-262 V-222" stroke="${OL}" stroke-width="5"/>`;
+    case 'sweat': return `<path d="M-38,-240 q10,-12 19,0 t19,0 t19,0 t19,0" stroke="${OL}" stroke-width="8" fill="none" stroke-linecap="round"/>`;
+    case 'shock': return `<ellipse cx="0" cy="-232" rx="${22+(open?4:0)}" ry="32" ${dark}/>`;
+    case 'cry': { const w=Math.sin(t*30)*4; return `<path d="M-55,-255 Q0,${-275+w} 55,-255 Q48,-195 0,-195 Q-48,-195 -55,-255Z" ${dark}/><ellipse cx="0" cy="-208" rx="26" ry="10" fill="#ff7b93"/>`; }
+    case 'scream': { const w=Math.sin(t*40)*6; return `<path d="M-62,-270 Q0,-285 62,-270 Q60,${-170+w} 0,${-170+w} Q-60,${-170+w} -62,-270Z" ${dark}/><ellipse cx="0" cy="${-188+w}" rx="32" ry="12" fill="#ff7b93"/>`; }
+    case 'happy': return open?`<path d="M-40,-250 Q0,-250 40,-250 Q36,-205 0,-205 Q-36,-205 -40,-250Z" ${dark}/>`:`<path d="M-38,-250 Q0,-212 38,-250" stroke="${OL}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+    default: return open?`<ellipse cx="0" cy="-240" rx="22" ry="18" ${dark}/>`:`<path d="M-26,-246 Q0,-228 26,-246" stroke="${OL}" stroke-width="9" fill="none" stroke-linecap="round"/>`;
+  }
+}
+function arm(pts,hand=true){
+  const d='M'+pts.map(p=>p.join(',')).join(' L');
+  const h=pts[pts.length-1];
+  return `<path d="${d}" stroke="${OL}" stroke-width="74" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="${d}" stroke="${HOOD}" stroke-width="58" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  ${hand?`<circle cx="${h[0]}" cy="${h[1]}" r="34" fill="${SKIN}" stroke="${OL}" stroke-width="7"/>`:''}`;
+}
+function girl(o){
+  const {x=540,y=1150,s=1,expr='neutral',t=0,talk=false,pose='down',tilt=0,shake=0,glow=false,tears=false,sweatDrop=false}=o;
+  const by=Math.sin(t*3.5)*7, sx=shake?Math.sin(t*70)*shake:0;
+  let arms='', front='';
+  if(pose==='down'){arms=arm([[-185,-90],[-215,90],[-200,230]])+arm([[185,-90],[215,90],[200,230]]);}
+  if(pose==='phone'){arms=arm([[-185,-90],[-205,80],[-70,40]])+arm([[185,-90],[205,80],[70,40]]);
+    front=`<g transform="translate(0,-10)"><rect x="-78" y="-120" width="156" height="250" rx="26" fill="#1b1830" stroke="${OL}" stroke-width="7"/><rect x="-64" y="-104" width="128" height="214" rx="16" fill="#9fd8ff"/><circle cx="-70" cy="45" r="34" fill="${SKIN}" stroke="${OL}" stroke-width="7"/><circle cx="70" cy="45" r="34" fill="${SKIN}" stroke="${OL}" stroke-width="7"/></g>`;}
+  if(pose==='fist'){const u=Math.sin(t*10)*12;arms=arm([[-185,-90],[-290,-20],[-250,-200+u]])+arm([[185,-90],[290,-20],[250,-200-u]]);}
+  if(pose==='face'){arms=arm([[-185,-90],[-290,-60],[-175,-250]])+arm([[185,-90],[290,-60],[175,-250]]);}
+  if(pose==='bowl'){arms=arm([[-185,-90],[-200,90],[-110,120]])+arm([[185,-90],[240,0],[110,-170]]);
+    front=`<g><path d="M-170,90 Q0,320 170,90Z" fill="#f2f2f2" stroke="${OL}" stroke-width="8"/><path d="M-170,90 H170" stroke="${OL}" stroke-width="8"/><path d="M-150,95 q30,-25 60,0 t60,0 t60,0 t60,0 t60,0" stroke="#f3c15a" stroke-width="12" fill="none"/><rect x="-60" y="140" width="120" height="30" rx="10" fill="#ff6a3d" opacity=".9"/>
+    <path d="M100,-150 L20,90" stroke="#b07a3c" stroke-width="10" stroke-linecap="round"/><path d="M125,-150 L50,92" stroke="#b07a3c" stroke-width="10" stroke-linecap="round"/>${[0,1,2].map(i=>`<path d="M${-80+i*70},${60-((t*90+i*40)%120)} q-18,-25 0,-50 t0,-50" stroke="#fff" stroke-width="8" fill="none" opacity="${.6-((t*90+i*40)%120)/240}" stroke-linecap="round"/>`).join('')}
+    <circle cx="110" cy="-170" r="34" fill="${SKIN}" stroke="${OL}" stroke-width="7"/><circle cx="-110" cy="120" r="34" fill="${SKIN}" stroke="${OL}" stroke-width="7"/></g>`;}
+  const tearSvg=tears?[-1,1].map(s=>{const k=(t*1.6+(s>0?.5:0))%1;return `<path d="M${s*70},-312 Q${s*95},-230 ${s*85},-140" stroke="#7cc8ff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".9"/><path d="M${s*85},${-140+k*150} q-14,22 0,32 q14,-10 0,-32Z" fill="#7cc8ff" stroke="${OL}" stroke-width="4" opacity="${1-k}"/>`}).join(''):'';
+  const drop=sweatDrop?`<path d="M168,${-470+Math.sin(t*6)*8} q-30,46 0,62 q30,-16 0,-62Z" fill="#8fd3ff" stroke="${OL}" stroke-width="6"/>`:'';
+  return `<g transform="translate(${x+sx},${y+by}) scale(${s}) rotate(${tilt})">
+   <ellipse cx="0" cy="335" rx="230" ry="26" fill="#000" opacity=".18"/>
+   <g transform="rotate(${Math.sin(t*3)*6},140,-470)" display="${(o.mush||o.male)?'none':'inline'}"><ellipse cx="205" cy="-380" rx="58" ry="125" transform="rotate(-25,205,-380)" fill="${HAIR}" stroke="${OL}" stroke-width="7"/><circle cx="150" cy="-480" r="30" fill="#ffd166" stroke="${OL}" stroke-width="7"/></g>
+   <path d="M-150,-150 Q-215,-130 -228,10 L-238,330 L238,330 L228,10 Q215,-130 150,-150Z" fill="${HOOD}" stroke="${OL}" stroke-width="8"/>
+   <path d="M-238,250 H238" stroke="${HOOD2}" stroke-width="14"/>
+   <rect x="-36" y="-200" width="72" height="70" fill="${SKIN}" stroke="${OL}" stroke-width="7"/>
+   <path d="M-125,-160 Q0,-80 125,-160" fill="none" stroke="${HOOD2}" stroke-width="22" stroke-linecap="round"/>
+   <path d="M-40,-125 V-20 M40,-125 V-30" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+   <g transform="translate(0,80)"><path d="M0,30 C-70,-20 -50,-75 0,-45 C50,-75 70,-20 0,30Z" fill="#fff" stroke="${OL}" stroke-width="6"/><path d="M0,-45 L-10,-15 L8,0 L-4,25" stroke="${OL}" stroke-width="5" fill="none"/></g>
+   ${arms}
+   <circle cx="-168" cy="-310" r="30" fill="${SKIN}" stroke="${OL}" stroke-width="7"/><circle cx="168" cy="-310" r="30" fill="${SKIN}" stroke="${OL}" stroke-width="7"/>
+   <ellipse cx="0" cy="-315" rx="170" ry="168" fill="${SKIN}" stroke="${OL}" stroke-width="8"/>
+   <path d="M-172,-330 Q-175,-505 0,-500 Q175,-505 172,-330 Q150,-420 70,-415 Q40,-445 10,-405 Q-30,-445 -70,-405 Q-130,-430 -172,-330Z" fill="${HAIR}" stroke="${OL}" stroke-width="8" stroke-linejoin="round"/>
+   <ellipse cx="-100" cy="-268" rx="30" ry="16" fill="#ff8fa3" opacity=".55"/><ellipse cx="100" cy="-268" rx="30" ry="16" fill="#ff8fa3" opacity=".55"/>
+   ${o.mush?`<path d="M-200,-290 Q-225,-575 0,-580 Q225,-575 200,-290 Q196,-350 160,-372 L-160,-372 Q-196,-350 -200,-290Z" fill="${HAIR}" stroke="${OL}" stroke-width="8" stroke-linejoin="round"/><path d="M-120,-372 V-400 M-60,-372 V-395 M0,-372 V-400 M60,-372 V-395 M120,-372 V-400" stroke="${OL}" stroke-width="4" opacity=".4"/>`:""}${o.male?`<path d="M-178,-300 Q-185,-530 0,-530 Q185,-530 178,-300 Q165,-395 105,-405 L-105,-405 Q-165,-395 -178,-300Z" fill="${HAIR}" stroke="${OL}" stroke-width="8" stroke-linejoin="round"/><path d="M-120,-520 L-95,-575 L-60,-525 L-20,-590 L15,-528 L60,-585 L85,-522Z" fill="${HAIR}" stroke="${OL}" stroke-width="7" stroke-linejoin="round"/>`:""}${o.hat?`<ellipse cx="0" cy="-470" rx="300" ry="60" fill="#f2d16b" stroke="${OL}" stroke-width="8"/><path d="M-160,-480 Q-150,-620 0,-620 Q150,-620 160,-480Z" fill="#f2d16b" stroke="${OL}" stroke-width="8"/><path d="M-158,-500 H158" stroke="#ff8fa3" stroke-width="22"/>`:""}${o.cap?`<path d="M-175,-400 Q-170,-560 0,-560 Q170,-560 175,-400Z" fill="#2d3748" stroke="${OL}" stroke-width="8"/><path d="M-175,-400 L-290,-390 Q-250,-430 -175,-430Z" fill="#1a202c" stroke="${OL}" stroke-width="6"/><circle cx="0" cy="-480" r="26" fill="#ffd166" stroke="${OL}" stroke-width="5"/>`:""}${o.band?`<rect x="-205" y="-430" width="410" height="44" rx="14" fill="#ff3b5c" stroke="${OL}" stroke-width="6"/>`:""}${eyes(expr,t)}${mouth(expr,t,talk)}${tearSvg}${drop}
+   ${glow?`<ellipse cx="0" cy="-260" rx="175" ry="150" fill="#9fd8ff" opacity="${.16+Math.sin(t*9)*.03}"/>`:''}
+   ${front}
+  </g>`;
+}
+
+/* ---------------- backgrounds ---------------- */
+function bedroom(t,dim=0){
+  const stars=[[760,330],[930,300],[860,420],[990,470],[720,470]].map(([a,b],i)=>`<circle cx="${a}" cy="${b}" r="${5+2*Math.sin(t*3+i)}" fill="#fff6c9"/>`).join('');
+  return `<defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232a52"/><stop offset="1" stop-color="#151a36"/></linearGradient></defs>
+  <rect width="1080" height="1920" fill="url(#bg1)"/>
+  <rect x="660" y="230" width="380" height="330" rx="18" fill="#0d1230" stroke="#3b4580" stroke-width="16"/>${stars}<circle cx="950" cy="345" r="42" fill="#ffe9a8"/><circle cx="932" cy="335" r="42" fill="#0d1230"/>
+  <path d="M850,230 V560 M660,395 H1040" stroke="#3b4580" stroke-width="12"/>
+  <rect x="40" y="300" width="220" height="150" rx="10" fill="#2f3768"/><path d="M60,430 L120,360 L170,410 L200,380 L240,430Z" fill="#454f8f"/>
+  <rect x="0" y="1480" width="1080" height="440" fill="#3d4a8c"/><path d="M0,1480 Q540,1430 1080,1480" fill="#4b5aa6"/>
+  <rect x="790" y="1350" width="230" height="130" rx="14" fill="#2b2f55"/><rect x="815" y="1375" width="180" height="70" rx="10" fill="#111"/><text x="905" y="1427" text-anchor="middle" font-size="50" font-weight="700" fill="#ff4d6d">02:${String(47+Math.floor(t/60)).padStart(2,'0')}</text>
+  ${dim?`<rect width="1080" height="1920" fill="#000" opacity="${dim}"/>`:''}`;
+}
+function kitchen(t){
+  return `<rect width="1080" height="1920" fill="#1f2a3d"/>
+  <rect x="0" y="0" width="1080" height="160" fill="#18202f"/>
+  <rect x="40" y="380" width="300" height="1100" rx="20" fill="#cfd8e3" stroke="#0e1420" stroke-width="10"/>
+  <path d="M340,380 L520,450 V1420 L340,1480Z" fill="#fff8d6" opacity=".9"/><rect x="60" y="400" width="260" height="1060" fill="#fff6c4"/>
+  <path d="M60,700 H320 M60,1000 H320" stroke="#e8d99a" stroke-width="10"/>
+  <rect x="90" y="610" width="60" height="90" rx="8" fill="#7fd1b9"/><rect x="180" y="640" width="90" height="60" rx="8" fill="#ff9f68"/>
+  <polygon points="340,380 1080,1300 1080,380" fill="#fff8d6" opacity=".05"/>
+  <rect x="0" y="1480" width="1080" height="440" fill="#5b3f2e"/><rect x="0" y="1480" width="1080" height="30" fill="#7a5640"/>
+  <text x="800" y="320" text-anchor="middle" font-size="44" fill="#ff4d6d" font-weight="700">02:13</text>`;
+}
+function phone(t,content){
+  return `<rect width="1080" height="1920" fill="#141833"/>
+  <circle cx="540" cy="960" r="${620+Math.sin(t*2)*15}" fill="#2a3170" opacity=".5"/>
+  <g transform="translate(540,960) rotate(${Math.sin(t*1.5)*1.2}) translate(-540,-960)">
+  <rect x="200" y="250" width="680" height="1420" rx="80" fill="#0c0c16" stroke="#3a3a55" stroke-width="10"/>
+  <rect x="226" y="276" width="628" height="1368" rx="58" fill="#fafafa"/>
+  <rect x="460" y="300" width="160" height="34" rx="17" fill="#0c0c16"/>
+  ${content}</g>`;
+}
+function profileUI(t){
+  return `<text x="270" y="420" font-size="40" font-weight="700" fill="#222">‹  ex.jaa_</text>
+  <circle cx="340" cy="560" r="80" fill="#ffd1dc" stroke="#ff5c8a" stroke-width="8"/><circle cx="340" cy="535" r="30" fill="#b06b8b"/><path d="M285,610 Q340,560 395,610" fill="#b06b8b"/>
+  <text x="470" y="555" font-size="40" font-weight="700" fill="#222">128</text><text x="590" y="555" font-size="40" font-weight="700" fill="#222">2.1k</text><text x="720" y="555" font-size="40" font-weight="700" fill="#222">540</text>
+  <text x="470" y="600" font-size="26" fill="#666">โพสต์</text><text x="590" y="600" font-size="26" fill="#666">ผู้ติดตาม</text><text x="720" y="600" font-size="26" fill="#666">กำลังติดตาม</text>
+  <text x="270" y="700" font-size="32" fill="#333">ชีวิตใหม่ ✨ ไม่หันหลังกลับ</text>
+  ${Array.from({length:9}).map((_,i)=>`<rect x="${240+(i%3)*202}" y="${760+Math.floor(i/3)*202}" width="196" height="196" fill="${['#ffcad4','#cde7ff','#ffe5a8','#d8f3dc','#e4c1f9','#ffd6a5','#bde0fe','#fbc4ab','#caffbf'][i]}"/>`).join('')}`;
+}
+function couplePost(t,liked=0,thumb=null){
+  const hs=liked?back(liked)*1:0;
+  return `<text x="270" y="420" font-size="36" font-weight="700" fill="#222">ex.jaa_</text><circle cx="250" cy="408" r="0"/>
+  <rect x="226" y="460" width="628" height="628" fill="#ffd6e0"/>
+  <circle cx="440" cy="760" r="90" fill="#6b5b7b"/><rect x="350" y="840" width="180" height="248" rx="80" fill="#6b5b7b"/>
+  <circle cx="640" cy="760" r="90" fill="#8a7a9a"/><rect x="550" y="840" width="180" height="248" rx="80" fill="#8a7a9a"/>
+  ${[0,1,2].map(i=>`<path transform="translate(${470+i*70},${600-((t*60+i*30)%60)}) scale(.5)" d="M0,30 C-70,-20 -50,-75 0,-45 C50,-75 70,-20 0,30Z" fill="#ff5c8a"/>`).join('')}
+  <g transform="translate(290,1160)"><path d="M0,30 C-70,-20 -50,-75 0,-45 C50,-75 70,-20 0,30Z" transform="scale(.75)" fill="${liked?'#ff3b5c':'none'}" stroke="${liked?'#ff3b5c':'#222'}" stroke-width="9"/></g>
+  <text x="360" y="1180" font-size="34" fill="#222">💬  ↗</text>
+  <text x="250" y="1260" font-size="32" font-weight="700" fill="#222">ex.jaa_ <tspan font-weight="400">คนนี้แหละ ใช่เลย 🤍</tspan></text>
+  <text x="250" y="1310" font-size="28" fill="#888">เมื่อ 3 นาทีที่แล้ว</text>
+  ${liked?`<g transform="translate(540,780) scale(${hs*2.6})" opacity="${1-P(liked,0.7,0.3)}"><path d="M0,30 C-70,-20 -50,-75 0,-45 C50,-75 70,-20 0,30Z" fill="#fff" opacity=".95"/></g>`:''}
+  ${thumb?`<g transform="translate(${thumb[0]},${thumb[1]})"><ellipse cx="0" cy="0" rx="85" ry="110" fill="${SKIN}" stroke="${OL}" stroke-width="8"/><rect x="-85" y="0" width="170" height="600" fill="${SKIN}" stroke="${OL}" stroke-width="8"/><rect x="-77" y="-4" width="154" height="20" fill="${SKIN}"/><ellipse cx="0" cy="-55" rx="45" ry="38" fill="#ffe3d2" stroke="${OL}" stroke-width="5"/></g>`:''}`;
+}
+
+/* ---------------- overlays ---------------- */
+function brokenHeart(t,cx,cy,k){ // k: 0..1 crack progress
+  const sp=ease(P(k,0.35,0.5))*70, fall=Math.pow(P(k,0.5,0.5),2)*500;
+  const half=(s)=>`<g transform="translate(${s*sp},${fall}) rotate(${s*ease(P(k,.35,.6))*18})"><path d="${s<0?'M0,60 C-140,-40 -100,-150 0,-90 L-20,-40 L15,-5 L-10,55Z':'M0,60 C140,-40 100,-150 0,-90 L-20,-40 L15,-5 L-10,55Z'}" fill="#ff3b5c" stroke="${OL}" stroke-width="9" stroke-linejoin="round"/></g>`;
+  const sc=back(P(k,0,.3));
+  return `<g transform="translate(${cx},${cy}) scale(${sc*1.6})">${half(-1)}${half(1)}</g>`;
+}
+function hud(day,moveon,bump){
+  const col=moveon<0?'#ff6b81':'#7ee0b5';
+  return `<g transform="translate(60,120)"><rect width="520" height="76" rx="12" fill="#0d1124" opacity=".82"/><rect width="8" height="76" fill="#7ee0b5"/>
+  <text x="34" y="51" font-size="36" font-weight="700" fill="#fff">• เหลือ ${day} วัน</text>
+  <g transform="translate(300,38) scale(${1+bump*.35}) translate(-300,-38)"><text x="300" y="51" font-size="36" font-weight="700" fill="${col}">มูฟออน ${moveon}%</text></g></g>`;
+}
+function wrapText(s){return s.split('\n');}
+function sub(text,lt){
+  const sc=back(P(lt,0,.22)), lines=wrapText(text);
+  return `<g transform="translate(540,1300) scale(${sc})">${lines.map((l,i)=>`<text x="0" y="${(i-(lines.length-1)/2)*92}" text-anchor="middle" font-size="76" font-weight="800" fill="#fff" stroke="${OL}" stroke-width="18" paint-order="stroke" stroke-linejoin="round">${l}</text>`).join('')}</g>`;
+}
+
+function street(t){
+  const win=[];for(let b=0;b<5;b++)for(let r=0;r<6;r++)for(let c=0;c<2;c++)win.push(`<rect x="${b*220+30+c*70}" y="${560+r*110+(b%2)*60}" width="45" height="60" fill="${(b*7+r*3+c)%4?'#ffe08a':'#3a3f6b'}" opacity=".8"/>`);
+  return `<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a8b"/><stop offset=".6" stop-color="#ffc3a0"/></linearGradient></defs><rect width="1080" height="1920" fill="url(#sk)"/>
+  ${[0,1,2,3,4].map(b=>`<rect x="${b*220}" y="${500+(b%2)*60}" width="200" height="1000" fill="${['#5b4b8a','#6d5ba3','#4f437a','#665597','#574a86'][b]}"/>`).join('')}${win.join('')}
+  <rect y="1480" width="1080" height="440" fill="#8c8c9e"/><rect y="1480" width="1080" height="24" fill="#a7a7b8"/>`;
+}
+
+const PAL={me:['#f6c9a4','#3a2a3f','#ff8fa3','#e86a84'],f1:['#e8b48a','#1e1e1e','#6cc4a1','#4fa184'],f2:['#f2d0b0','#7a4a2a','#ffd166','#e6b84c'],staff:['#efc19c','#151515','#9b5de5','#7b3fc4'],mom:['#e9b993','#5a5a5a','#7fb8a8','#5f9a8a'],guy:['#d9a37c','#1a1a1a','#3b82f6','#2f6bd1'],guard:['#e0a77e','#222','#4a5568','#2d3748'],mlm:['#e0b089','#333','#f4a261','#e07a3c'],old:['#d9a37c','#9a9a9a','#8d99ae','#6c7a8d'],hunk:['#e3a877','#111','#111827','#000'],ex:['#e8b48a','#2a1d2f','#6b5b7b','#54476a'],gf:['#f2d0b0','#7a3b2e','#c77dff','#a05fd6'],angel:['#f6d5b8','#f5d76e','#ffffff','#dcdcdc'],devil:['#f6c9a4','#2b0f1a','#c1121f','#8d0c17']};
+function who(o,pal,extra=''){const old=[SKIN,HAIR,HOOD,HOOD2];[SKIN,HAIR,HOOD,HOOD2]=PAL[pal];let g=girl(o);[SKIN,HAIR,HOOD,HOOD2]=old;
+  if(extra){const i=g.lastIndexOf('</g>');g=g.slice(0,i)+extra+g.slice(i);}return g;}
+function me(o,extra=''){return who(o,'me',extra);}
+const punch=lt=>1+0.06*(1-ease(P(lt,0,.35)));
+const Wz=(lt,inner)=>`<g transform="translate(540,960) scale(${punch(lt)}) translate(-540,-960)">${inner}</g>`;
+function thumb(x,y){return `<g transform="translate(${x},${y})"><ellipse cx="0" cy="0" rx="85" ry="110" fill="${SKIN}" stroke="${OL}" stroke-width="8"/><rect x="-85" y="0" width="170" height="700" fill="${SKIN}" stroke="${OL}" stroke-width="8"/><rect x="-77" y="-4" width="154" height="20" fill="${SKIN}"/><ellipse cx="0" cy="-55" rx="45" ry="38" fill="#ffe3d2" stroke="${OL}" stroke-width="5"/></g>`;}
+function rays(t,bg,col,cx=540,cy=960,op=.5){return `<rect width="1080" height="1920" fill="${bg}"/>`+Array.from({length:14}).map((_,i)=>`<path d="M${cx},${cy} L${cx+1700*Math.cos(i/14*Math.PI*2+t*.3)},${cy+1700*Math.sin(i/14*Math.PI*2+t*.3)} L${cx+1700*Math.cos((i+.5)/14*Math.PI*2+t*.3)},${cy+1700*Math.sin((i+.5)/14*Math.PI*2+t*.3)}Z" fill="${col}" opacity="${op}"/>`).join('');}
+function sparkles(t,pts,col='#fff'){return pts.map(([x,y],i)=>`<path transform="translate(${x},${y}) scale(${.7+.4*Math.sin(t*6+i)})" d="M0,-40 L10,-10 L40,0 L10,10 L0,40 L-10,10 L-40,0 L-10,-10Z" fill="${col}"/>`).join('');}
+function label(x,y,text,k,rot=-6,w=null){const ww=w||Math.max(300,text.length*34+80);return `<g transform="translate(${x},${y}) rotate(${rot}) scale(${back(k)})"><rect x="${-ww/2}" y="-55" width="${ww}" height="110" rx="20" fill="#fff" stroke="${OL}" stroke-width="6"/><text y="15" text-anchor="middle" font-size="42" fill="${OL}">${text}</text></g>`;}
+function bedHead(t,o={}){
+  const {mush=false,eyesKind='sleep',dim=.2,morning=false}=o;
+  const eyesSvg=eyesKind==='sleep'?`<path d="M-90,-40 Q-62,-25 -34,-40 M34,-40 Q62,-25 90,-40" stroke="${OL}" stroke-width="10" fill="none" stroke-linecap="round"/>`
+    :eyesKind==='pain'?`<path d="M-85,-55 L-40,-25 M-40,-55 L-85,-25 M40,-55 L85,-25 M85,-55 L40,-25" stroke="${OL}" stroke-width="10" stroke-linecap="round"/><path d="M-30,20 q15,-12 30,0 t30,0" stroke="${OL}" stroke-width="8" fill="none"/>`
+    :eyesKind==='open'?`<circle cx="-62" cy="-40" r="22" fill="#fff" stroke="${OL}" stroke-width="6"/><circle cx="62" cy="-40" r="22" fill="#fff" stroke="${OL}" stroke-width="6"/><circle cx="-62" cy="-40" r="8" fill="${OL}"/><circle cx="62" cy="-40" r="8" fill="${OL}"/><path d="M-95,-5 Q-62,8 -30,-5 M30,-5 Q62,8 95,-5" stroke="#7d6b9e" stroke-width="7" fill="none"/>`
+    :`<path d="M-90,-30 Q-62,-55 -34,-30 M34,-30 Q62,-55 90,-30" stroke="${OL}" stroke-width="10" fill="none" stroke-linecap="round"/>`;
+  const hair=mush?`<path d="M-195,-40 Q-210,-235 0,-240 Q210,-235 195,-40 Q190,-80 150,-90 L-150,-90 Q-190,-80 -195,-40Z" fill="${HAIR}" stroke="${OL}" stroke-width="8"/>`:`<path d="M-172,-60 Q-175,-215 0,-210 Q175,-215 172,-60 Q120,-140 0,-130 Q-120,-140 -172,-60Z" fill="${HAIR}" stroke="${OL}" stroke-width="8"/>`;
+  return bedroom(t,morning?0:dim)+(morning?`<rect width="1080" height="1920" fill="#ffd8a8" opacity=".22"/><circle cx="950" cy="345" r="60" fill="#ffd166"/>`:'')
+   +`<g transform="translate(540,1480)"><path d="M-420,0 Q-430,-300 -200,-330 Q0,-380 200,-330 Q430,-300 420,0Z" fill="#7d8ad6" stroke="${OL}" stroke-width="10"/></g>`
+   +`<g transform="translate(540,${1200+Math.sin(t*2)*6})"><ellipse cx="0" cy="-60" rx="170" ry="130" fill="${SKIN}" stroke="${OL}" stroke-width="8"/>${hair}${eyesSvg}<path d="M-300,30 Q0,-40 300,30 L300,120 L-300,120Z" fill="#7d8ad6" stroke="${OL}" stroke-width="10"/></g>`
+   +(eyesKind==='sleep'?`<text x="760" y="${900-((t*40)%120)}" font-size="${60+((t*40)%120)/3}" font-weight="800" fill="#cfd6ff" opacity="${1-((t*40)%120)/120}">Z</text>`:'');
+}
+function endCard(t,t0,title,left,n1,tn1,n2,tn2,tf){const lt=t-t0;
+  return `<rect width="1080" height="1920" fill="#1b2340"/>`
+   +`<g transform="translate(540,760) rotate(-3) scale(${back(P(lt,0,.4))})"><rect x="-400" y="-95" width="800" height="190" rx="18" fill="#2e7d5b" stroke="#fff" stroke-width="10"/><text y="28" text-anchor="middle" font-size="${title.length>16?72:88}" font-weight="800" fill="#fff">${title}</text></g>`
+   +`<text x="540" y="930" text-anchor="middle" font-size="46" font-weight="700" fill="#7ee0b5" opacity="${P(lt,.3,.3)}">เหลือ ${left} วัน</text>`
+   +`<g opacity="${P(t,tn1,.3)}"><text x="540" y="1220" text-anchor="middle" font-size="54" font-weight="700" fill="#fff">${n1}</text><text x="540" y="1300" text-anchor="middle" font-size="54" font-weight="700" fill="#ffd166" opacity="${P(t,tn2,.3)}">${n2}</text></g>`
+   +`<g opacity="${P(t,tf,.3)}" transform="translate(540,1520) scale(${1+Math.sin(lt*6)*.04})"><rect x="-290" y="-60" width="580" height="120" rx="60" fill="#ff3b5c"/><text y="20" text-anchor="middle" font-size="50" font-weight="800" fill="#fff">กดติดตาม ไม่งั้นพลาด!</text></g>`;
+}
+function bumpsAt(t,list){for(const a of list){if(t>=a&&t<a+.4)return Math.sin((t-a)/.4*Math.PI);}return 0;}
+function finish(t,s,day,hudUntil,moveon,bumps){
+  if(t<hudUntil) s+=hud(day,moveon(t),bumpsAt(t,bumps));
+  const cur=SUBS.find(([a,b])=>t>=a&&t<b); if(cur) s+=sub(cur[2],t-cur[0]);
+  return s;
+}
+
+function gauge(t,t0,v,col){return `<g transform="translate(540,600) scale(${back(P(t,t0,.4))})"><circle r="250" fill="#fff" stroke="${OL}" stroke-width="12"/><text y="60" text-anchor="middle" font-size="${Math.abs(v)>=100?135:170}" font-weight="800" fill="${col}">${v>0?'+':''}${v}%</text><text y="140" text-anchor="middle" font-size="40" fill="#666">มูฟออน</text></g>`;}
+function fireworks(t,t0){return [[250,500,'#ffd166'],[800,450,'#ff8fa3'],[540,350,'#7ee0b5'],[300,900,'#9fd8ff'],[820,850,'#ffd166']].map(([x,y,c],j)=>{const k=((t-t0)*.9+j*.23)%1;return Array.from({length:12}).map((_,i)=>{const a=i/12*Math.PI*2;return `<circle cx="${x+Math.cos(a)*k*170}" cy="${y+Math.sin(a)*k*170+k*k*40}" r="${12*(1-k)+3}" fill="${c}" opacity="${1-k}"/>`;}).join('');}).join('');}
+function polaroid(x,y,rot,emo,txt,k){return `<g transform="translate(${x},${y}) rotate(${rot}) scale(${back(k)*.82})"><rect x="-140" y="-150" width="280" height="300" rx="10" fill="#fff" stroke="${OL}" stroke-width="6"/><rect x="-115" y="-125" width="230" height="190" fill="#ffe3ec"/><text y="15" text-anchor="middle" font-size="110">${emo}</text><text y="120" text-anchor="middle" font-size="36" font-weight="700" fill="${OL}">${txt}</text><circle cx="0" cy="-150" r="14" fill="#ff3b5c" stroke="${OL}" stroke-width="4"/></g>`;}
+function board(t,items){return `<rect width="1080" height="1920" fill="#c99a6b"/><rect x="40" y="200" width="1000" height="1580" rx="24" fill="#d9ab7c" stroke="#8b5e34" stroke-width="20"/>`+items.map(([a,e,tx],i)=>t>=a?polaroid(330+(i%2)*420,370+Math.floor(i/2)*300,[-6,5,4,-5,-3,7][i],e,tx,P(t,a,.3)):'').join('');}
+function lineChart(t,k,title,vals,labels){const x0=180,x1=900,lo=Math.min(0,...vals),hi=Math.max(0,...vals),sc=300/Math.max(1,hi-lo),y0=690+lo*sc;const pts=vals.map((v,i)=>[x0+i*(x1-x0)/(vals.length-1),y0-v*sc]);
+  const n=Math.max(1,Math.min(vals.length,Math.floor(k*vals.length)+1));const path='M'+pts.slice(0,n).map(p=>p.join(',')).join(' L');
+  return `<g><rect x="110" y="250" width="860" height="520" rx="30" fill="#fff" stroke="${OL}" stroke-width="8"/><text x="540" y="320" text-anchor="middle" font-size="42" font-weight="800" fill="${OL}">${title}</text><path d="M${x0},${y0} H${x1}" stroke="#ccc" stroke-width="4" stroke-dasharray="12 10"/><text x="${x0-20}" y="${y0+12}" text-anchor="end" font-size="28" fill="#999">0</text><path d="${path}" stroke="#ff3b5c" stroke-width="10" fill="none" stroke-linejoin="round" stroke-linecap="round"/>${pts.slice(0,n).map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="14" fill="${vals[i]>=0?'#2e7d5b':'#ff3b5c'}" stroke="#fff" stroke-width="4"/><text x="${p[0]}" y="745" text-anchor="middle" font-size="28" fill="#666">${labels[i]}</text>`).join('')}</g>`;}
+function notif(x,y,k,txt){return `<g transform="translate(${x},${y-(1-ease(k))*300})" opacity="${k>0?1:0}"><rect x="-300" y="-70" width="600" height="140" rx="30" fill="#ffffffee" stroke="#ddd" stroke-width="4"/><circle cx="-230" cy="0" r="40" fill="#b06b8b"/><text x="-170" y="-10" font-size="32" font-weight="700" fill="#222">ex.jaa_</text><text x="-170" y="35" font-size="30" fill="#444">${txt}</text></g>`;}
+function viewers(t,list){return `<text x="270" y="400" font-size="40" font-weight="800" fill="#222">👁️ คนดูสตอรี่ ${list.length} คน</text>`+list.map(([n,c],i)=>`<g><circle cx="310" cy="${520+i*130}" r="46" fill="${c}"/><text x="380" y="${535+i*130}" font-size="42" fill="#222">${n}</text><path d="M260,${585+i*130} H830" stroke="#eee" stroke-width="3"/></g>`).join('');}
+
+const apronMe=`<path d="M-140,-40 H140 L165,330 H-165Z" fill="#fff" stroke="${OL}" stroke-width="7"/><path d="M-140,-40 Q0,-110 140,-40" stroke="${OL}" stroke-width="6" fill="none"/>`;
+function speech(x,y,text,k,w=null,tail='left'){const ww=w||Math.max(320,text.length*30+90);const tx=tail==='left'?-ww/2+90:ww/2-90;return `<g transform="translate(${x},${y}) scale(${back(k)})"><rect x="${-ww/2}" y="-75" width="${ww}" height="150" rx="48" fill="#fff" stroke="${OL}" stroke-width="8"/><path d="M${tx-30},68 L${tx},140 L${tx+30},68Z" fill="#fff" stroke="${OL}" stroke-width="8" stroke-linejoin="round"/><path d="M${tx-26},66 H${tx+26}" stroke="#fff" stroke-width="12"/><text y="18" text-anchor="middle" font-size="48" font-weight="700" fill="${OL}">${text}</text></g>`;}
+function gaugeScene(t,t0,from,to,tc,extra=''){const v=Math.round(from+(to-from)*ease(P(t,tc,.8))),g=v>=0&&to>=from;return Wz(t-t0,(g?rays(t,'#2e7d5b','#7ee0b5',540,700,.45):`<rect width="1080" height="1920" fill="#1b2340"/>`)+gauge(t,t0,v,v<0||to<from?'#ff3b5c':'#2e7d5b')+extra+me({t,expr:to>=from?'happy':'sad',pose:to>=from&&t>=tc?'fist':'down',x:540,y:1560,s:.65,mush:true,talk:true}));}
+
+const SUBS=[
+ [0.0,1.5,'วันที่ 30...'],[1.5,3.4,'วันสุดท้ายแล้ว 🥹'],
+ [3.45,4.9,'สามสิบวันก่อน...'],[4.9,7.95,'ฉันส่องไอจีเขา\nวันละ 47 ครั้ง 📱'],
+ [8.0,8.95,'วันนี้...'],[8.95,12.3,'จำไม่ได้ด้วยซ้ำ\nว่าเขาลงรูปอะไรล่าสุด 🤷'],
+ [12.35,14.25,'ผมทรงเห็ดยาวขึ้นแล้ว 🍄'],[14.25,16.4,'ใจก็โตขึ้นด้วย 💪'],
+ [16.45,19.2,'ขอบคุณทุกคน\nที่ดูมาด้วยกันทั้ง 30 วัน 🙏'],[19.2,21.9,'ทุกคอมเมนต์ ทำให้ฉัน\nไม่รู้สึกว่าเดินคนเดียว 💬'],
+ [21.95,22.9,'มูฟออน...'],[22.9,25.3,'100%!!! 🎉'],
+ [25.4,26.95,'แล้วมือถือก็เด้ง...'],[26.95,28.8,'หนุ่มฟิตเนสทักมา 😳'],
+ [28.9,30.1,'ภารกิจใหม่...'],[30.1,31.85,'หาแฟนใหม่ใน 30 วัน 💘'],[31.85,34.2,'ซีซั่น 2 เร็วๆ นี้!'],
+];
+const END=40;
+const moveon=t=>t<23.0?95:100;
+function scene(t){
+  let s='';
+  if(t<3.45){ s=Wz(t,rays(t,'#ffb38a','#ffe0b3',540,700,.5)+me({t,expr:'happy',pose:'down',x:540,y:1300,s:.95,mush:true,talk:true})); }
+  else if(t<7.95){ const n=Math.min(47,1+Math.floor(ease(P(t,4.9,2.2))*46));
+    s=Wz(t-3.45,bedroom(t)+me({t,expr:'sad',pose:'phone',glow:true,x:540,y:1200})+`<rect width="1080" height="1920" fill="#c9a46b" opacity=".28"/><g transform="translate(540,560) rotate(-4)"><rect x="-300" y="-70" width="600" height="140" rx="24" fill="#ff3b5c" stroke="${OL}" stroke-width="8"/><text y="22" text-anchor="middle" font-size="58" font-weight="800" fill="#fff">ส่องวันนี้: ${n} ครั้ง</text></g>`
+      +`<g transform="translate(830,1720) rotate(-4)"><rect x="-170" y="-50" width="340" height="100" rx="14" fill="#f4e4c1" stroke="${OL}" stroke-width="5"/><text y="16" text-anchor="middle" font-size="40" font-weight="700" fill="${OL}">⏪ Day 1</text></g>`); }
+  else if(t<12.3){ s=Wz(t-7.95,`<rect width="1080" height="1920" fill="#8fd3ff"/><circle cx="860" cy="300" r="90" fill="#ffd166"/><rect y="1450" width="1080" height="470" fill="#7ee0b5"/>`+me({t,expr:'happy',pose:'down',x:540,y:1350,s:.95,mush:true,talk:true})+(t>=8.95?`<text x="200" y="${640+Math.sin(t*3)*15}" font-size="110">🤷</text><text x="830" y="${700+Math.cos(t*3)*15}" font-size="110" fill="#7c6cd6" font-weight="800">?</text>`:'')); }
+  else if(t<16.4){ const now=t>=14.25;
+    s=Wz(t-12.3,`<rect width="1080" height="1920" fill="#ffe3ec"/><g opacity=".9"><g transform="translate(-230,0)">${me({t,expr:'sad',pose:'down',x:540,y:1350,s:.7})}<text x="540" y="560" text-anchor="middle" font-size="48" font-weight="800" fill="#999">Day 1</text></g></g><text x="540" y="1100" text-anchor="middle" font-size="110">➡️</text>`
+      +`<g transform="translate(230,0)">${me({t,expr:'happy',pose:now?'fist':'down',x:540,y:1350,s:.7,mush:true})}<text x="540" y="560" text-anchor="middle" font-size="48" font-weight="800" fill="#ff3b5c">Day 30</text></g>`+(now?sparkles(t,[[770,700],[920,880],[620,760]]):'')); }
+  else if(t<21.95){ const cms=['❤️ สู้ๆ นะน้องมูฟ','🥹 ดูทุกวันเลย','💪 เราก็มูฟออนได้แล้ว','🍄 ทีมทรงเห็ด!','✨ ขอซีซั่น 2!'];
+    s=Wz(t-16.4,rays(t,'#ff8fa3','#ffc2d1',540,900,.5)+me({t,expr:'happy',pose:'down',x:540,y:1400,s:.95,mush:true,talk:true,tilt:t>=17&&t<18.2?8:0})
+      +cms.map((c,i)=>{const a=16.6+i*.8;return t>=a?`<g transform="translate(${[420,660,430,650,540][i]},${[430,560,690,820,300][i]}) scale(${back(P(t,a,.3))})"><rect x="${-c.length*12-40}" y="-40" width="${c.length*24+80}" height="80" rx="40" fill="#fff" stroke="${OL}" stroke-width="5"/><text y="12" text-anchor="middle" font-size="34" fill="${OL}">${c}</text></g>`:''}).join('')); }
+  else if(t<25.4){ const conf=Array.from({length:30}).map((_,i)=>{const y=((t*350+i*80)%1500)+200;return `<rect x="${(i*137)%1040}" y="${y}" width="20" height="34" fill="${['#ffd166','#ff8fa3','#7ee0b5','#9fd8ff'][i%4]}" transform="rotate(${t*220+i*40},${(i*137)%1040+10},${y+17})"/>`;}).join('');
+    s=gaugeScene(t,21.95,95,100,23.0,t>=23.0?fireworks(t,23.0)+conf:''); }
+  else if(t<28.9){ s=Wz(t-25.4,bedroom(t,.1)+me({t,expr:t<26.95?'neutral':'shock',pose:'phone',glow:true,x:540,y:1300,s:.95,mush:true},`<ellipse cx="-100" cy="-268" rx="55" ry="28" fill="#ff4d6d" opacity="${t>=26.95?.7:0}"/><ellipse cx="100" cy="-268" rx="55" ry="28" fill="#ff4d6d" opacity="${t>=26.95?.7:0}"/>`)
+      +`<g transform="translate(540,${420-(1-ease(P(t,25.6,.4)))*300})"><rect x="-320" y="-80" width="640" height="160" rx="30" fill="#ffffffee" stroke="#ddd" stroke-width="4"/><circle cx="-245" cy="0" r="46" fill="#3b82f6"/><text x="-180" y="-12" font-size="36" font-weight="700" fill="#222">ภูมิ 💪</text><text x="-180" y="38" font-size="32" fill="#444">ว่างไหม ไปกินกาแฟกันอีกนะ ☕</text></g>`
+      +(t>=26.95?`<text x="860" y="900" font-size="100">💓</text>`:'')); }
+  else if(t<34.3){ const k=P(t,28.9,.5);
+    s=rays(t,'#9b5de5','#ff8fa3',540,960,.45)+`<g transform="translate(540,560) rotate(-4) scale(${back(k)})"><rect x="-420" y="-150" width="840" height="300" rx="30" fill="#ff3b8a" stroke="#fff" stroke-width="12"/><text y="-30" text-anchor="middle" font-size="64" font-weight="800" fill="#fff">น้องมูฟ ซีซั่น 2</text><text y="70" text-anchor="middle" font-size="76" font-weight="800" fill="#ffd166">หาแฟนใหม่ใน 30 วัน 💘</text></g>`
+      +`<g transform="translate(60,120)"><rect width="560" height="76" rx="12" fill="#0d1124" opacity=".82"/><rect width="8" height="76" fill="#ff8fa3"/><text x="34" y="51" font-size="36" font-weight="700" fill="#fff">• เหลือ 30 วัน</text><text x="290" y="51" font-size="36" font-weight="700" fill="#ff8fa3">ใจเต้น 0% 💓</text></g>`
+      +me({t,expr:'happy',pose:'fist',x:540,y:1450,s:.85,mush:true})+(t>=31.85?`<g transform="translate(540,1740) scale(${back(P(t,31.85,.3))})"><rect x="-260" y="-60" width="520" height="120" rx="60" fill="#fff"/><text y="20" text-anchor="middle" font-size="56" font-weight="800" fill="#9b5de5">เร็วๆ นี้! ⏳</text></g>`:''); }
+  else { const lt=t-34.3;
+    s=`<rect width="1080" height="1920" fill="#1b2340"/><g transform="translate(540,700) scale(${back(P(lt,0,.4))})"><text text-anchor="middle" font-size="76" font-weight="800" fill="#fff">ขอบคุณที่ดูจนจบ</text><text y="100" text-anchor="middle" font-size="76" font-weight="800" fill="#ffd166">ซีซั่น 1 🙏</text></g>`
+     +`<g transform="translate(540,1150)">${me({t,expr:'happy',pose:'fist',x:0,y:300,s:.6,mush:true})}</g>`
+     +`<g opacity="${P(lt,.8,.3)}" transform="translate(540,1600) scale(${1+Math.sin(lt*6)*.04})"><rect x="-330" y="-60" width="660" height="120" rx="60" fill="#ff3b5c"/><text y="20" text-anchor="middle" font-size="48" font-weight="800" fill="#fff">กดติดตาม รอซีซั่น 2! 💘</text></g>`;
+  }
+  return finish(t,s,1,28.9,moveon,[23.0]);
+}
+
+window.renderAt=t=>{document.getElementById('v').innerHTML=scene(t);};
+window.DURATION=END;
+renderAt(0);
+</script></body></html>
